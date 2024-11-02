@@ -1,5 +1,3 @@
-package Classes;
-
 public class Availability {
 	private Doctor doctor;
 	private String date;
@@ -10,7 +8,7 @@ public class Availability {
 		doctor = doc;
 		this.date = date;
 		this.time = time;
-		status ="Available";
+		status = "Available";
 	}
 	
 	public Doctor getDoctor() {

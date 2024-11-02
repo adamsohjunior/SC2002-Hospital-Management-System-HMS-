@@ -1,5 +1,3 @@
-package Classes;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,30 +6,42 @@ public class Available {
 	private ArrayList<Availability> availableDates = new ArrayList<>();
 	private Scanner scan = new Scanner(System.in);
 	
-	public void viewAvailableAppointmentSlots() {
-		if (this.availableDates.size() == 0) {
-			System.out.println("No available dates for appointments.");
-			return;
-		}
-		
-		System.out.println("Available dates for appointmets are:");
-		
-		/* this is ALL available dates OR for the doctor's own personal dates, one of the object made of this class will hold all the available dates -> see Doctor class */
-		for (int i=0;i<this.availableDates.size();i++) {
-			if(this.availableDates.get(i).getStatus().equals("Available")) {
-				System.out.println((i+1)+")Doctor: "+this.availableDates.get(i).getDoctor().getName());
-				System.out.println("    Date: "+this.availableDates.get(i).getDate());
-				System.out.println("    Time: "+this.availableDates.get(i).getTime());
+	public int viewAvailableAppointmentSlots() { 
+		if (this.availableDates.size() == 0) { 
+			System.out.println("No available dates for appointments."); 
+			return -1; 
+		} 
+		 
+		System.out.println("Available dates for appointments are:"); 
+		int count = 0;
 
-			}
-		}
+		/* this is ALL available dates OR for the doctor's own personal dates, one of the object made of this class will hold all the available dates -> see Doctor class */ 
+		for (int i = 0; i < this.availableDates.size() ; i++) { 
+			if (this.availableDates.get(i).getStatus().equals("Available")) { 
+				count++; 
+				System.out.println((i+1)+")Doctor: "+this.availableDates.get(i).getDoctor().getName()); 
+				System.out.println("    Date: "+this.availableDates.get(i).getDate()); 
+				System.out.println("    Time: "+this.availableDates.get(i).getTime()); 
+			} 
+		} 
+		return count; 
 	}
+	  
 	
 	public Appointment selectAvailableSlot(ArrayList<Appointment> scheduledAppointments, Patient patient) {
 		
 		int choice = 0;
 		boolean validity = false;
-		
+
+		int check = this.viewAvailableAppointmentSlots(); 
+		if (check == -1){ 
+			return null; 
+		} 
+		if (check == 0){ 
+			System.out.println("No available dates for appointments."); 
+			return null; 
+		}
+
 		this.viewAvailableAppointmentSlots();
 		
 	      while (!validity) { 
@@ -56,12 +66,9 @@ public class Available {
 		                		}
 	                		}
 	                	}
-	                	
-	                	
-	                	
 	                }
 	                else {
-	                	System.out.print("Please input a choice that is valid.");
+	                	System.out.println("Please input a choice that is valid.");
 	                }
 	            } catch (InputMismatchException e) {
 	                System.out.println("Invalid input! Please enter an appropriate choice.");

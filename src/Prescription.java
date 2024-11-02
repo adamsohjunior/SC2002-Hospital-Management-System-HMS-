@@ -1,5 +1,3 @@
-package Classes;
-
 public class Prescription {
 	private String medicineName;
 	private String status;

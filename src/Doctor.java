@@ -1,5 +1,3 @@
-package Classes;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -39,7 +37,7 @@ public class Doctor extends User{
 			validity = false;
 		      while (!validity) { 
 		            try {
-		    			System.out.println("1)View Patient Medical Records\r\n"
+		    			System.out.println("1) View Patient Medical Records\r\n"
 		    					+ "2) Update Patient Medical Records\r\n"
 		    					+ "3) View Personal Schedule\r\n"
 		    					+ "4) Set Availability for Appointments\r\n"
@@ -49,12 +47,8 @@ public class Doctor extends User{
 		    					+ "8) Logout\r\n");
 		                System.out.print("Please enter your choice: ");
 		                choice = scan.nextInt(); 
-		                if(choice>0 && choice<=8) {
-		                
-		                	
+		                if(choice>0 && choice<=8) {                	
 		                	validity = true;
-		             
-		                	
 		                }
 		                else {
 		                	System.out.print("Please input a choice that is valid.");
@@ -90,14 +84,10 @@ public class Doctor extends User{
 		    	  break;
 		      case 8:
 		    	  break;
-
 		      }
+		} while (choice != 8);
 		
-		            
-		
-		}while(choice != 8);
-		
-		scan.close();
+		// scan.close();
 	}
 	
 	public void viewPersonalSchedule() {
@@ -126,15 +116,10 @@ public class Doctor extends User{
 		int choice =-1;
 	      while (!validity) { 
 	            try {
-
 	                System.out.print("Please enter your choice: ");
 	                choice = scan.nextInt(); 
-	                if(choice>0 && choice<=patientMedicalRecords.size()) {
-	                
-	                	
+	                if(choice>0 && choice<=patientMedicalRecords.size()) {	
 	                	validity = true;
-	             
-	                	
 	                }
 	                else {
 	                	System.out.print("Please input a choice that is valid.");
@@ -147,7 +132,7 @@ public class Doctor extends User{
 			/* clear the enter key */
 			scan.nextLine(); 
 			choice = choice-1;
-			System.out.println("Please enter today's date(DD-MMM): ");
+			System.out.println("Please enter today's date(DD-MM): ");
 			String date = scan.nextLine();
 			System.out.println("Please enter your diagnoses: ");
 			String diag = scan.nextLine();
@@ -156,9 +141,7 @@ public class Doctor extends User{
 			System.out.println("Please enter your consultation notes: ");
 			String notes = scan.nextLine();
 			
-			
 			/* here can change to list of medications instead of the doctor manually enterint the name*/
-			
 			ArrayList<Prescription> list = new ArrayList<>();
 			
 			validity = false;
@@ -170,10 +153,8 @@ public class Doctor extends User{
 		            	System.out.println("1)Prescribe Medication");
 		            	System.out.println("2)Finish");
 		                choice = scan.nextInt(); 
-		                if(choice>0 && choice<3) {
-		                	
-		                	validity = true;
-		                	               	
+		                if(choice>0 && choice<3) {	                	
+		                	validity = true;        	
 		                }
 		                else {
 		                	System.out.print("Please input a choice that is valid.");
@@ -192,7 +173,6 @@ public class Doctor extends User{
 					Prescription toBePrescribed = new Prescription(medName);
 					list.add(toBePrescribed);
 				}
-				
 			}
 			
 			AppointmentOutcomeRecord outcome = new AppointmentOutcomeRecord(date, diag, treat, list, notes);
@@ -210,7 +190,6 @@ public class Doctor extends User{
 		/* Both arraylist contains the same ref to Availability object */
 		personalSchedule.addAvailableDates(avail);
 		availableDates.addAvailableDates(avail);
-		
 	}
 	
 	public void incomingAppointment(Appointment appointment) {
@@ -254,9 +233,7 @@ public class Doctor extends User{
 	            	System.out.println("1 to Accept || 2 to Decline");
 	                choice = scan.nextInt(); 
 	                if(choice>0 && choice<3) {
-	                	
-	                	validity = true;
-	                	               	
+	                	validity = true;               	
 	                }
 	                else {
 	                	System.out.print("Please input a choice that is valid.");
@@ -286,10 +263,7 @@ public class Doctor extends User{
 				/* this should update the availability object for both personal and global since both contain the same ref to the object*/
 				this.availableDates.updateAvailableDates(doc, dat, tim);
 			}
-
-			
 		}
-		
 	}
 	
 	public void viewUpcomingAppointments() {
@@ -303,8 +277,6 @@ public class Doctor extends User{
 			System.out.println("");
 		}
 	}
-	
-	
 	
 	public void recordAppointmentOutcome() {
 		if(this.upcomingAppointments.size() == 0) {
@@ -326,9 +298,7 @@ public class Doctor extends User{
                 System.out.print("Please select an appointment to complete: ");
                 choice = scan.nextInt(); 
                 if(choice>0 && choice<=this.upcomingAppointments.size()) {
-                	
-                	validity = true;
-                	               	
+                	validity = true;            	
                 }
                 else {
                 	System.out.print("Please input a choice that is valid.");
@@ -354,9 +324,8 @@ public class Doctor extends User{
 		System.out.println("Please enter your consultation notes: ");
 		String notes = scan.nextLine();
 		
-		
+
 		/* here can change to list of medications instead of the doctor manually enterint the name*/
-		
 		ArrayList<Prescription> list = new ArrayList<>();
 		
 		validity = false;
@@ -369,9 +338,7 @@ public class Doctor extends User{
 	            	System.out.println("2)Finish");
 	                choice = scan.nextInt(); 
 	                if(choice>0 && choice<3) {
-	                	
-	                	validity = true;
-	                	               	
+	                	validity = true;          	
 	                }
 	                else {
 	                	System.out.print("Please input a choice that is valid.");
@@ -399,9 +366,6 @@ public class Doctor extends User{
 		/* update the global list so that pharmacists can see and perform their task */
 		allAppointmentOutcomeRecords.add(outcome);
 		chosen.getPatient().getMedicalRecord().updateRecord(outcome);
-		
 	}
-	
 
-	
 }

@@ -1,5 +1,3 @@
-package Classes;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,11 +16,12 @@ public class Patient extends User{
 	 * the allAppointments is the global array for ALL appointments for ALL patient. This is really mainly for the Admin class as stated in manual they can access ALL appointment in real-time
 	 * */
 	
-	public Patient(String id,String name, int age,String email,String bloodType,int contactNumber,String dateOfBirth,Available availableDates,String gender, ArrayList<Appointment> allAppointments){
+	// removed contactNumber
+	public Patient(String id, String name, int age, String email, String bloodType, String dateOfBirth, Available availableDates, String gender, ArrayList<Appointment> allAppointments) {
 		
 		super(id,name,age,gender);
 
-		medicalRecord = new MedicalRecord(id,name,email,bloodType,contactNumber,dateOfBirth,gender);
+		medicalRecord = new MedicalRecord(id,name,email,bloodType,dateOfBirth,gender);
 		this.allAppointments = allAppointments;
 		this.availableDates = availableDates;
 	}
@@ -44,18 +43,14 @@ public class Patient extends User{
 		    					+ "6) Cancel an Appointment\r\n"
 		    					+ "7) View Scheduled Appointments\r\n"
 		    					+ "8) View Past Appointment Outcome Records\r\n"
-		    					+ "9) Logout ");
+		    					+ "9) Logout\r\n");
 		                System.out.print("Please enter your choice: ");
 		                choice = scan.nextInt(); 
-		                if(choice>0 && choice<=9) {
-		                
-		                	
+		                if(choice > 0 && choice <= 9) {
 		                	validity = true;
-		             
-		                	
 		                }
 		                else {
-		                	System.out.print("Please input a choice that is valid.");
+		                	System.out.println("Please input a choice that is valid.");
 		                }
 		            } catch (InputMismatchException e) {
 		                System.out.println("Invalid input! Please enter an appropriate choice.");
@@ -69,26 +64,26 @@ public class Patient extends User{
 		    	  viewMedicalRecord();
 		    	  break;
 		      case 2:
-		    	  boolean proof = false;
-		    	  int contact = -1;
+		    	//   boolean proof = false;
+		    	//   int contact = -1;
 		    	  
 		    	  System.out.print("Please input new email: ");
 		    	  String email = scan.nextLine();
 		    	  
-		    	  while(!proof) {
-			    	  try {
-				    	  System.out.print("Please input new contact number: ");
-				    	  contact = scan.nextInt();
-				    	  proof = true;
-			    	  } catch (InputMismatchException e) {
-			                System.out.println("Invalid input! Please enter an appropriate choice.");
-			                scan.next(); 
-			            }
-		    	  }
-					/* clear the enter key */
-					scan.nextLine(); 
+		    	//   while(!proof) {
+			    // 	  try {
+				//     	  System.out.print("Please input new contact number: ");
+				//     	  contact = scan.nextInt();
+				//     	  proof = true;
+			    // 	  } catch (InputMismatchException e) {
+			    //             System.out.println("Invalid input! Please enter an appropriate choice.");
+			    //             scan.next(); 
+			    //         }
+		    	//   }
+				// 	/* clear the enter key */
+				// 	scan.nextLine(); 
 					
-		    	  updatePersonalInfo(email,contact);
+		    	  updatePersonalInfo(email);
 		    	  break;
 		      case 3:
 		    	  availableDates.viewAvailableAppointmentSlots();
@@ -111,12 +106,9 @@ public class Patient extends User{
 		      case 9:
 		    	  break;
 		      }
+		} while (choice != 9);
 		
-		            
-		
-		}while(choice != 9);
-		
-		scan.close();
+		// scan.close();
 	}
 	
 	/* Getters function that will be removed or not later*/
@@ -134,16 +126,12 @@ public class Patient extends User{
 		appointmentOutcomeRecords.add(outcome);
 	}
 	
-	
-	
-	
-	
 	public void viewMedicalRecord() {
 		medicalRecord.printRecord();
 	}
 	
-	public void updatePersonalInfo(String newEmail, int newContact) {
-		medicalRecord.updateRecord(newEmail,newContact);
+	public void updatePersonalInfo(String newEmailString) {
+		medicalRecord.updateRecord(newEmailString);
 	}
 	
 	public void viewAppointmentOutcomeRecords() {
@@ -169,13 +157,11 @@ public class Patient extends User{
 	}
 	
 	public void scheduleAppointment() {
-		
-
 		Appointment appointment = availableDates.selectAvailableSlot(scheduledAppointments,this);
-        
-		
+		if (appointment == null){ 
+			return; 
+		}
 		scheduledAppointments.add(appointment);
-		
 		/* this is a reference to the global appointment list that all classes can access as it is in the main system */
 		allAppointments.add(appointment);
 		
@@ -183,7 +169,7 @@ public class Patient extends User{
 	
 	public void rescheduleAppointment() {
 		
-		if(cancelAppointment()) {
+		if (cancelAppointment()) {
 			scheduleAppointment();
 		}
 		else {
@@ -211,13 +197,11 @@ public class Patient extends User{
             try {
                 System.out.print("Please select an appointment to cancel: ");
                 choice = scan.nextInt(); 
-                if(choice>0 && choice<=this.scheduledAppointments.size()) {
-                	
-                	validity = true;
-                	               	
+                if(choice>0 && choice<=this.scheduledAppointments.size()) {        	
+                	validity = true;         	
                 }
                 else {
-                	System.out.print("Please input a choice that is valid.");
+                	System.out.println("Please input a choice that is valid.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! Please enter an appropriate choice.");

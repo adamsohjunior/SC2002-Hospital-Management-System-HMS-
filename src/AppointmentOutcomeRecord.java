@@ -1,5 +1,3 @@
-package Classes;
-
 import java.util.ArrayList;
 
 public class AppointmentOutcomeRecord {
@@ -46,15 +44,14 @@ public class AppointmentOutcomeRecord {
 		this.prescriptionList = prescriptionList;
 	}
 	
-	
 	public void printInfo() {
 		System.out.println("Date: "+this.date);
 		System.out.println("Diagnoses: "+this.diagnoses);
 		System.out.println("Treatment: "+this.treatment);
 		System.out.println("Consultation Notes: "+this.consultationNotes);
 		System.out.print("Prescriptions: ");
-		for(int i=0;i<prescriptionList.size();i++) {
-			System.out.print(this.prescriptionList.get(i).getName()+"("+this.prescriptionList.get(i).getStatus()+")"+" ");
+		for(int i = 0; i < prescriptionList.size() ; i++) {
+			System.out.print(this.prescriptionList.get(i).getName() + "(" + this.prescriptionList.get(i).getStatus() + ")" + " ");
 		}
 	}
 }

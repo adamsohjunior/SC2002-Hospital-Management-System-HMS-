@@ -1,5 +1,3 @@
-package Classes;
-
 public abstract class User {
 	private String userId;
 	private String password = "password";

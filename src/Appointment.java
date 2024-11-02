@@ -1,5 +1,3 @@
-package Classes;
-
 public class Appointment {
 	private Patient patient;
 	private Doctor doctor;
@@ -27,7 +25,6 @@ public class Appointment {
 		System.out.println("Date: "+this.date);
 		System.out.println("Time: "+this.time);
 		System.out.println("Status: "+this.status);
-
 	}
 	
 	public void printInfoForAdmin() {
@@ -42,7 +39,6 @@ public class Appointment {
 			System.out.println("");
 		}
 	}
-	
 	
 	public AppointmentOutcomeRecord getAppointmentOutcome() {
 		return this.outcome;
