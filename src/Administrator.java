@@ -3,10 +3,32 @@ import java.util.Scanner;
 
 public class Administrator extends User {
     private Scanner scan = new Scanner(System.in);
+	private InventoryManagement inventoryManagement;
+    private StaffManagement staffManagement;
 
     public Administrator(String id, String name, int age, String gender) {
         super(id, name, age, gender);
+		this.inventoryManagement = new InventoryManagement();
+        this.staffManagement = new StaffManagement();
     }
+
+	
+    // Inventory management methods delegated to InventoryManagement
+    public void manageInventory() {
+        inventoryManagement.manageInventory();
+    }
+
+	public void approveRequest() {
+		inventoryManagement.approveRequest();
+	}
+
+    // Staff management methods delegated to StaffManagement
+    public void manageStaff() {
+        staffManagement.manageStaff();
+    }
+	
+
+
 
     public void displayMenu() {
         int choice=-1;
@@ -44,19 +66,19 @@ public class Administrator extends User {
 				printInfoForAdmin();
 				break;
 			case 3:
-				InventoryManagement();
+				manageInventory();
 				break;
 			case 4:
 				approveRequest();
 				break;
-			}
 			case 5:
 				break;
+			}
 		} while (choice != 5);
 		
 		// scan.close();
     }
-
+	
     
 }
 
