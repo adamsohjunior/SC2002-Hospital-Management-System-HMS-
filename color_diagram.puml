@@ -1,0 +1,233 @@
+@startuml
+
+' Title and global note
+title Healthcare Management System (HMS)
+note as teamNote
+  Developed by SC2002 HMS SCS6 Group 5
+end note
+
+' Adding note to float above the title
+teamNote -[hidden]-> HMS
+
+' Abstract User class
+abstract class User #lightblue {
+  - userId: String
+  - password: String = "password"
+  - name: String
+  - age: int
+  - gender: String
+  + changePassword(newPassword: String): void
+  + getUserId(): String
+  + getName(): String
+  + getPassword(): String
+  + displayMenu(): void
+}
+
+' Package grouping for roles
+package "User Roles" #DDDDDD {
+  ' Patient class inherits from User
+  class Patient #lightyellow {
+    - medicalRecord: MedicalRecord
+    - scheduledAppointments: List<Appointment>
+    - availableDates: Available
+    - appointmentOutcomeRecords: List<AppointmentOutcomeRecord>
+    - allAppointments: List<Appointment>
+    + viewMedicalRecord(): void
+    + updatePersonalInfo(newEmail: String, newContact: int): void
+    + scheduleAppointment(): void
+    + rescheduleAppointment(): void
+    + cancelAppointment(): void
+    + viewScheduledAppointments(): void
+    + viewAppointmentOutcomeRecords(): void
+  }
+
+  ' Doctor class inherits from User
+  class Doctor #lightgreen {
+    - patientMedicalRecords: List<MedicalRecord>
+    - personalSchedule: Available
+    - availableDates: Available
+    - appointmentRequests: List<Appointment>
+    - upcomingAppointments: List<Appointment>
+    - allAppointmentOutcomeRecords: List<AppointmentOutcomeRecord>
+    + viewPersonalSchedule(): void
+    + viewPatientMedicalRecords(): void
+    + setAvailability(): void
+    + acceptOrDecline(): void
+    + recordAppointmentOutcome(): void
+  }
+
+  ' Pharmacist class inherits from User
+  class Pharmacist #lightpink {
+    - allAppointmentOutcomeRecords: List<AppointmentOutcomeRecord>
+    - allInventoryItems: List<Inventory>
+    + viewAppointmentOutcomeRecords(): void
+    + updatePrescriptionStatus(): void
+    + viewMedicationInventory(): void
+    + replenishmentRequest(): void
+    - updateInventory(): void
+  }
+
+  ' Updated Administrator class inherits from User
+  class Administrator #lightgrey {
+    - inventoryManagement: InventoryManagement
+    - staffManagement: StaffManagement
+    + Administrator(String id, String name, int age, String gender)
+    + manageInventory(): void
+    + approveRequest(): void
+    + manageStaff(): void
+    + displayMenu(): void
+  }
+}
+
+' Additional classes with background colors
+class Appointment #FFF5EE {
+  - patient: Patient
+  - doctor: Doctor
+  - date: String
+  - time: String
+  - status: String
+  - outcome: AppointmentOutcomeRecord
+  + updateAppointment(newOutcome: AppointmentOutcomeRecord): void
+  + printInfo(): void
+  + printInfoForAdmin(): void
+  + getAppointmentOutcome(): AppointmentOutcomeRecord
+}
+
+class AppointmentOutcomeRecord #F0E68C {
+  - date: String
+  - diagnoses: String
+  - treatment: String
+  - consultationNotes: String
+  - prescriptionList: List<Prescription>
+  + setOutcome(serviceType: String, prescribedMedication: String, consultationNotes: String): void
+  + printInfo(): void
+}
+
+class MedicalRecord #E6E6FA {
+  - userId: String
+  - email: String
+  - gender: String
+  - name: String
+  - bloodType: String
+  - dateOfBirth: String
+  - diagnosesTreatmentPrescription: List<AppointmentOutcomeRecord>
+  + printRecord(): void
+  + updateRecord(email: String, contactNumber: int): void
+  + updateRecord(outcome: AppointmentOutcomeRecord): void
+  + getUserId(): String
+}
+
+class Prescription #FFE4E1 {
+  - medicineName: String
+  - status: String
+  + updateStatus(): void
+  + getName(): String
+  + getStatus(): String
+  + display(): void
+}
+
+class Available #ADD8E6 {
+  - availableDates: List<Availability>
+  + viewAvailableAppointmentSlots(): int
+  + selectAvailableSlot(scheduledAppointments: List<Appointment>, patient: Patient): Appointment
+}
+
+' Availability class for representing individual availability slots
+class Availability {
+  - doctor: Doctor
+  - date: String
+  - time: String
+  - status: String
+  + getDoctor(): Doctor
+  + getDate(): String
+  + getTime(): String
+  + getStatus(): String
+  + setStatus(newStatus: String): void
+}
+
+class Inventory #98FB98 {
+  - medicineName: String
+  - stockAvailable: int
+  - alertLevel: int
+  - status: String
+  + updateStock(): boolean
+  + getName(): String
+  + getStock(): int
+  + getStatus(): String
+  + setStatus(newStatus: String): void
+  + display(): void
+  - lowStockAlert(): void
+}
+
+' InventoryManagement and StaffManagement
+class InventoryManagement #D8BFD8 {
+  + manageInventory(): void
+  + addStocks(): void
+  + updateStocks(): void
+  + removeStocks(): void
+  + updateAlertLine(): void
+  + approveRequest(): void
+}
+
+class StaffManagement #DDA0DD {
+  + manageStaff(): void
+  + addStaff(): void
+  + updateStaff(user: User): void
+  + removeStaff(): void
+  + displayStaff(): void
+}
+
+' New relationships
+InventoryManagement --> Inventory : "manages inventory"
+StaffManagement --> User : "manages staff"
+Administrator --> InventoryManagement : "delegates inventory tasks"
+Administrator --> StaffManagement : "delegates staff tasks"
+
+' Adding class relationships
+User <|-- Patient
+User <|-- Doctor
+User <|-- Pharmacist
+User <|-- Administrator
+
+Patient --> MedicalRecord : "has a"
+Doctor --> MedicalRecord : "accesses"
+Doctor --> Appointment : "manages"
+Doctor --> AppointmentOutcomeRecord : "records"
+Appointment --> Patient : "for"
+Appointment --> Doctor : "with"
+MedicalRecord --> AppointmentOutcomeRecord : "stores"
+AppointmentOutcomeRecord --> Prescription : "contains"
+Available --> Availability : "aggregates"
+Patient --> Available : "uses"
+Administrator --> Inventory : "manages"
+Inventory --> Prescription : "contains"
+
+' Notes section
+note "Patient: Manages personal appointments and records" as patientNote
+note "Doctor: Schedules and manages appointments with patients" as doctorNote
+
+patientNote -[hidden]-> Patient
+doctorNote -[hidden]-> Doctor
+
+' Dependencies package
+package "Dependencies" #F5F5F5 {
+  class CSVReader<T> {
+    + read(String filePath, CSVParser<T> parser): ArrayList<T>
+  }
+  interface CSVParser<T> {
+    + parse(String line): T
+  }
+  class MedicineParser implements CSVParser {
+    + parse(String line): T
+  }
+  class PatientParser implements CSVParser {
+    + parse(String line): T
+  }
+  class StaffParser implements CSVParser {
+    + parse(String line): T
+  }
+  CSVReader ..> CSVParser : "uses for parsing"
+  HMS ..> CSVReader : "reads from CSV files"
+}
+
+@enduml
