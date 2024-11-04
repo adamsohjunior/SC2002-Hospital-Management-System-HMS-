@@ -89,7 +89,7 @@ public class Pharmacist extends User{
     }
 
 
-    private void updatePrescriptionStatus(){
+    public void updatePrescriptionStatus(){
         for (AppointmentOutcomeRecord record : allAppointmentOutcomeRecords) {
             boolean updateNeeded = false;
             for (Prescription item : record.getPrescriptionList()){
