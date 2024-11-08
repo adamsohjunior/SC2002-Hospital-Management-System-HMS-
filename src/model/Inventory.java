@@ -36,6 +36,10 @@ public class Inventory {
 		return stockAvailable;
 	}
 
+    public void setStock(int newStock) {
+        this.stockAvailable = newStock;
+    }
+
     public String getStatus() {
 		return status;
 	}
