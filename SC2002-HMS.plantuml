@@ -3,272 +3,779 @@
 title __SC2002-HMS's Class Diagram__\n
 
   namespace  {
-    class Administrator {
-    }
-  }
-  
-
-  namespace  {
-    class Administrator {
-    }
-  }
-  
-
-  namespace  {
-    class Appointment {
-    }
-  }
-  
-
-  namespace  {
-    class Appointment {
-    }
-  }
-  
-
-  namespace  {
-    class AppointmentOutcomeRecord {
-    }
-  }
-  
-
-  namespace  {
-    class AppointmentOutcomeRecord {
-    }
-  }
-  
-
-  namespace  {
-    class Availability {
-    }
-  }
-  
-
-  namespace  {
-    class Availability {
-    }
-  }
-  
-
-  namespace  {
-    class Available {
-    }
-  }
-  
-
-  namespace  {
-    class Available {
-    }
-  }
-  
-
-  namespace  {
-    class CSVReader {
-    }
-  }
-  
-
-  namespace  {
-    class CSVReader {
-    }
-  }
-  
-
-  namespace  {
-    class Doctor {
-    }
-  }
-  
-
-  namespace  {
-    class Doctor {
-    }
-  }
-  
-
-  namespace  {
-    class HMS {
-    }
-  }
-  
-
-  namespace  {
-    class HMS {
-    }
-  }
-  
-
-  namespace  {
-    namespace MS {
-      class HMS.Inventory {
+    namespace ontroller {
+      class controller.InventoryManagement {
       }
     }
   }
   
 
   namespace  {
-    namespace MS {
-      class HMS.Pharmacist {
+    namespace ontroller {
+      class controller.InventoryManagement {
       }
     }
   }
   
 
   namespace  {
-    namespace MS {
-      class HMS.Prescription {
+    namespace ontroller {
+      class controller.StaffManagement {
       }
     }
   }
   
 
   namespace  {
-    class Inventory {
+    namespace ontroller {
+      class controller.StaffManagement {
+      }
     }
   }
   
 
   namespace  {
-    class InventoryManagement {
+    namespace odel {
+      class model.Administrator {
+      }
     }
   }
   
 
   namespace  {
-    class InventoryManagement {
+    namespace odel {
+      class model.Administrator {
+      }
     }
   }
   
 
   namespace  {
-    class MedicalRecord {
+    namespace odel {
+      class model.Appointment {
+      }
     }
   }
   
 
   namespace  {
-    class MedicalRecord {
+    namespace odel {
+      class model.Appointment {
+      }
     }
   }
   
 
   namespace  {
-    class MedicineParser {
+    namespace odel {
+      class model.AppointmentOutcomeRecord {
+      }
     }
   }
   
 
   namespace  {
-    class MedicineParser {
+    namespace odel {
+      class model.AppointmentOutcomeRecord {
+      }
     }
   }
   
 
   namespace  {
-    class Patient {
+    namespace odel {
+      class model.Availability {
+      }
     }
   }
   
 
   namespace  {
-    class Patient {
+    namespace odel {
+      class model.Availability {
+      }
     }
   }
   
 
   namespace  {
-    class PatientParser {
+    namespace odel {
+      class model.Available {
+      }
     }
   }
   
 
   namespace  {
-    class PatientParser {
+    namespace odel {
+      class model.Available {
+      }
     }
   }
   
 
   namespace  {
-    class Pharmacist {
+    namespace odel {
+      class model.Doctor {
+      }
     }
   }
   
 
   namespace  {
-    class Prescription {
+    namespace odel {
+      class model.Doctor {
+      }
     }
   }
   
 
   namespace  {
-    class StaffManagement {
+    namespace odel {
+      class model.Inventory {
+      }
     }
   }
   
 
   namespace  {
-    class StaffManagement {
+    namespace odel {
+      class model.Inventory {
+      }
     }
   }
   
 
   namespace  {
-    class StaffParser {
+    namespace odel {
+      class model.MedicalRecord {
+      }
     }
   }
   
 
   namespace  {
-    class StaffParser {
+    namespace odel {
+      class model.MedicalRecord {
+      }
     }
   }
   
 
   namespace  {
-    abstract class User {
+    namespace odel {
+      class model.Patient {
+      }
     }
   }
   
 
   namespace  {
-    abstract class User {
+    namespace odel {
+      class model.Patient {
+      }
     }
   }
   
 
-  Administrator -up-|> User
-  Administrator o-- InventoryManagement : inventoryManagement
-  Administrator o-- StaffManagement : staffManagement
-  Administrator -up-|> User
-  Administrator o-- InventoryManagement : inventoryManagement
-  Administrator o-- StaffManagement : staffManagement
-  Appointment o-- Doctor : doctor
-  Appointment o-- AppointmentOutcomeRecord : outcome
-  Appointment o-- Patient : patient
-  Appointment o-- Doctor : doctor
-  Appointment o-- AppointmentOutcomeRecord : outcome
-  Appointment o-- Patient : patient
-  Availability o-- Doctor : doctor
-  Availability o-- Doctor : doctor
-  Doctor -up-|> User
-  Doctor o-- Available : availableDates
-  Doctor o-- Available : personalSchedule
-  Doctor -up-|> User
-  Doctor o-- Available : availableDates
-  Doctor o-- Available : personalSchedule
-  MedicineParser .up.|> CSVReader.CSVParser
-  MedicineParser .up.|> CSVReader.CSVParser<Stock>
-  Patient -up-|> User
-  Patient o-- Available : availableDates
-  Patient o-- MedicalRecord : medicalRecord
-  Patient -up-|> User
-  Patient o-- Available : availableDates
-  Patient o-- MedicalRecord : medicalRecord
-  PatientParser .up.|> CSVReader.CSVParser<Patient>
-  PatientParser .up.|> CSVReader.CSVParser
-  Pharmacist -up-|> User
-  StaffParser .up.|> CSVReader.CSVParser
-  StaffParser .up.|> CSVReader.CSVParser<User>
+  namespace  {
+    namespace odel {
+      class model.Pharmacist {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      class model.Pharmacist {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      class model.Prescription {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      class model.Prescription {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      abstract class model.User {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace odel {
+      abstract class model.User {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.AdministratorParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.AdministratorParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.CSVReader {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.CSVReader {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.DoctorParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.DoctorParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.HMS {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.HMS {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.InventoryParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.InventoryParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.PatientParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.PatientParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.PharmacistParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.PharmacistParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.StaffParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace ystem {
+      class system.StaffParser {
+      }
+    }
+  }
+  
+
+  namespace  {
+    class testing {
+    }
+  }
+  
+
+  namespace  {
+    class testing {
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.AppointmentOutcomeRecordDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.AppointmentOutcomeRecordDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.DayChecker {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.DayChecker {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.Display {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.Display {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.DisplayInfo {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.DisplayInfo {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.DisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.DisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.DoctorDisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.DoctorDisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.EmailUpdateDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.EmailUpdateDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.Input {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.Input {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputDayChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputDayChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.InputInt {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.InputInt {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputIntChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputIntChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputMonthChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputMonthChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputPrescriptionChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputPrescriptionChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.InputString {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      interface view.InputString {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputTimeChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InputTimeChoice {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InventoryDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.InventoryDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.PatientDisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.PatientDisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.PharmacistDisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.PharmacistDisplayMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.PrescriptionDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.PrescriptionDisplay {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.ReplenishmentRequestMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.ReplenishmentRequestMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.UpdatePresriptionStatusMenu {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace iew {
+      class view.UpdatePresriptionStatusMenu {
+      }
+    }
+  }
+  
+
+  model.Administrator -up-|> model.User
+  model.Administrator o-- controller.InventoryManagement : inventoryManagement
+  model.Administrator o-- controller.StaffManagement : staffManagement
+  model.Administrator -up-|> model.User
+  model.Administrator o-- controller.InventoryManagement : inventoryManagement
+  model.Administrator o-- controller.StaffManagement : staffManagement
+  model.Appointment o-- model.Doctor : doctor
+  model.Appointment o-- model.AppointmentOutcomeRecord : outcome
+  model.Appointment o-- model.Patient : patient
+  model.Appointment o-- model.Doctor : doctor
+  model.Appointment o-- model.AppointmentOutcomeRecord : outcome
+  model.Appointment o-- model.Patient : patient
+  model.Availability o-- model.Doctor : doctor
+  model.Availability o-- model.Doctor : doctor
+  model.Doctor -up-|> model.User
+  model.Doctor o-- model.Available : availableDates
+  model.Doctor o-- model.Available : personalSchedule
+  model.Doctor -up-|> model.User
+  model.Doctor o-- model.Available : availableDates
+  model.Doctor o-- model.Available : personalSchedule
+  model.Patient -up-|> model.User
+  model.Patient o-- model.Available : availableDates
+  model.Patient o-- model.MedicalRecord : medicalRecord
+  model.Patient -up-|> model.User
+  model.Patient o-- model.Available : availableDates
+  model.Patient o-- model.MedicalRecord : medicalRecord
+  model.Pharmacist -up-|> model.User
+  model.Pharmacist -up-|> model.User
+  system.AdministratorParser .up.|> system.CSVReader.CSVParser<model.User>
+  system.AdministratorParser .up.|> system.CSVReader.CSVParser
+  system.DoctorParser .up.|> system.CSVReader.CSVParser<model.Doctor>
+  system.DoctorParser o-- model.Available : availableDates
+  system.DoctorParser .up.|> system.CSVReader.CSVParser
+  system.DoctorParser o-- model.Available : availableDates
+  system.InventoryParser .up.|> system.CSVReader.CSVParser<model.Inventory>
+  system.InventoryParser .up.|> system.CSVReader.CSVParser
+  system.PatientParser .up.|> system.CSVReader.CSVParser
+  system.PatientParser o-- model.Available : availableDates
+  system.PatientParser .up.|> system.CSVReader.CSVParser<model.Patient>
+  system.PatientParser o-- model.Available : availableDates
+  system.PharmacistParser .up.|> system.CSVReader.CSVParser<model.User>
+  system.PharmacistParser o-- model.Available : availableDates
+  system.PharmacistParser .up.|> system.CSVReader.CSVParser
+  system.PharmacistParser o-- model.Available : availableDates
+  system.StaffParser .up.|> system.CSVReader.CSVParser
+  system.StaffParser o-- model.Available : availableDates
+  system.StaffParser .up.|> system.CSVReader.CSVParser<model.User>
+  system.StaffParser o-- model.Available : availableDates
+  testing -up-|> model.User
+  testing -up-|> model.User
+  view.AppointmentOutcomeRecordDisplay .up.|> view.DisplayInfo
+  view.AppointmentOutcomeRecordDisplay .up.|> view.DisplayInfo
+  view.DoctorDisplayMenu .up.|> view.DisplayMenu
+  view.DoctorDisplayMenu .up.|> view.DisplayMenu
+  view.EmailUpdateDisplay .up.|> view.DisplayInfo
+  view.EmailUpdateDisplay .up.|> view.DisplayInfo
+  view.InputDayChoice -up-|> view.InputIntChoice
+  view.InputDayChoice -up-|> view.InputIntChoice
+  view.InputIntChoice .up.|> view.InputInt
+  view.InputIntChoice .up.|> view.InputInt
+  view.InputMonthChoice -up-|> view.InputIntChoice
+  view.InputMonthChoice -up-|> view.InputIntChoice
+  view.InputPrescriptionChoice -up-|> view.InputIntChoice
+  view.InputPrescriptionChoice -up-|> view.InputIntChoice
+  view.InputTimeChoice -up-|> view.InputIntChoice
+  view.InputTimeChoice -up-|> view.InputIntChoice
+  view.PatientDisplayMenu .up.|> view.DisplayMenu
+  view.PatientDisplayMenu .up.|> view.DisplayMenu
+  view.PharmacistDisplayMenu .up.|> view.DisplayMenu
+  view.PharmacistDisplayMenu .up.|> view.DisplayMenu
+  view.ReplenishmentRequestMenu .up.|> view.DisplayMenu
+  view.ReplenishmentRequestMenu .up.|> view.DisplayMenu
+  view.UpdatePresriptionStatusMenu .up.|> view.DisplayMenu
+  view.UpdatePresriptionStatusMenu .up.|> view.DisplayMenu
 
 
 right footer
