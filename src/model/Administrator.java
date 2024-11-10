@@ -1,36 +1,39 @@
 package model;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import controller.InventoryManagement;
+import controller.StaffManagement;
+import model.Appointment;
 
 public class Administrator extends User {
     private Scanner scan = new Scanner(System.in);
-	// private InventoryManagement inventoryManagement;
-    // private StaffManagement staffManagement;
+	private InventoryManagement inventoryManagement;
+    private StaffManagement staffManagement;
+	private ArrayList<Appointment> allAppointments;
 
-    public Administrator(String id, String name, int age, String gender) {
+    public Administrator(String id, String name, int age, String gender, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList, ArrayList<Appointment> allAppointments) {
         super(id, name, age, gender);
-		// this.inventoryManagement = new InventoryManagement();
-        // this.staffManagement = new StaffManagement();
+		this.inventoryManagement = new InventoryManagement(allInventoryItems);
+        this.staffManagement = new StaffManagement(staffList, allInventoryItems, allAppointments);
+		this.allAppointments = allAppointments;
     }
 
 	
     // Inventory management methods delegated to InventoryManagement
     public void manageInventory() {
-        // inventoryManagement.manageInventory();
+        inventoryManagement.manageInventory();
     }
 
 	public void approveRequest() {
-		// inventoryManagement.approveRequest();
+		inventoryManagement.approveRequest();
 	}
 
     // Staff management methods delegated to StaffManagement
     public void manageStaff() {
-        // staffManagement.manageStaff();
+        staffManagement.manageStaff();
     }
 	
-
-
-
     public void displayMenu() {
         int choice=-1;
 		boolean validity = false;
@@ -64,7 +67,7 @@ public class Administrator extends User {
 				manageStaff();
 				break;
 			case 2:
-				// printInfoForAdmin();
+				viewAppointment(allAppointments);
 				break;
 			case 3:
 				manageInventory();
@@ -80,6 +83,11 @@ public class Administrator extends User {
 		// scan.close();
     }
 	
+	private void viewAppointment(ArrayList<Appointment> allAppointments) {
+		for(Appointment a : allAppointments) {
+			a.printInfoForAdmin();
+		}
+	}
     
 }
 

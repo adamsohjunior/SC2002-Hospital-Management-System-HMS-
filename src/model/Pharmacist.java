@@ -165,7 +165,7 @@ public class Pharmacist extends User{
                 int choice = scan.nextInt();
 
                 if (choice == 1){
-                    stock.setStatus("pending");
+                    stock.setreqStatus("pending");
                     stock.display();            // use InventoryDisplay class
                     System.out.println("Submission sent successfully! Waiting approval from administrator.");
                 }

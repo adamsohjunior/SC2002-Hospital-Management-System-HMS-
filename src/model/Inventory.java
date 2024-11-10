@@ -1,13 +1,14 @@
 package model;
 public class Inventory {
-	private String medicineName, status;
+	private String medicineName, status, reqStatus;
 	private int stockAvailable, alertLevel;
 
 	public Inventory(String name, int stockAvailable, int alertLevel) {
 		this.medicineName = name;
 		this.stockAvailable = stockAvailable;
         this.alertLevel = alertLevel;
-        this.status = "sufficient";  // 3 possible status: sufficient, low, pending
+        this.status = "sufficient";  // 2 possible status: sufficient, low
+        this.reqStatus = "null"; // null, pending, approved
 	}
 	
 	public boolean updateStock() {
@@ -44,14 +45,27 @@ public class Inventory {
 		return status;
 	}
 
+    public String getreqStatus() {
+		return reqStatus;
+	}
+
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setreqStatus(String reqStatus) {
+        this.reqStatus = reqStatus;
+    }
+
+    public void setAlertLevel(int alertLevel) {
+        this.alertLevel = alertLevel;
     }
 
 	public void display(){
 		System.out.println("Medicine Name: " +  medicineName);
 		System.out.println("Stock Available: " + stockAvailable);
         System.out.println("Stock Status: " + status);
+        System.out.println("Replenishment Request Status: " + reqStatus);
 	}
 	
 }
