@@ -1,16 +1,30 @@
 package model;
+
+import java.util.ArrayList;
+
+import view.DisplayInbox;
+
 public abstract class User {
 	private String userId;
 	private String password = "password";
 	private String name;
 	private int age;
 	private String gender;
+	private ArrayList<String> inbox;
 	
 	public User(String id, String name, int age, String gender) {
 		userId = id;
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
+	}
+
+	public void showInbox() {
+		DisplayInbox.display(inbox);
+	}
+
+	public void sendMessage(User user, String message) {
+		user.inbox.add(message);
 	}
 	
 	public void changePassword(String newPassword) {

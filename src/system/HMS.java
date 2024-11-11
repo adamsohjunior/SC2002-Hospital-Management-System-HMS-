@@ -21,7 +21,7 @@ public class HMS {
         SystemManager system = new SystemManager();
         system.initialise();
         system.loadData();
-        system.manageSessions();
+        system.runSystem();
         
         // // further improvement: create SystemInitializer and LoginManagement classes (facade pattern)
         // System.out.println("System starting...");

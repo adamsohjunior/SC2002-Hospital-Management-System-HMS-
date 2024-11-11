@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Doctor extends User{
+import view.MedicalRecordDisplay;
+
+public class Doctor extends User {
 
 	private ArrayList<MedicalRecord> patientMedicalRecords = new ArrayList<>();
 	private Available personalSchedule;
@@ -104,7 +106,7 @@ public class Doctor extends User{
 		}
 
 		for(int j = 0;j<patientMedicalRecords.size();j++) {
-			patientMedicalRecords.get(j).printRecord();
+			MedicalRecordDisplay.display(patientMedicalRecords.get(j));
 			System.out.println("");
 		}
 	}

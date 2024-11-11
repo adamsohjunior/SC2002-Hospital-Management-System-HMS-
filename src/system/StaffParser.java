@@ -16,13 +16,15 @@ public class StaffParser implements CSVReader.CSVParser<User> {
     private ArrayList<Inventory> storage;
     private ArrayList<User> staffList;
     private ArrayList<Appointment> allAppointments;
+    private SystemManager systemManager;
 
-    public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage, ArrayList<User> staffList, ArrayList<Appointment> allAppointments) {
+    public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage, ArrayList<User> staffList, ArrayList<Appointment> allAppointments, SystemManager systemManager) {
         this.availableDates = availableDates;
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
         this.storage = storage;
         this.staffList = staffList;
         this.allAppointments = allAppointments;
+        this.systemManager = systemManager;
     }
     
     @Override
@@ -40,7 +42,7 @@ public class StaffParser implements CSVReader.CSVParser<User> {
             case "Pharmacist":
                 return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage);
             case "Administrator":
-                return new Administrator(id, name, age, gender, storage, staffList, allAppointments);
+                return new Administrator(id, name, age, gender, storage, staffList, allAppointments, systemManager);
             default:
                 throw new IllegalArgumentException("Invalid user role!");
         }

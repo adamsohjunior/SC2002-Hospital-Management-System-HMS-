@@ -27,7 +27,6 @@ public class SessionManager {
         InputID input = new InputID();
 
         while (true) {
-            DisplayPrompt.display("Enter hospital ID: ");
             id = input.getStringInput();
 
             for (int i = 0; i < users.size(); i++) {
@@ -46,7 +45,6 @@ public class SessionManager {
     private void getPassword() {
         InputPassword input = new InputPassword();
         while (true) {
-            DisplayPrompt.display("Enter password: ");
             password = input.getStringInput();
             
             if (password.equals(currentUser.getPassword())) {

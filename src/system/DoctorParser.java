@@ -7,7 +7,7 @@ import model.Doctor;
 import model.Inventory;
 
 /*
- * Not used. See StaffParser
+ *  Not used. See StaffParser
  */
 
 public class DoctorParser implements CSVReader.CSVParser<Doctor> {

@@ -3,7 +3,7 @@ import model.Administrator;
 import model.User;
 
 /*
- * Not used. See StaffParser
+ *  Not used. See StaffParser
  */
 
 public class AdministratorParser implements CSVReader.CSVParser<User> {

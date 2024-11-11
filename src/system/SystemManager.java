@@ -21,6 +21,9 @@ public class SystemManager {
     private ArrayList<Appointment> allAppointments;
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
 
+    // Flag for system shutdown
+    private boolean shutdown;
+
     // Main user list for sessionManagement
     private ArrayList<User> users;
     
@@ -28,6 +31,7 @@ public class SystemManager {
     private final String medicineListPath = "../data/Medicine_List.csv";
     private final String patientListPath = "../data/Patient_List.csv";
     private final String staffListPath = "../data/Staff_List.csv";
+
 
     public void initialise() {
         DisplayLog.display("System starting...");
@@ -37,24 +41,33 @@ public class SystemManager {
         this.availableDates = new Available();
         this.allAppointments = new ArrayList<Appointment>();
         this.allAppointmentOutcomeRecords = new ArrayList<AppointmentOutcomeRecord>();
+        this.shutdown = false;
     }
 
     public void loadData() {
         PatientParser patientParser = new PatientParser(availableDates, allAppointments);
-        StaffParser staffParser = new StaffParser(availableDates, allAppointmentOutcomeRecords, storage, staffList, allAppointments);
+        StaffParser staffParser = new StaffParser(availableDates, allAppointmentOutcomeRecords, storage, staffList, allAppointments, this);
         InventoryParser inventoryParser = new InventoryParser();
 
+        DisplayLog.display("Loading data from CSV files...");
         storage = new CSVReader<Inventory>().read(medicineListPath, inventoryParser);
         users.addAll(new CSVReader<Patient>().read(patientListPath, patientParser));    // No need for patientList
         staffList = new CSVReader<User>().read(staffListPath, staffParser);
         users.addAll(staffList);
     }
 
-    public void manageSessions() {
+    public void runSystem() {
         while (true) {
             DisplayLog.display("Welcome to HMS!");
             sessionManager.startNewSession();
+            if (shutdown) {
+                return;
+            }
         }
+    }
+
+    public void shutdown() {
+        shutdown = true;
     }
 
     public ArrayList<Inventory> getStorage() {

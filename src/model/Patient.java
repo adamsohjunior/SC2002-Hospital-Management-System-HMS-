@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import view.MedicalRecordDisplay;
+
 public class Patient extends User{
 	private MedicalRecord medicalRecord;
 	private ArrayList<Appointment> scheduledAppointments = new ArrayList<>();
@@ -128,7 +130,7 @@ public class Patient extends User{
 	}
 	
 	public void viewMedicalRecord() {
-		medicalRecord.printRecord();
+		MedicalRecordDisplay.display(medicalRecord);
 	}
 	
 	public void updatePersonalInfo(String newEmailString) {
@@ -180,7 +182,7 @@ public class Patient extends User{
 		else {
 			System.out.println("There are no appointments to reschedule");
 		}
-		
+
 	}
 	
 	public boolean cancelAppointment() {

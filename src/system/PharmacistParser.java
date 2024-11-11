@@ -8,7 +8,7 @@ import model.Pharmacist;
 import model.User;
 
 /*
- * Not used. See StaffParser
+ *  Not used. See StaffParser
  */
 
 public class PharmacistParser implements CSVReader.CSVParser<User> {
