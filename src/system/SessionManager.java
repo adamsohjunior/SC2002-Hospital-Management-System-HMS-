@@ -5,6 +5,7 @@ import view.DisplayPrompt;
 import view.DisplayLog;
 import view.InputID;
 import view.InputPassword;
+import view.InputPasswordStrict;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,10 @@ public class SessionManager {
 
     private void getPassword() {
         InputPassword input = new InputPassword();
+        InputPasswordStrict inputStrict = new InputPasswordStrict();
+
         while (true) {
+            DisplayPrompt.display("Enter password: ");
             password = input.getStringInput();
             
             if (password.equals(currentUser.getPassword())) {
@@ -54,13 +58,13 @@ public class SessionManager {
                     DisplayLog.display("Please change your password for security.");
                     while (true) {
                         DisplayPrompt.display("Enter new password: ");
-                        newPassword = input.getStringInput();
+                        newPassword = inputStrict.getStringInput();
 
                         if (!newPassword.equals(password)) {
                             break;
                         }
 
-                        DisplayPrompt.display("New and old passwords are the same.");
+                        DisplayLog.display("New and old passwords are the same.");
                     }
                     
                     /*

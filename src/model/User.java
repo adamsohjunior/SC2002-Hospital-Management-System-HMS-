@@ -23,6 +23,10 @@ public abstract class User {
 		DisplayInbox.display(inbox);
 	}
 
+	public void clearInbox() {
+		inbox.clear();
+	}
+
 	public void sendMessage(User user, String message) {
 		user.inbox.add(message);
 	}

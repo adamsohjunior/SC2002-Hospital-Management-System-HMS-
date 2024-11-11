@@ -35,12 +35,13 @@ public class SystemManager {
 
     public void initialise() {
         DisplayLog.display("System starting...");
-        this.sessionManager = new SessionManager(users);
         this.storage = new ArrayList<Inventory>();
         this.staffList = new ArrayList<User>();
+        this.users = new ArrayList<User>();
         this.availableDates = new Available();
         this.allAppointments = new ArrayList<Appointment>();
         this.allAppointmentOutcomeRecords = new ArrayList<AppointmentOutcomeRecord>();
+        this.sessionManager = new SessionManager(users);
         this.shutdown = false;
     }
 

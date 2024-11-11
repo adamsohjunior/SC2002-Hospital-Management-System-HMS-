@@ -13,15 +13,17 @@ import view.PrescriptionDisplay;
 import view.ReplenishmentRequestMenu;
 import view.UpdatePresriptionStatusMenu;
 
-public class Pharmacist extends User{
+public class Pharmacist extends User {
     private Scanner scan = new Scanner(System.in);
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private ArrayList<Inventory> allInventoryItems;
+    private ArrayList<User> staffList;
     
-    public Pharmacist(String id, String name, int age, String gender, Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> allInventoryItems){
+    public Pharmacist(String id, String name, int age, String gender, Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList){
         super(id, name, age, gender);
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
         this.allInventoryItems = allInventoryItems;
+        this.staffList = staffList;
     }
 
     public void displayMenu() {         // use PharmascistDisplayMenu class
@@ -149,6 +151,7 @@ public class Pharmacist extends User{
                     stock.setreqStatus(RequestStatus.PENDING);
                     InventoryDisplay.display(stock);            // use InventoryDisplay class
                     System.out.println("Submission sent successfully! Waiting approval from administrator.");
+                    sendMessage(getAdmin(), "New replenishment request for " + stock.getName());
                 }
 
                 if (choice == 2){
@@ -157,6 +160,15 @@ public class Pharmacist extends User{
                 }
             } 
             System.out.println("Quitting Replenishment Request. . . ");
+    }
+
+    private User getAdmin() {
+        for (User user: staffList) {
+            if (user.getClass().isInstance("Administrator")) {
+                return user;
+            }
+        }
+        return null;
     }
 }
         

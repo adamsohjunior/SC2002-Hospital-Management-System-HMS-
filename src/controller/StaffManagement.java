@@ -123,7 +123,7 @@ public class StaffManagement {
             case "Doctor":           
                 return new Doctor(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, allInventoryItems);
             case "Pharmacists":
-                return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, allInventoryItems);
+                return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, allInventoryItems, staffList);
             case "Administrator":
                 return new Administrator(id, name, age, gender, allInventoryItems, staffList, allAppointments, systemManager);
             default: 

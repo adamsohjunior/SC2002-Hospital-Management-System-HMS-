@@ -21,6 +21,7 @@ public class Administrator extends User {
 		this.inventoryManagement = new InventoryManagement(allInventoryItems);
         this.staffManagement = new StaffManagement(staffList, allInventoryItems, allAppointments, systemManager);
 		this.allAppointments = allAppointments;
+		this.systemManager = systemManager;
     }
 
 	

@@ -40,7 +40,7 @@ public class StaffParser implements CSVReader.CSVParser<User> {
             case "Doctor":
                 return new Doctor(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage);
             case "Pharmacist":
-                return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage);
+                return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage, staffList);
             case "Administrator":
                 return new Administrator(id, name, age, gender, storage, staffList, allAppointments, systemManager);
             default:

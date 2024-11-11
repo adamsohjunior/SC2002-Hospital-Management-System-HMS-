@@ -16,7 +16,7 @@ public class InputID implements InputString {
                 continue;
             }
             // Format validation (source: regex101.com)
-            if (id.matches("^[A-Za-z]\\d+$")) {
+            if (!id.matches("^[A-Za-z]\\d+$")) {
                 DisplayLog.display("Invalid ID format.");
                 continue;
             }
