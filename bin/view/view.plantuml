@@ -5,7 +5,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.AppointmentOutcomeRecordDisplay {
-          + AppointmentOutcomeRecordDisplay()
           {static} + display()
       }
     }
@@ -16,7 +15,6 @@ title __VIEW's Class Diagram__\n
     namespace iew {
       class view.DayChecker {
           - months : String[]
-          + DayChecker()
           + dayCheck()
           + getMonthIndex()
       }
@@ -52,7 +50,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.DoctorDisplayMenu {
-          + DoctorDisplayMenu()
           {static} + display()
       }
     }
@@ -62,7 +59,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.EmailUpdateDisplay {
-          + EmailUpdateDisplay()
           {static} + display()
       }
     }
@@ -152,7 +148,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.InventoryDisplay {
-          + InventoryDisplay()
           {static} + display()
       }
     }
@@ -162,7 +157,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.PatientDisplayMenu {
-          + PatientDisplayMenu()
           {static} + display()
       }
     }
@@ -172,7 +166,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.PharmacistDisplayMenu {
-          + PharmacistDisplayMenu()
           {static} + display()
       }
     }
@@ -182,7 +175,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.PrescriptionDisplay {
-          + PrescriptionDisplay()
           {static} + display()
       }
     }
@@ -192,7 +184,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.ReplenishmentRequestMenu {
-          + ReplenishmentRequestMenu()
           {static} + display()
       }
     }
@@ -202,7 +193,6 @@ title __VIEW's Class Diagram__\n
   namespace  {
     namespace iew {
       class view.UpdatePresriptionStatusMenu {
-          + UpdatePresriptionStatusMenu()
           {static} + display()
       }
     }

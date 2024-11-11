@@ -3,7 +3,7 @@
 title __CONTROLLER's Class Diagram__\n
 
   namespace  {
-    namespace ontroller {
+    namespace controller {
       class controller.InventoryManagement {
           - allInventoryItems : ArrayList<Inventory>
           + InventoryManagement()
@@ -19,7 +19,7 @@ title __CONTROLLER's Class Diagram__\n
   
 
   namespace  {
-    namespace ontroller {
+    namespace controller {
       class controller.StaffManagement {
           - allAppointments : ArrayList<Appointment>
           - allInventoryItems : ArrayList<Inventory>

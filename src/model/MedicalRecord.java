@@ -21,23 +21,6 @@ public class MedicalRecord {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-	public void printRecord() { 
-		System.out.println(userId); 
-		System.out.println(name); 
-		System.out.println(email); 
-		System.out.println(dateOfBirth); 
-		System.out.println(gender); 
-		System.out.println(bloodType); 
-
-		System.out.println("Past diagnoses, treatments and prescriptions: "); 
-		for (int i = 0; i< diagnosesTreatmentPrescription.size(); i++) { 
-			System.out.print(i+1+")"); 
-			diagnosesTreatmentPrescription.get(i).printInfo(); 
-			System.out.println(""); 
-		} 
-		System.out.println();
-	}
-	  
 	public void updateRecord(String email) {
 		this.email = email;
 	}
@@ -45,12 +28,34 @@ public class MedicalRecord {
 	public void updateRecord(AppointmentOutcomeRecord outcome) {
 		diagnosesTreatmentPrescription.add(outcome);
 	}
-	
-	public String getUserId() {
-		return userId;
-	}
-	
-	public String getName() {
-		return name;
-	}
+
+    // Getters for all private attributes
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+    
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public ArrayList<AppointmentOutcomeRecord> getDiagnosesTreatmentPrescription() {
+        return diagnosesTreatmentPrescription;
+    }
 }

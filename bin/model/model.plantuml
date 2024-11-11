@@ -86,7 +86,6 @@ title __MODEL's Class Diagram__\n
       class model.Available {
           - availableDates : ArrayList<Availability>
           - scan : Scanner
-          + Available()
           + addAvailableDates()
           + selectAvailableSlot()
           + updateAvailableDates()

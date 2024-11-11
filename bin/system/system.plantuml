@@ -5,7 +5,6 @@ title __SYSTEM's Class Diagram__\n
   namespace  {
     namespace ystem {
       class system.AdministratorParser {
-          + AdministratorParser()
           + parse()
       }
     }
@@ -15,7 +14,6 @@ title __SYSTEM's Class Diagram__\n
   namespace  {
     namespace ystem {
       class system.CSVReader {
-          + CSVReader()
           + read()
       }
     }
@@ -46,7 +44,6 @@ title __SYSTEM's Class Diagram__\n
   namespace  {
     namespace ystem {
       class system.HMS {
-          + HMS()
           {static} + main()
       }
     }
@@ -56,7 +53,6 @@ title __SYSTEM's Class Diagram__\n
   namespace  {
     namespace ystem {
       class system.InventoryParser {
-          + InventoryParser()
           + parse()
       }
     }
@@ -98,16 +94,16 @@ title __SYSTEM's Class Diagram__\n
   }
   
 
-  system.AdministratorParser .up.|> system.CSVReader.CSVParser<model.User>
+  system.AdministratorParser .up.|> system.CSVReader.CSVParser
   system.CSVReader +-down- system.CSVReader.CSVParser
-  system.DoctorParser .up.|> system.CSVReader.CSVParser<model.Doctor>
+  system.DoctorParser .up.|> system.CSVReader.CSVParser
   system.DoctorParser o-- model.Available : availableDates
-  system.InventoryParser .up.|> system.CSVReader.CSVParser<model.Inventory>
-  system.PatientParser .up.|> system.CSVReader.CSVParser<model.Patient>
+  system.InventoryParser .up.|> system.CSVReader.CSVParser
+  system.PatientParser .up.|> system.CSVReader.CSVParser
   system.PatientParser o-- model.Available : availableDates
-  system.PharmacistParser .up.|> system.CSVReader.CSVParser<model.User>
+  system.PharmacistParser .up.|> system.CSVReader.CSVParser
   system.PharmacistParser o-- model.Available : availableDates
-  system.StaffParser .up.|> system.CSVReader.CSVParser<model.User>
+  system.StaffParser .up.|> system.CSVReader.CSVParser
   system.StaffParser o-- model.Available : availableDates
 
 

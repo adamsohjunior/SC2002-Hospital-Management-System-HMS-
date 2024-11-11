@@ -8,16 +8,21 @@ import model.Doctor;
 import model.Inventory;
 import model.Pharmacist;
 import model.User;
+import model.Appointment;
 
 public class StaffParser implements CSVReader.CSVParser<User> {
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private Available availableDates;
     private ArrayList<Inventory> storage;
+    private ArrayList<User> staffList;
+    private ArrayList<Appointment> allAppointments;
 
-    public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage) {
+    public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage, ArrayList<User> staffList, ArrayList<Appointment> allAppointments) {
         this.availableDates = availableDates;
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
         this.storage = storage;
+        this.staffList = staffList;
+        this.allAppointments = allAppointments;
     }
     
     @Override
@@ -35,7 +40,7 @@ public class StaffParser implements CSVReader.CSVParser<User> {
             case "Pharmacist":
                 return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage);
             case "Administrator":
-                return new Administrator(id, name, age, gender);
+                return new Administrator(id, name, age, gender, storage, staffList, allAppointments);
             default:
                 throw new IllegalArgumentException("Invalid user role!");
         }
