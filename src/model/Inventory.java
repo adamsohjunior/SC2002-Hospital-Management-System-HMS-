@@ -1,14 +1,29 @@
 package model;
+
 public class Inventory {
-	private String medicineName, status, reqStatus;
+
+    public enum RequestStatus {
+        NULL,
+        PENDING,
+        APPROVED
+    }
+
+    public enum Status {
+        SUFFICIENT,
+        LOW
+    }
+
+	private String medicineName;
 	private int stockAvailable, alertLevel;
+    private Status status;
+    private RequestStatus reqStatus;
 
 	public Inventory(String name, int stockAvailable, int alertLevel) {
 		this.medicineName = name;
 		this.stockAvailable = stockAvailable;
         this.alertLevel = alertLevel;
-        this.status = "sufficient";  // 2 possible status: sufficient, low
-        this.reqStatus = "null"; // null, pending, approved
+        this.status = Status.SUFFICIENT;  // 2 possible status: sufficient, low
+        this.reqStatus = RequestStatus.NULL; // null, pending, approved
 	}
 	
 	public boolean updateStock() {
@@ -26,7 +41,7 @@ public class Inventory {
     private void lowStockAlert(){
         if (this.getStock() <= alertLevel){
             System.out.println(medicineName + " is in under low stock level alert.");
-            this.status = "low";
+            this.status = Status.LOW;
         };
     }
 	
@@ -41,19 +56,19 @@ public class Inventory {
         this.stockAvailable = newStock;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
 		return status;
 	}
 
-    public String getreqStatus() {
+    public RequestStatus getreqStatus() {
 		return reqStatus;
 	}
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void setreqStatus(String reqStatus) {
+    public void setreqStatus(RequestStatus reqStatus) {
         this.reqStatus = reqStatus;
     }
 

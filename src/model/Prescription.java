@@ -1,21 +1,26 @@
 package model;
 public class Prescription {
+
+	public enum PrescriptionStatus {
+        PENDING,
+		DISPENSED
+    }
 	private String medicineName;
-	private String status;
+	private PrescriptionStatus status;
 	
 	public Prescription(String name) {
 		this.medicineName = name;
-		status = "Pending";
+		status = PrescriptionStatus.PENDING;
 	}
 	
 	public void updateStatus() {
-		status = "Dispensed";
+		status = PrescriptionStatus.DISPENSED;
 	}
 	
 	public String getName() {
 		return this.medicineName;
 	}
-	public String getStatus() {
+	public PrescriptionStatus getStatus() {
 		return this.status;
 	}
 

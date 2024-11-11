@@ -2,6 +2,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Inventory.Status;
+import model.Prescription.PrescriptionStatus;
+import model.Inventory.RequestStatus; 
 import view.AppointmentOutcomeRecordDisplay;
 import view.InputIntChoice;
 import view.InventoryDisplay;
@@ -74,7 +77,7 @@ public class Pharmacist extends User{
         for (AppointmentOutcomeRecord record : allAppointmentOutcomeRecords) {
             boolean updateNeeded = false;
             for (Prescription item : record.getPrescriptionList()){
-                if (item.getStatus().equals( "Pending")){
+                if (item.getStatus() == PrescriptionStatus.PENDING){
                     PrescriptionDisplay.display(item);             // use PrescriptionDisplay class
                     System.out.println("");
                     updateNeeded = true;
@@ -108,7 +111,7 @@ public class Pharmacist extends User{
     }
 
     private void updateInventory(Prescription medicine) {
-        if (medicine.getStatus().equals("Pending")){
+        if (medicine.getStatus() == PrescriptionStatus.PENDING){
             for (Inventory stock : allInventoryItems){
                 if (stock.getName().equals(medicine.getName())){
                     boolean validity = stock.updateStock();
@@ -136,14 +139,14 @@ public class Pharmacist extends User{
         int choice = -1;
 
         for(Inventory stock : allInventoryItems){
-            if (stock.getStatus().equals("low")){
+            
                 InventoryDisplay.display(stock);;                // use InventoryDisplay class
 
                 ReplenishmentRequestMenu.display();
                 choice = input.getIntChoice();
 
                 if (choice == 1){
-                    stock.setreqStatus("pending");
+                    stock.setreqStatus(RequestStatus.PENDING);
                     InventoryDisplay.display(stock);            // use InventoryDisplay class
                     System.out.println("Submission sent successfully! Waiting approval from administrator.");
                 }
@@ -153,10 +156,11 @@ public class Pharmacist extends User{
                     continue;
                 }
             } 
-        }
-        System.out.println("Quitting Replenishment Request. . . ");
+            System.out.println("Quitting Replenishment Request. . . ");
     }
-
-
-
 }
+        
+
+
+
+
