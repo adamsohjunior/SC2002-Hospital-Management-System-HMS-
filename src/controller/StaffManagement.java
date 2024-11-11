@@ -11,50 +11,33 @@ import model.Available;
 import model.Doctor;
 import model.Inventory;
 import model.Pharmacist;
+import view.InputIntChoice;
+import view.StaffDisplay;
+import view.StaffDisplayMenu;
+import system.SystemManager;
 
 public class StaffManagement {
     private ArrayList<User> staffList;
     private ArrayList<Inventory> allInventoryItems;
     private ArrayList<Appointment> allAppointments;
+    private InputIntChoice inputIntChoice = new InputIntChoice(5);
+    private SystemManager systemManager;
 
-    public StaffManagement(ArrayList<User> staffList, ArrayList<Inventory> allInventoryItems, ArrayList<Appointment> allAppointments) {
+    public StaffManagement(ArrayList<User> staffList, ArrayList<Inventory> allInventoryItems, ArrayList<Appointment> allAppointments, SystemManager systemManager) {
         this.staffList = staffList;
         this.allInventoryItems = allInventoryItems;
         this.allAppointments = allAppointments;
+        this.systemManager = systemManager;
     }
 
     public void manageStaff() {
-        int choice=-1;
-		boolean validity = false;
-
+        int choice;
         Scanner scan = new Scanner(System.in);
-		
+
 		do{
-			validity = false;
-		      while (!validity) { 
-		            try {
-		    			System.out.println("What would you like to do?"
-                                + "1) Add Staff\r\n"
-		    					+ "2) Update Staff Details\r\n"
-		    					+ "3) Delete Staff\r\n"
-                                + "4) Display Staff\r\n"
-		    					+ "5) Exit\r\n");
-		                System.out.print("Please enter your choice: ");
-		                choice = scan.nextInt(); 
-		                if(choice > 0 && choice <= 5) {
-		                	validity = true;
-		                }
-		                else {
-		                	System.out.println("Please input a choice that is valid.");
-		                }
-		            } catch (InputMismatchException e) {
-		                System.out.println("Invalid input! Please enter an appropriate choice.");
-		                scan.next(); 
-		            }
-		        }
-				/* clear the enter key */
-				scan.nextLine(); 
-		        switch(choice) {
+            StaffDisplayMenu.display();
+            choice = inputIntChoice.getIntChoice();
+		    switch(choice) {
 		        case 1:
                     addStaff();
                     break;
@@ -69,12 +52,11 @@ public class StaffManagement {
 		    	    break;
                 case 5: 
                     break;
-		      }
+		    }
 		} while (choice != 5);
     }
 
     // add staff
-    // Parameter can be (User user), reduce switch case
     private void addStaff() {
         Scanner scan = new Scanner(System.in);
 
@@ -82,12 +64,7 @@ public class StaffManagement {
         boolean validity = false;
         while (!validity) { 
             try {
-                System.out.println("Select the Staff's Role"
-                        + "1) Doctor\r\n"
-                        + "2) Pharmacist\r\n"
-                        + "3) Admin\r\n"
-                        + "4) Exit\r\n");
-                System.out.print("Please enter your choice: ");
+                StaffDisplayMenu.display();
                 choice = scan.nextInt(); 
                 if(choice > 0 && choice <= 4) {
                     validity = true;
@@ -112,7 +89,6 @@ public class StaffManagement {
         age = scan.nextInt();
         scan.next();
 
-        // TODO
         // store data into database
         switch (choice) {           
             case 1: 
@@ -137,6 +113,7 @@ public class StaffManagement {
         }
     }
 
+    // Factory method to create staff members
     private User createStaff(String role, String name, int age, String gender) {
         String id = generateId(role, 1);
         ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords = new ArrayList<>();
@@ -148,12 +125,13 @@ public class StaffManagement {
             case "Pharmacists":
                 return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, allInventoryItems);
             case "Administrator":
-                return new Administrator(id, name, age, gender, allInventoryItems, staffList, allAppointments);
+                return new Administrator(id, name, age, gender, allInventoryItems, staffList, allAppointments, systemManager);
             default: 
                 return null;
         }
     }
 
+    // Method to generate sequential IDs with leading zeros
     private String generateId(String role, int choice) {
         // choice = 1, return Id
         // choice = 2, return End + 1
@@ -228,21 +206,6 @@ public class StaffManagement {
 
     // display staff
     private void displayStaff() {
-        System.out.printf("%-15s %-10s %-10s %-5s %-15s%n", "Name", "Gender", "ID", "Age", "Role");
-        System.out.println("-------------------------------------------------------");
-
-        // Display staff details
-        for (User staff : staffList) {
-            String role = staff.getUserId();
-            if (role.charAt(0) == 'D') { role = "Doctor";}
-            if (role.charAt(0) == 'P') { role = "Pharmacist";}
-            if (role.charAt(0) == 'A') { role = "Administrator";}
-            System.out.printf("%-15s %-10s %-10s %-5d %-15s%n", 
-                staff.getName(), 
-                staff.getGender(), 
-                staff.getUserId(), 
-                staff.getAge(),
-                role);
-        }
+        StaffDisplay.display(staffList);
     }
 }

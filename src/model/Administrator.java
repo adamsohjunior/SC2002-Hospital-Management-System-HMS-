@@ -5,17 +5,21 @@ import java.util.Scanner;
 import controller.InventoryManagement;
 import controller.StaffManagement;
 import model.Appointment;
+import view.AdminDisplayMenu;
+import view.InputIntChoice;
+import system.SystemManager;
 
 public class Administrator extends User {
-    private Scanner scan = new Scanner(System.in);
 	private InventoryManagement inventoryManagement;
     private StaffManagement staffManagement;
 	private ArrayList<Appointment> allAppointments;
+	private InputIntChoice inputIntChoice = new InputIntChoice(6); // 6 input choices
+	private SystemManager systemManager;
 
-    public Administrator(String id, String name, int age, String gender, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList, ArrayList<Appointment> allAppointments) {
+    public Administrator(String id, String name, int age, String gender, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList, ArrayList<Appointment> allAppointments, SystemManager systemManager) {
         super(id, name, age, gender);
 		this.inventoryManagement = new InventoryManagement(allInventoryItems);
-        this.staffManagement = new StaffManagement(staffList, allInventoryItems, allAppointments);
+        this.staffManagement = new StaffManagement(staffList, allInventoryItems, allAppointments, systemManager);
 		this.allAppointments = allAppointments;
     }
 
@@ -35,33 +39,11 @@ public class Administrator extends User {
     }
 	
     public void displayMenu() {
-        int choice=-1;
-		boolean validity = false;
-		
+        int choice;
 		do{
-			validity = false;
-			while (!validity) { 
-				try {
-					System.out.println("1) View and Manage Staff\r\n"
-							+ "2) View Appointment Details\r\n"
-							+ "3) View and Manage Medication Inventory\r\n"
-							+ "4) Approve Replenishment Requests"
-							+ "5) Logout\r\n");
-					System.out.print("Please enter your choice: ");
-					choice = scan.nextInt(); 
-					if(choice > 0 && choice <= 5) {
-						validity = true;
-					}
-					else {
-						System.out.println("Please input a choice that is valid.");
-					}
-				} catch (InputMismatchException e) {
-					System.out.println("Invalid input! Please enter an appropriate choice.");
-					scan.next(); 
-				}
-			}
-			/* clear the enter key */
-			scan.nextLine(); 
+			AdminDisplayMenu.display();
+			choice = inputIntChoice.getIntChoice();
+			
 			switch(choice) {
 			case 1:
 				manageStaff();
@@ -76,8 +58,12 @@ public class Administrator extends User {
 				approveRequest();
 				break;
 			case 5:
+				systemManager.shutdown();
+				break;
+			case 6:
 				break;
 			}
+			
 		} while (choice != 5);
 		
 		// scan.close();

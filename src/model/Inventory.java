@@ -64,6 +64,10 @@ public class Inventory {
 		return reqStatus;
 	}
 
+    public int getAlertLevel() {
+        return this.alertLevel;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
