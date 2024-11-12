@@ -13,13 +13,15 @@ import model.Inventory;
 import model.Pharmacist;
 import view.InputIntChoice;
 import view.StaffDisplay;
-import view.StaffDisplayMenu;
+import view.RoleDisplayMenu;
+import view.StaffMDisplayMenu;
 import system.SystemManager;
 
 public class StaffManagement {
     private ArrayList<User> staffList;
     private ArrayList<Inventory> allInventoryItems;
     private ArrayList<Appointment> allAppointments;
+    private InputIntChoice inputRoleChoice = new InputIntChoice(4);
     private InputIntChoice inputIntChoice = new InputIntChoice(5);
     private SystemManager systemManager;
 
@@ -35,7 +37,7 @@ public class StaffManagement {
         Scanner scan = new Scanner(System.in);
 
 		do{
-            StaffDisplayMenu.display();
+            StaffMDisplayMenu.display();
             choice = inputIntChoice.getIntChoice();
 		    switch(choice) {
 		        case 1:
@@ -60,24 +62,9 @@ public class StaffManagement {
     private void addStaff() {
         Scanner scan = new Scanner(System.in);
 
-        int choice = -1;
-        boolean validity = false;
-        while (!validity) { 
-            try {
-                StaffDisplayMenu.display();
-                choice = scan.nextInt(); 
-                if(choice > 0 && choice <= 4) {
-                    validity = true;
-                }
-                else {
-                    System.out.println("Please input a choice that is valid.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter an appropriate choice.");
-                scan.next(); 
-            }
-        }
-        if (choice == 4) return;
+        int choice;
+        RoleDisplayMenu.display();
+        choice = inputRoleChoice.getIntChoice();
 
         String name, gender, role = null; 
         int age;
@@ -87,8 +74,8 @@ public class StaffManagement {
         gender = scan.next();
         System.out.println("Enter age: ");
         age = scan.nextInt();
-        scan.next();
-
+        //scan.next();
+        //System.out.println("Staff selected\n");
         // store data into database
         switch (choice) {           
             case 1: 
@@ -103,7 +90,10 @@ public class StaffManagement {
             default: 
                 System.out.println("Invalid Staff Role");
         }
-        User staffMember = createStaff(role, name, age, gender);    
+        System.out.println("Staff selected\n");
+        User staffMember = createStaff(role, name, age, gender);  
+    
+        
         if (staffMember != null) {
            int pos = Integer.parseInt(generateId(role, 2)); 
            staffList.add(pos, staffMember);

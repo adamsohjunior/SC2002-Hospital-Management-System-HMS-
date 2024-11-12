@@ -1,10 +1,10 @@
 package view;
 
-public class StaffDisplayMenu implements DisplayMenu{
+public class RoleDisplayMenu implements DisplayMenu{
     public static void display() {
         System.out.println("");
 		System.out.println("==============================================");
-        System.out.println("Select the Staff's Role"
+        System.out.println("Select the Staff's Role\r\n"
                         + "1) Doctor\r\n"
                         + "2) Pharmacist\r\n"
                         + "3) Admin\r\n"

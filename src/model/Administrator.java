@@ -65,7 +65,7 @@ public class Administrator extends User {
 				break;
 			}
 			
-		} while (choice != 5);
+		} while (choice != 6);
 		
 		// scan.close();
     }
