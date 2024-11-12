@@ -177,6 +177,7 @@ public class Pharmacist extends User {
                     InventoryDisplay.display(stock);            // use InventoryDisplay class
                     System.out.println("Submission sent successfully! Waiting approval from administrator.");
                     System.out.println("Next stock. . . ");
+                    System.out.println("");
                     sendMessage(getAdmin(), "New replenishment request for " + stock.getName());
                 }
 
