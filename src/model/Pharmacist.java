@@ -16,13 +16,17 @@ import view.UpdatePresriptionStatusMenu;
 public class Pharmacist extends User {
     private Scanner scan = new Scanner(System.in);
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
-    private ArrayList<Inventory> allInventoryItems;
+    private ArrayList<Inventory> allInventoryItems = new ArrayList<>();
     private ArrayList<User> staffList;
     
     public Pharmacist(String id, String name, int age, String gender, Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList){
         super(id, name, age, gender);
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
         this.allInventoryItems = allInventoryItems;
+        this.staffList = staffList;
+    }
+
+    public void setStaffList(ArrayList<User> staffList) {
         this.staffList = staffList;
     }
 
@@ -37,7 +41,7 @@ public class Pharmacist extends User {
             choice = input.getIntChoice();
 		        
 				/* clear the enter key */
-			scan.nextLine(); 
+			// scan.nextLine(); 
             switch(choice) {
             case 1:
                 System.out.println("Application Outcome Record:");
@@ -164,7 +168,10 @@ public class Pharmacist extends User {
 
     private User getAdmin() {
         for (User user: staffList) {
-            if (user.getClass().isInstance("Administrator")) {
+            /*
+             * ASSUME ID of admin starts with 'A'
+             */
+            if (user.getUserId().charAt(0) == 'A') {
                 return user;
             }
         }

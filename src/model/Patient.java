@@ -3,7 +3,13 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import view.AppointmentOutcomeRecordDisplay;
+import view.AppointmentsDisplay;
+import view.EmailUpdateDisplay;
+import view.InputEmail;
+import view.InputIntChoice;
 import view.MedicalRecordDisplay;
+import view.PatientDisplayMenu;
 
 public class Patient extends User{
 	private MedicalRecord medicalRecord;
@@ -11,7 +17,8 @@ public class Patient extends User{
 	private Available availableDates;
 	private ArrayList<AppointmentOutcomeRecord> appointmentOutcomeRecords = new ArrayList<>();
 	private ArrayList<Appointment> allAppointments;
-	private Scanner scan = new Scanner(System.in);
+	
+
 	
 	/* this availableDates is the global object that itself store an array of ALL Availability objects->days indicated by all doctors that
 	 * they are able. We have this to use later on in the scheduling methods.
@@ -31,37 +38,14 @@ public class Patient extends User{
 	
 	public void displayMenu() {
 		/* to be filled */
+		
 		int choice=-1;
-		boolean validity = false;
+		InputIntChoice inputForMenu = new InputIntChoice(9);
 		
 		do{
-			validity = false;
-		      while (!validity) { 
-		            try {
-		    			System.out.println("1) View Medical Record\r\n"
-		    					+ "2) Update Personal Information\r\n"
-		    					+ "3) View Available Appointment Slots\r\n"
-		    					+ "4) Schedule an Appointment\r\n"
-		    					+ "5) Reschedule an Appointment\r\n"
-		    					+ "6) Cancel an Appointment\r\n"
-		    					+ "7) View Scheduled Appointments\r\n"
-		    					+ "8) View Past Appointment Outcome Records\r\n"
-		    					+ "9) Logout\r\n");
-		                System.out.print("Please enter your choice: ");
-		                choice = scan.nextInt(); 
-		                if(choice > 0 && choice <= 9) {
-		                	validity = true;
-		                }
-		                else {
-		                	System.out.println("Please input a choice that is valid.");
-		                }
-		            } catch (InputMismatchException e) {
-		                System.out.println("Invalid input! Please enter an appropriate choice.");
-		                scan.next(); 
-		            }
-		        }
-				/* clear the enter key */
-				scan.nextLine(); 
+			PatientDisplayMenu.display();
+			choice = inputForMenu.getIntChoice();
+
 		      switch(choice) {
 		      case 1:
 		    	  viewMedicalRecord();
@@ -70,8 +54,11 @@ public class Patient extends User{
 		    	//   boolean proof = false;
 		    	//   int contact = -1;
 		    	  
-		    	  System.out.print("Please input new email: ");
-		    	  String email = scan.nextLine();
+		    	  
+				  EmailUpdateDisplay.display();
+
+		    	  InputEmail inputForEmail = new InputEmail();
+				  String email = inputForEmail.getStringInput();
 		    	  
 		    	//   while(!proof) {
 			    // 	  try {
@@ -146,10 +133,7 @@ public class Patient extends User{
 			System.out.println("There are no records.");
 			return;
 		}
-		for(int i =0;i<this.appointmentOutcomeRecords.size();i++) {
-			this.appointmentOutcomeRecords.get(i).printInfo();
-			System.out.println("");
-		}
+		AppointmentOutcomeRecordDisplay.display(appointmentOutcomeRecords);
 	}
 	
 	public void viewScheduledAppointments() {
@@ -157,10 +141,7 @@ public class Patient extends User{
 			System.out.println("There are no appointments.");
 			return;
 		}
-		for(int i =0;i<this.scheduledAppointments.size();i++) {
-			this.scheduledAppointments.get(i).printInfo();
-			System.out.println("");
-		}
+		AppointmentsDisplay.display(scheduledAppointments);
 	}
 	
 	public void scheduleAppointment() {
@@ -171,7 +152,8 @@ public class Patient extends User{
 		scheduledAppointments.add(appointment);
 		/* this is a reference to the global appointment list that all classes can access as it is in the main system */
 		allAppointments.add(appointment);
-		
+	
+		sendMessage(appointment.getDoctor(), appointment.getPatient().getName()+" has SCHEDULED an appointment on "+appointment.getDate()+" "+appointment.getTime());
 	}
 	
 	public void rescheduleAppointment() {
@@ -191,32 +173,14 @@ public class Patient extends User{
 			return false;
 		}
 		
-		System.out.println("Current scheduled appointments");
-		for(int i=0;i<this.scheduledAppointments.size();i++) {
-			System.out.println((i+1)+")Doctor: "+this.scheduledAppointments.get(i).getDoctor().getName());
-			System.out.println("    Date: "+this.scheduledAppointments.get(i).getDate());
-			System.out.println("    Time: "+this.scheduledAppointments.get(i).getTime());
-		}
 		
-		boolean validity = false;
+		AppointmentsDisplay.display(scheduledAppointments);
+
 		int choice = 0;
-		while (!validity) { 
-            try {
-                System.out.print("Please select an appointment to cancel: ");
-                choice = scan.nextInt(); 
-                if(choice>0 && choice<=this.scheduledAppointments.size()) {        	
-                	validity = true;         	
-                }
-                else {
-                	System.out.println("Please input a choice that is valid.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter an appropriate choice.");
-                scan.next(); 
-            }
-        }
-		/* clear the enter key */
-		scan.nextLine(); 
+		System.out.println("Please select an appointment to cancel: ");
+		InputIntChoice inputForAppointment = new InputIntChoice(scheduledAppointments.size());
+		choice  = inputForAppointment.getIntChoice();
+     
 		choice = choice-1;
 		Appointment appoinmentToBeRemoved = this.scheduledAppointments.get(choice);
 		this.scheduledAppointments.remove(appoinmentToBeRemoved);
@@ -227,7 +191,7 @@ public class Patient extends User{
 		String tim = appoinmentToBeRemoved.getTime();
 		
 		doc.removeIncommingAppointment(appoinmentToBeRemoved);
-
+		sendMessage(appoinmentToBeRemoved.getDoctor(), appoinmentToBeRemoved.getPatient().getName()+" has CANCELLED an appointment on "+appoinmentToBeRemoved.getDate()+" "+appoinmentToBeRemoved.getTime());
 		this.availableDates.updateAvailableDates(doc, dat, tim);
 		return true;
 	}

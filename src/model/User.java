@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import view.DisplayInbox;
+import view.DisplayLog;
 
 public abstract class User {
 	private String userId;
@@ -17,6 +18,7 @@ public abstract class User {
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
+		this.inbox = new ArrayList<String>();
 	}
 
 	public void showInbox() {
@@ -68,4 +70,6 @@ public abstract class User {
 	}
 
 	public abstract void displayMenu();
+
+	public void setStaffList(ArrayList<User> staffList) {}
 }

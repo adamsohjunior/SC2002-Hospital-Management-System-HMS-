@@ -20,13 +20,13 @@ public class Appointment {
 		this.outcome = newOutcome;
 	}
 	
-	public void printInfo() {
-		System.out.println("Patient: "+this.patient.getName());
-		System.out.println("Doctor: "+this.doctor.getName());
-		System.out.println("Date: "+this.date);
-		System.out.println("Time: "+this.time);
-		System.out.println("Status: "+this.status);
-	}
+	// public void printInfo() {
+	// 	System.out.println("Patient: "+this.patient.getName());
+	// 	System.out.println("Doctor: "+this.doctor.getName());
+	// 	System.out.println("Date: "+this.date);
+	// 	System.out.println("Time: "+this.time);
+	// 	System.out.println("Status: "+this.status);
+	// }
 	
 	public void printInfoForAdmin() {
 		System.out.println("Patient: "+this.patient.getUserId());

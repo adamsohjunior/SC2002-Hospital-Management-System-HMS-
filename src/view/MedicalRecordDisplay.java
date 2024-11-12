@@ -8,6 +8,7 @@ public class MedicalRecordDisplay implements DisplayInfo{
 		System.out.println("==============================================");
 		System.out.println(mR.getUserId());
 		System.out.println(mR.getName());
+		System.out.println(mR.getEmail());
 		System.out.println(mR.getDateOfBirth());
 		System.out.println(mR.getGender());
 		System.out.println(mR.getBloodType());

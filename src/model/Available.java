@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import view.AvailableDatesDisplay;
+
 public class Available {
 	private ArrayList<Availability> availableDates = new ArrayList<>();
 	private Scanner scan = new Scanner(System.in);
@@ -10,21 +12,14 @@ public class Available {
 	public int viewAvailableAppointmentSlots() { 
 		if (this.availableDates.size() == 0) { 
 			System.out.println("No available dates for appointments."); 
+			System.out.println("");
 			return -1; 
 		} 
 		 
-		System.out.println("Available dates for appointments are:"); 
-		int count = 0;
+		int count = 1;
 
 		/* this is ALL available dates OR for the doctor's own personal dates, one of the object made of this class will hold all the available dates -> see Doctor class */ 
-		for (int i = 0; i < this.availableDates.size() ; i++) { 
-			if (this.availableDates.get(i).getStatus().equals("Available")) { 
-				count++; 
-				System.out.println((i+1)+")Doctor: "+this.availableDates.get(i).getDoctor().getName()); 
-				System.out.println("    Date: "+this.availableDates.get(i).getDate()); 
-				System.out.println("    Time: "+this.availableDates.get(i).getTime()); 
-			} 
-		} 
+		AvailableDatesDisplay.display(availableDates);
 		return count; 
 	}
 	 
@@ -38,15 +33,12 @@ public class Available {
 		if (check == -1){ 
 			return null; 
 		} 
-		if (check == 0){ 
-			System.out.println("No available dates for appointments."); 
-			return null; 
-		}
 
 	      while (!validity) { 
 	            try {
-	                System.out.print("Please enter your choice: ");
+	                System.out.println("Please enter your choice: ");
 	                choice = scan.nextInt(); 
+					System.out.println("");
 	                if(choice>0 && choice<=availableDates.size()) {
 	                	/* Check if selected appointment is VALID -> meaning that it has no conflict with other scheduled appointments*/
 	                	String date = this.availableDates.get(choice-1).getDate();
@@ -59,7 +51,8 @@ public class Available {
 		                		String checkDate = scheduledAppointments.get(i).getDate();
 		                		String checkTime = scheduledAppointments.get(i).getTime();
 		                		if(date.equals(checkDate) && time.equals(checkTime)) {
-		                			System.out.print("Conflicting date and time with an already scheduled appointment!");
+		                			System.out.println("Conflicting date and time with an already scheduled appointment!");
+									System.out.println("");
 		                			validity = false;
 		                			break;
 		                		}
@@ -68,9 +61,11 @@ public class Available {
 	                }
 	                else {
 	                	System.out.println("Please input a choice that is valid.");
+						System.out.println("");
 	                }
 	            } catch (InputMismatchException e) {
 	                System.out.println("Invalid input! Please enter an appropriate choice.");
+					System.out.println("");
 	                scan.next(); 
 	            }
 	        }
@@ -105,13 +100,14 @@ public class Available {
 	
 	public void addAvailableDates(Availability avail) {
 		
-		Doctor doc = avail.getDoctor();
+		String doc = avail.getDoctor().getName();
 		String dat = avail.getDate();
 		String tim = avail.getTime();
 		
 		for(int i =0; i<availableDates.size();i++) {
-			if(availableDates.get(i).getDoctor() == doc && availableDates.get(i).getDate().equals(dat) && availableDates.get(i).getTime().equals(tim) ) {
+			if(availableDates.get(i).getDoctor().getName().equals(doc) && availableDates.get(i).getDate().equals(dat) && availableDates.get(i).getTime().equals(tim) ) {
 				System.out.println("Date is already available.");
+				System.out.println("");
 				return;
 			}
 		}

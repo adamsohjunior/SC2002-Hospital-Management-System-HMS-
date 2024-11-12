@@ -15,6 +15,7 @@ public class Administrator extends User {
 	private ArrayList<Appointment> allAppointments;
 	private InputIntChoice inputIntChoice = new InputIntChoice(6); // 6 input choices
 	private SystemManager systemManager;
+	private ArrayList<User> staffList;
 
     public Administrator(String id, String name, int age, String gender, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList, ArrayList<Appointment> allAppointments, SystemManager systemManager) {
         super(id, name, age, gender);
@@ -22,9 +23,13 @@ public class Administrator extends User {
         this.staffManagement = new StaffManagement(staffList, allInventoryItems, allAppointments, systemManager);
 		this.allAppointments = allAppointments;
 		this.systemManager = systemManager;
+		this.staffList = staffList;
     }
 
-	
+	public void setStaffList(ArrayList<User> staffList) {
+        this.staffList = staffList;
+    }
+
     // Inventory management methods delegated to InventoryManagement
     public void manageInventory() {
         inventoryManagement.manageInventory();

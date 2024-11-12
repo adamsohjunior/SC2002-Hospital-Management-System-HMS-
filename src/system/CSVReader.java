@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import model.User;
+
 public class CSVReader<T> {
     public ArrayList<T> read(String filePath, CSVParser<T> parser) {
         ArrayList<T> list = new ArrayList<>();

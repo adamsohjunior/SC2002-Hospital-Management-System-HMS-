@@ -46,14 +46,15 @@ public class SystemManager {
     }
 
     public void loadData() {
-        PatientParser patientParser = new PatientParser(availableDates, allAppointments);
-        StaffParser staffParser = new StaffParser(availableDates, allAppointmentOutcomeRecords, storage, staffList, allAppointments, this);
+        // Load inventory items
         InventoryParser inventoryParser = new InventoryParser();
+        PatientParser patientParser = new PatientParser(availableDates, allAppointments);
+        StaffParser staffParser = new StaffParser(availableDates, allAppointmentOutcomeRecords, storage, allAppointments, this, staffList);
 
         DisplayLog.display("Loading data from CSV files...");
         storage = new CSVReader<Inventory>().read(medicineListPath, inventoryParser);
         users.addAll(new CSVReader<Patient>().read(patientListPath, patientParser));    // No need for patientList
-        staffList = new CSVReader<User>().read(staffListPath, staffParser);
+        staffList.addAll(new CSVReader<User>().read(staffListPath, staffParser));
         users.addAll(staffList);
     }
 

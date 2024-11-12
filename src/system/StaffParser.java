@@ -18,13 +18,13 @@ public class StaffParser implements CSVReader.CSVParser<User> {
     private ArrayList<Appointment> allAppointments;
     private SystemManager systemManager;
 
-    public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage, ArrayList<User> staffList, ArrayList<Appointment> allAppointments, SystemManager systemManager) {
+    public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage, ArrayList<Appointment> allAppointments, SystemManager systemManager, ArrayList<User> staffList) {
         this.availableDates = availableDates;
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
         this.storage = storage;
-        this.staffList = staffList;
         this.allAppointments = allAppointments;
         this.systemManager = systemManager;
+        this.staffList = staffList;
     }
     
     @Override

@@ -9,13 +9,13 @@ public class InputPasswordStrict implements InputString {
             // Empty input validation
             if (password.isEmpty()) {
                 DisplayLog.display("Password cannot be empty.");
-                DisplayPrompt.display("Enter password: ");
+                DisplayPrompt.display("Enter new password: ");
                 continue;
             }
             // Format validation (source: regex101.com)
             if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}$")) {
                 DisplayLog.display("Invalid password format.");
-                DisplayPrompt.display("Enter password: ");
+                DisplayPrompt.display("Enter new password: ");
                 continue;
             }
             break;
