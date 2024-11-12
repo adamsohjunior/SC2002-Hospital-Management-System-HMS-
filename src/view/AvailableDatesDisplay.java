@@ -11,7 +11,7 @@ public class AvailableDatesDisplay {
 		System.out.println("==============================================");
 		for (int i=0;i<availableDates.size();i++) {
 			if(availableDates.get(i).getStatus().equals("Available")) {
-				System.out.println((i+1)+")Doctor: "+availableDates.get(i).getDoctor().getName());
+				System.out.println((i+1)+")  Doctor: "+availableDates.get(i).getDoctor().getName());
 				System.out.println("    Date: "+availableDates.get(i).getDate());
 				System.out.println("    Time: "+availableDates.get(i).getTime());
 				System.out.println("");

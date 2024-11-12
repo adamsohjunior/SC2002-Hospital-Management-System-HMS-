@@ -8,9 +8,9 @@ public class AppointmentOutcomeRecordDisplay implements DisplayInfo {
 
 
     static public void display(ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords) {
-		System.out.println("");
 		// System.out.println("Appointment Outcome Record:");     // DISCLAIMER: everyone put this line into your own main file before calling this method
 		System.out.println("==============================================");
+        System.out.println("");
 		for (AppointmentOutcomeRecord record : allAppointmentOutcomeRecords) {
             System.out.println("Date: "+record.getDate());
             System.out.println("Diagnoses: "+record.getDiagnoses());
@@ -21,6 +21,8 @@ public class AppointmentOutcomeRecordDisplay implements DisplayInfo {
                 System.out.print(record.getPrescriptionList().get(i).getName() + "(" + record.getPrescriptionList().get(i).getStatus() + ")" + " ");
             }
             System.out.println("");
+            System.out.println("");
+
         }
 		System.out.println("==============================================");
 		System.out.println("");

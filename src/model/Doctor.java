@@ -279,7 +279,7 @@ public class Doctor extends User {
 		InputIntChoice inputForApp = new InputIntChoice(upcomingAppointments.size());
 		int choice = 0;
 		
-                System.out.print("Please select an appointment to complete: ");
+                System.out.println("Please select an appointment to complete: ");
 				choice = inputForApp.getIntChoice();
 		
 	

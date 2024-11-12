@@ -32,7 +32,7 @@ public class Inventory {
             return false;
         }else{
             stockAvailable = stockAvailable - 1;
-            System.out.println("Prescribed. Stocks Remaining: " + stockAvailable);
+            System.out.println(medicineName + " Prescribed. Stocks Remaining: " + stockAvailable);
             this.lowStockAlert();
             return true;
         }

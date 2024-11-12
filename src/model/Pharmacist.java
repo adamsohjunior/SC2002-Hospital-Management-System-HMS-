@@ -37,7 +37,6 @@ public class Pharmacist extends User {
         InputIntChoice input = new InputIntChoice(5);
 		
 		do{	
-            System.out.println("Appointment Outcome Record:");
             PharmacistDisplayMenu.display();
             choice = input.getIntChoice();
 		        
@@ -45,25 +44,30 @@ public class Pharmacist extends User {
 			// scan.nextLine(); 
             switch(choice) {
             case 1:
-                System.out.println("Application Outcome Record:");
+                System.out.println("");
+                System.out.println("Appointment Outcome Record:");
                 this.viewAppointmentOutcomeRecords();
                 break;
             case 2:
-                System.out.println("Prescription Status:");
+                System.out.println("");
+                System.out.println("Update Prescription Status:");
                 this.updatePrescriptionStatus();
                 break;
         
             case 3:
+                System.out.println("");
                 System.out.println("Medication Inventory:");
                 this.viewMedicationInventory();
                 break;
 
             case 4:
+                System.out.println("");
                 System.out.println("Replenishment Request:");
                 this.replenishmentRequest();
                 break;
 
             case 5:
+                System.out.println("");
                 System.out.println("Pharmacist logging out . . . ");
                 break;
             }
@@ -81,25 +85,36 @@ public class Pharmacist extends User {
         InputIntChoice input = new InputIntChoice(3);
         int choice = -1;
 
+        if (allAppointmentOutcomeRecords.size() == 0){
+            System.out.println("No action needed to update prescription status!");
+            return;
+        }
+
+		
         for (AppointmentOutcomeRecord record : allAppointmentOutcomeRecords) {
+            System.out.println("==============================================");
             boolean updateNeeded = false;
             for (Prescription item : record.getPrescriptionList()){
                 if (item.getStatus() == PrescriptionStatus.PENDING){
                     PrescriptionDisplay.display(item);             // use PrescriptionDisplay class
-                    System.out.println("");
                     updateNeeded = true;
                 }
+            
             }
+            System.out.println("==============================================");
+		    System.out.println("");
 
             if (updateNeeded){
                 UpdatePresriptionStatusMenu.display();
                 choice = input.getIntChoice();
+                System.out.println("");
 
                 
                 if (choice == 1){
                     for (Prescription item : record.getPrescriptionList()){
                         this.updateInventory(item);
                     }
+                    System.out.println("Next patient record. . .");
                 }
 
                 if (choice == 2) {
@@ -114,6 +129,7 @@ public class Pharmacist extends User {
                 }
             }
         }
+        System.out.println("Actions completed!");
         System.out.println("Quitting Prescription Status. . .");
     }
 
@@ -134,10 +150,12 @@ public class Pharmacist extends User {
 
 
     public void viewMedicationInventory(){
+        System.out.println("Current Inventory Information: ");
+		System.out.println("==============================================");
         for (Inventory stock : allInventoryItems){
             InventoryDisplay.display(stock);;            // use InventoryDisplay class
         }
-
+        System.out.println("==============================================");
         System.out.println("Quitting Medication Inventory. . .");
     }
 
@@ -146,8 +164,10 @@ public class Pharmacist extends User {
         int choice = -1;
 
         for(Inventory stock : allInventoryItems){
-            
+                System.out.println("Current Inventory Information: ");
+                System.out.println("==============================================");
                 InventoryDisplay.display(stock);;                // use InventoryDisplay class
+                System.out.println("==============================================");
 
                 ReplenishmentRequestMenu.display();
                 choice = input.getIntChoice();
@@ -156,14 +176,17 @@ public class Pharmacist extends User {
                     stock.setreqStatus(RequestStatus.PENDING);
                     InventoryDisplay.display(stock);            // use InventoryDisplay class
                     System.out.println("Submission sent successfully! Waiting approval from administrator.");
+                    System.out.println("Next stock. . . ");
                     sendMessage(getAdmin(), "New replenishment request for " + stock.getName());
                 }
 
                 if (choice == 2){
+                    System.out.println("");
                     System.out.println("Next stock. . . ");
                     continue;
                 }
-            } 
+            }
+            System.out.println("Actions Completed!");
             System.out.println("Quitting Replenishment Request. . . ");
     }
 
