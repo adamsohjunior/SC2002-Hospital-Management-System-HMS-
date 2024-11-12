@@ -52,10 +52,11 @@ public class SystemManager {
         StaffParser staffParser = new StaffParser(availableDates, allAppointmentOutcomeRecords, storage, allAppointments, this, staffList);
 
         DisplayLog.display("Loading data from CSV files...");
-        storage = new CSVReader<Inventory>().read(medicineListPath, inventoryParser);
+        //storage = new CSVReader<Inventory>().read(medicineListPath, inventoryParser);
         users.addAll(new CSVReader<Patient>().read(patientListPath, patientParser));    // No need for patientList
         staffList.addAll(new CSVReader<User>().read(staffListPath, staffParser));
         users.addAll(staffList);
+        storage.addAll(new CSVReader<Inventory>().read(medicineListPath,inventoryParser));
     }
 
     public void runSystem() {

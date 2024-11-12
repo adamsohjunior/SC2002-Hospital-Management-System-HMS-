@@ -37,6 +37,7 @@ public class Pharmacist extends User {
         InputIntChoice input = new InputIntChoice(5);
 		
 		do{	
+            System.out.println("Appointment Outcome Record:");
             PharmacistDisplayMenu.display();
             choice = input.getIntChoice();
 		        
