@@ -73,6 +73,10 @@ public class SystemManager {
         shutdown = true;
     }
 
+    public void addUser(User user) {
+        users.add(user);
+    }
+
     public ArrayList<Inventory> getStorage() {
         return this.storage;
     }
