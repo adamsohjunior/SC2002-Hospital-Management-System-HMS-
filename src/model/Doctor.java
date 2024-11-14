@@ -225,6 +225,9 @@ public class Doctor extends User {
 		
 		DisplayLog.display("Appointment requests: ");
 		InputIntChoice inputForAccDec = new InputIntChoice(2);
+
+		
+
 		for (int i = 0;i<appointmentRequests.size();i++) {
 			Appointment temp = appointmentRequests.get(i);
 			ArrayList<Appointment> tempList = new ArrayList<Appointment>();
@@ -232,19 +235,20 @@ public class Doctor extends User {
 			AppointmentsDisplay.display(tempList);
 			
 			int choice = 0;
-	        DisplayPrompt.display("1 to Accept || 2 to Decline");	
+	        DisplayPrompt.display("1 to Accept || 2 to Decline");
+			System.out.println("");	
 	        choice = inputForAccDec.getIntChoice();
 			
 			if(choice == 1) {
 				temp.setStatus("Accepted");
 				upcomingAppointments.add(temp);
-				appointmentRequests.remove(temp);
+				
 				updatePatientList();
 				sendMessage(temp.getPatient(), "Dr "+temp.getDoctor().getName()+" has ACCEPTED your appointment on "+temp.getDate()+" "+temp.getTime());
 			}
 			else {
 				temp.setStatus("Rejected");
-				appointmentRequests.remove(temp);
+				
 				sendMessage(temp.getPatient(), "Dr "+temp.getDoctor().getName()+" has REJECTED your appointment on "+temp.getDate()+" "+temp.getTime());
 				Doctor doc = temp.getDoctor();
 				String dat = temp.getDate();
@@ -254,6 +258,7 @@ public class Doctor extends User {
 				this.availableDates.updateAvailableDates(doc, dat, tim);
 			}
 		}
+		appointmentRequests.clear();
 	}
 	
 	public void viewUpcomingAppointments() {
