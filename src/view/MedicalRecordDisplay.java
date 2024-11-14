@@ -17,7 +17,6 @@ public class MedicalRecordDisplay implements DisplayInfo{
 
 		AppointmentOutcomeRecordDisplay.display(mR.getDiagnosesTreatmentPrescription());
 
-		System.out.println("==============================================");
 		System.out.println("");
 	}
 }

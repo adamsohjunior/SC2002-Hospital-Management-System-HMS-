@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.Availability;
 import model.Inventory;
 
-public class MedicineDisplay {
+public class MedicineDisplay implements DisplayInfo {
 	static public void display(ArrayList<Inventory> storage) {
 		System.out.println("");
 		System.out.println("Medications");
