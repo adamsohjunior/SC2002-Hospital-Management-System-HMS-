@@ -10,6 +10,8 @@ import view.InputEmail;
 import view.InputIntChoice;
 import view.MedicalRecordDisplay;
 import view.PatientDisplayMenu;
+import view.DisplayLog;
+import view.DisplayPrompt;
 
 public class Patient extends User{
 	private MedicalRecord medicalRecord;
@@ -130,7 +132,7 @@ public class Patient extends User{
 
 	public void viewAppointmentOutcomeRecords() {
 		if(this.appointmentOutcomeRecords.size() == 0) {
-			System.out.println("There are no records.");
+			DisplayLog.display("There are no records.");
 			return;
 		}
 		AppointmentOutcomeRecordDisplay.display(appointmentOutcomeRecords);
@@ -138,7 +140,7 @@ public class Patient extends User{
 	
 	public void viewScheduledAppointments() {
 		if(this.scheduledAppointments.size()==0) {
-			System.out.println("There are no appointments.");
+			DisplayLog.display("There are no appointments.");
 			return;
 		}
 		AppointmentsDisplay.display(scheduledAppointments);
@@ -162,14 +164,14 @@ public class Patient extends User{
 			scheduleAppointment();
 		}
 		else {
-			System.out.println("There are no appointments to reschedule");
+			DisplayLog.display("There are no appointments to reschedule");
 		}
 
 	}
 	
 	public boolean cancelAppointment() {
 		if(this.scheduledAppointments.size() == 0) {
-			System.out.println("There are no appointments to cancel");
+			DisplayLog.display("There are no appointments to cancel");
 			return false;
 		}
 		
@@ -177,7 +179,7 @@ public class Patient extends User{
 		AppointmentsDisplay.display(scheduledAppointments);
 
 		int choice = 0;
-		System.out.println("Please select an appointment to cancel: ");
+		DisplayPrompt.display("Please select an appointment to cancel: ");
 		InputIntChoice inputForAppointment = new InputIntChoice(scheduledAppointments.size());
 		choice  = inputForAppointment.getIntChoice();
      

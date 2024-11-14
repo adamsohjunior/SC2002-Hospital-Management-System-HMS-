@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import view.AppointmentsDisplay;
 import view.DayDisplay;
+import view.DisplayLog;
+import view.DisplayPrompt;
 import view.DoctorDisplayMenu;
 import view.InputDayChoice;
 import view.InputInt;
@@ -89,23 +91,23 @@ public class Doctor extends User {
 	
 	public void viewPatientMedicalRecords() {
 		if (patientMedicalRecords.size() == 0) {
-			System.out.println("No patients");
+			DisplayLog.display("No patients");
 			return;
 		}
 
 		for(int j = 0;j<patientMedicalRecords.size();j++) {
 			MedicalRecordDisplay.display(patientMedicalRecords.get(j));
-			System.out.println("");
+			DisplayLog.display("");
 		}
 	}
 	
 	public void updatePatientMedicalRecord() {
 		if(patientMedicalRecords.size()==0) {
-			System.out.println("You have no patients");
+			DisplayLog.display("You have no patients");
 			return;
 		}
 		InputIntChoice inputForPatient = new InputIntChoice(patientMedicalRecords.size());
-		System.out.println("Select patient to update their record");
+		DisplayPrompt.display("Select patient to update their record");
 		for(int i=0;i<patientMedicalRecords.size();i++) {
 			System.out.println((i+1)+")"+patientMedicalRecords.get(i).getName());
 		}
@@ -125,18 +127,13 @@ public class Doctor extends User {
 
 			String date = day + " " + month;
 
-
-
-			System.out.println("");
-			System.out.println("Please enter your diagnoses: ");
+			DisplayPrompt.display("\nPlease enter your diagnoses: ");
 			String diag = scan.nextLine();
-			System.out.println("");
-			System.out.println("Please enter your treatment: ");
+			DisplayPrompt.display("\nPlease enter your treatment: ");
 			String treat = scan.nextLine();
-			System.out.println("");
-			System.out.println("Please enter your consultation notes: ");
+			DisplayPrompt.display("\nPlease enter your consultation notes: ");
 			String notes = scan.nextLine();
-			System.out.println("");
+			DisplayLog.display("");
 			
 			/* here can change to list of medications instead of the doctor manually enterint the name*/
 			ArrayList<Prescription> list = new ArrayList<>();
@@ -174,14 +171,14 @@ public class Doctor extends User {
 	
 	public void setAvailability() {
 		MonthDisplay.display();
-			InputMonthChoice inputForMonth = new InputMonthChoice();
-			String month = inputForMonth.getMonth();
+		InputMonthChoice inputForMonth = new InputMonthChoice();
+		String month = inputForMonth.getMonth();
 
-			DayDisplay.display();
-			InputDayChoice inputForDay = new InputDayChoice();
-			int day = inputForDay.getDay(month);
+		DayDisplay.display();
+		InputDayChoice inputForDay = new InputDayChoice();
+		int day = inputForDay.getDay(month);
 
-			String date = day + " " + month;
+		String date = day + " " + month;
 		
 		TimeDisplay.display();
 		InputTimeChoice inputForTime = new InputTimeChoice();
@@ -222,11 +219,11 @@ public class Doctor extends User {
 	
 	public void acceptOrDecline() {
 		if (appointmentRequests.size() == 0) {
-			System.out.println("There are no appointment requests.");
+			DisplayLog.display("There are no appointment requests.");
 			return;
 		}
 		
-		System.out.print("Appointment requests: ");
+		DisplayLog.display("Appointment requests: ");
 		InputIntChoice inputForAccDec = new InputIntChoice(2);
 		for (int i = 0;i<appointmentRequests.size();i++) {
 			Appointment temp = appointmentRequests.get(i);
@@ -235,7 +232,7 @@ public class Doctor extends User {
 			AppointmentsDisplay.display(tempList);
 			
 			int choice = 0;
-	        System.out.println("1 to Accept || 2 to Decline");	
+	        DisplayPrompt.display("1 to Accept || 2 to Decline");	
 	        choice = inputForAccDec.getIntChoice();
 			
 			if(choice == 1) {
@@ -261,7 +258,7 @@ public class Doctor extends User {
 	
 	public void viewUpcomingAppointments() {
 		if(upcomingAppointments.size()==0) {
-			System.out.println("You have no upcoming appoinments.");
+			DisplayLog.display("You have no upcoming appoinments.");
 			return;
 		}
 		
@@ -270,7 +267,7 @@ public class Doctor extends User {
 	
 	public void recordAppointmentOutcome() {
 		if(this.upcomingAppointments.size() == 0) {
-			System.out.println("There are no appointments to complete");
+			DisplayLog.display("There are no appointments to complete");
 			return;
 		}
 		
@@ -279,25 +276,20 @@ public class Doctor extends User {
 		InputIntChoice inputForApp = new InputIntChoice(upcomingAppointments.size());
 		int choice = 0;
 		
-                System.out.println("Please select an appointment to complete: ");
-				choice = inputForApp.getIntChoice();
-		
-	
-		
-		choice = choice-1;
+		DisplayLog.display("Please select an appointment to complete: ");
+		choice = inputForApp.getIntChoice()-1;
+
 		Appointment chosen = upcomingAppointments.get(choice);
 		upcomingAppointments.remove(chosen);
 		updatePatientList();
-		System.out.println("");
-		System.out.println("Please enter your diagnoses: ");
+
+		DisplayLog.display("\nPlease enter your diagnoses: ");
 		String diag = scan.nextLine();
-		System.out.println("");
-		System.out.println("Please enter your treatment: ");
+		DisplayLog.display("\nPlease enter your treatment: ");
 		String treat = scan.nextLine();
-		System.out.println("");
-		System.out.println("Please enter your consultation notes: ");
+		DisplayLog.display("\nPlease enter your consultation notes: ");
 		String notes = scan.nextLine();
-		System.out.println("");
+		DisplayPrompt.display("");
 		
 
 		/* here can change to list of medications instead of the doctor manually enterint the name*/
@@ -307,13 +299,10 @@ public class Doctor extends User {
 		int choice1 = -1;
 		while(choice1 !=2) {
 				
-			System.out.println("");
-			System.out.println("==============================================");
+			System.out.println("\n==============================================");
 			System.out.println("1)Prescribe Medication");
 			System.out.println("2)Finish");
-			System.out.println("==============================================");
-			System.out.println("");
-			
+			System.out.println("==============================================\n");
 
 			choice1 = inputForChoice1.getIntChoice();
 					
