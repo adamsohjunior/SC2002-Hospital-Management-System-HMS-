@@ -9,7 +9,8 @@ public class InventoryDisplayMenu implements DisplayMenu {
 		    					+ "3) Remove Stocks\r\n"
 		    					+ "4) Update Alert Line\r\n"
 		    					+ "5) Approve Replenishment Requests\r\n"
-		    					+ "6) Exit\r\n");
+                                + "6) Display Inventory\r\n"
+		    					+ "7) Exit\r");
         System.out.println("==============================================");
         System.out.println("");
     }

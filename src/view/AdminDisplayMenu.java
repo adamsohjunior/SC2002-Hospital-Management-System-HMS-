@@ -10,7 +10,7 @@ public class AdminDisplayMenu implements Display{
 							+ "3) View and Manage Medication Inventory\r\n"
 							+ "4) Approve Replenishment Requests\r\n" 
 							+ "5) Shut Down\r\n"
-                            + "6) Log Out\r\n");
+                            + "6) Log Out\r");
         System.out.println("==============================================");
         System.out.println("");
     } 

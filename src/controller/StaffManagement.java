@@ -90,13 +90,15 @@ public class StaffManagement {
             default: 
                 System.out.println("Invalid Staff Role");
         }
-        System.out.println("Staff selected\n");
+        //System.out.println("Staff selected\n");
         User staffMember = createStaff(role, name, age, gender);  
     
         
         if (staffMember != null) {
-           int pos = Integer.parseInt(generateId(role, 2)); 
-           staffList.add(pos, staffMember);
+           int pos = Integer.parseInt(generateId(role, 2));
+           staffList.add(pos, staffMember); 
+           systemManager.addUser(staffMember);
+           System.out.println("Staff Added...");
         }  
         else {
             System.out.println("Invalid Staff Role");
@@ -114,7 +116,7 @@ public class StaffManagement {
                 return new Doctor(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, allInventoryItems);
             case "Pharmacists":
                 return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, allInventoryItems, staffList);
-            case "Administrator":
+            case "Admin":
                 return new Administrator(id, name, age, gender, allInventoryItems, staffList, allAppointments, systemManager);
             default: 
                 return null;
@@ -124,12 +126,12 @@ public class StaffManagement {
     // Method to generate sequential IDs with leading zeros
     private String generateId(String role, int choice) {
         // choice = 1, return Id
-        // choice = 2, return End + 1
+        // choice = 2, return index to be inserted
         int start = 0, end = 0, index = 0, cnt = 0, size = staffList.size();
         char id = role.charAt(0);
         while (index < size) {
             //check the first character of UserId and Role
-            if (staffList.get(cnt).getUserId().charAt(0) == id) {
+            if (staffList.get(index).getUserId().charAt(0) == id) {
                 if (cnt == 0) { // first element
                     start = index;
                     end = start;
@@ -139,12 +141,11 @@ public class StaffManagement {
                 }
                 cnt++; // increment the number of the role
             }
-            else {
-                index++;
-            }
+           index++;
         }
+
         if (choice == 1) {
-            return id + String.format("%03d", end + 1);  
+            return id + String.format("%03d", cnt + 1);  
         }
         if (choice == 2) {
             return String.valueOf(end + 1);
@@ -155,7 +156,8 @@ public class StaffManagement {
 
     //update staff
     private void updateStaff() {
-        String name, gender, id; int age;
+        String name, gender, id; 
+        int age;
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Staff ID");
         id = scan.next();
@@ -170,14 +172,16 @@ public class StaffManagement {
                 gender = scan.next();
                 System.out.println("Update age: ");
                 age = scan.nextInt();
-                scan.next();
+                scan.nextLine();
 
                 staff.setName(name);
                 staff.setGender(gender);
                 staff.setAge(age);
+
+                return;
             }
         }
-
+        System.out.println("Invalid Staff ID\n");
     }
 
     // remove staff
@@ -190,8 +194,10 @@ public class StaffManagement {
         for (User staff : staffList) {
             if (staff.getUserId().equals(id)) {
                 staffList.remove(staff);
+                return;
             }
         }
+        System.out.println("Staff not found\n");
     }
 
     // display staff

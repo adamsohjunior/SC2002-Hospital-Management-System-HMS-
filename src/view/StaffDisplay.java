@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class StaffDisplay implements DisplayInfo{
     public static void display(ArrayList<User> staffList) {
         System.out.printf("%-15s %-10s %-10s %-5s %-15s%n", "Name", "Gender", "ID", "Age", "Role");
-        System.out.println("-------------------------------------------------------");
+        System.out.println("==============================================");
 
         // Display staff details
         for (User staff : staffList) {
@@ -21,5 +21,7 @@ public class StaffDisplay implements DisplayInfo{
                 staff.getAge(),
                 role);
         }
+
+        System.out.println("==============================================");
     }
 }

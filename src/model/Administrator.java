@@ -70,7 +70,7 @@ public class Administrator extends User {
 				break;
 			}
 			
-		} while (choice != 6);
+		} while (choice != 6 && choice != 5);
 		
 		// scan.close();
     }
