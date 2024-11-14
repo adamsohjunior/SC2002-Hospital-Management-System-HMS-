@@ -15,6 +15,8 @@ import view.InputIntChoice;
 import view.StaffDisplay;
 import view.RoleDisplayMenu;
 import view.StaffMDisplayMenu;
+import view.DisplayGender;
+import view.InputID;
 import system.SystemManager;
 
 public class StaffManagement {
@@ -23,6 +25,7 @@ public class StaffManagement {
     private ArrayList<Appointment> allAppointments;
     private InputIntChoice inputRoleChoice = new InputIntChoice(4);
     private InputIntChoice inputIntChoice = new InputIntChoice(5);
+    private InputIntChoice inputGenderChoice = new InputIntChoice(3);
     private SystemManager systemManager;
 
     public StaffManagement(ArrayList<User> staffList, ArrayList<Inventory> allInventoryItems, ArrayList<Appointment> allAppointments, SystemManager systemManager) {
@@ -66,16 +69,31 @@ public class StaffManagement {
         RoleDisplayMenu.display();
         choice = inputRoleChoice.getIntChoice();
 
-        String name, gender, role = null; 
+        String name, gender = null, role = null; 
         int age;
         System.out.println("Enter name: ");
         name = scan.next();
-        System.out.println("Enter gender: ");
-        gender = scan.next();
+
+        DisplayGender.display();
+        int choiceGen = inputGenderChoice.getIntChoice();
+        switch (choiceGen) {           
+            case 1: 
+                gender = "Male";
+                break;
+            case 2: 
+                gender = "Female";
+                break;
+            case 3:
+                gender = "Prefer not to say";
+                break;
+            default: 
+                System.out.println("Invalid Staff Role");
+        }
+
         System.out.println("Enter age: ");
         age = scan.nextInt();
         //scan.next();
-        //System.out.println("Staff selected\n");
+        
         // store data into database
         switch (choice) {           
             case 1: 
@@ -156,11 +174,11 @@ public class StaffManagement {
 
     //update staff
     private void updateStaff() {
-        String name, gender, id; 
+        String name, gender = null, id; 
         int age;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Staff ID");
-        id = scan.next();
+        InputID inputID = new InputID();
+        id = inputID.getStringInput();
 
         // TODO
         // some ways to check if id is valid...
@@ -168,12 +186,37 @@ public class StaffManagement {
             if(staff.getUserId().equals(id)) {
                 System.out.println("Update name: ");
                 name = scan.next();
-                System.out.println("Update gender: ");
-                gender = scan.next();
-                System.out.println("Update age: ");
-                age = scan.nextInt();
-                scan.nextLine();
 
+                DisplayGender.display();
+                int choiceGen = inputGenderChoice.getIntChoice();
+                switch (choiceGen) {           
+                    case 1: 
+                        gender = "Male";
+                        break;
+                    case 2: 
+                        gender = "Female";
+                        break;
+                    case 3:
+                        gender = "Prefer not to say";
+                        break;
+                    default: 
+                        System.out.println("Invalid Staff Role");
+                }
+
+                
+                while (true) {
+                    System.out.println("Update age: ");
+                    age = scan.nextInt();
+                    if (age < staff.getAge()) {
+                        System.out.println("You can't turn back your age!");
+                    }
+                    else {
+                        break;
+                    }
+                    
+                }
+                
+                //scan.nextLine();
                 staff.setName(name);
                 staff.setGender(gender);
                 staff.setAge(age);
@@ -189,8 +232,9 @@ public class StaffManagement {
         // TODO
         Scanner scan = new Scanner(System.in);
         String id;
-        System.out.println("Enter Staff's ID: ");
-        id = scan.next();
+        InputID inputID = new InputID();
+        id = inputID.getStringInput();
+
         for (User staff : staffList) {
             if (staff.getUserId().equals(id)) {
                 staffList.remove(staff);

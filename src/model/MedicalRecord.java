@@ -55,6 +55,10 @@ public class MedicalRecord {
         return gender;
     }
 
+    public String getContact() {
+        return email;
+    }
+
     public ArrayList<AppointmentOutcomeRecord> getDiagnosesTreatmentPrescription() {
         return diagnosesTreatmentPrescription;
     }

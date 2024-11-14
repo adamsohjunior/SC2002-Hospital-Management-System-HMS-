@@ -59,7 +59,7 @@ public class InventoryManagement {
 
         System.out.println("Enter medicine name");
         medicineName = scan.next();
-        System.out.println("Enter available stock");
+        System.out.println("Enter available stock"); // assume stocks entered > alert level
         stockAvailable = scan.nextInt();
         System.out.println("Enter alert level");
         alertLevel = scan.nextInt();
