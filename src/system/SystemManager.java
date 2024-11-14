@@ -11,6 +11,8 @@ import model.User;
 
 import view.DisplayLog;
 
+import system.Writer;
+
 // Facade pattern
 public class SystemManager {
     // Global (system) variables
@@ -72,7 +74,8 @@ public class SystemManager {
     }
 
     public void saveData() {
-        
+        Writer csvwriter = new Writer(staffList, patientList, storage);
+        csvwriter.writeDataIntoCSV();
     }
 
     public void shutdown() {
