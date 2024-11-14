@@ -16,8 +16,16 @@ public class Available {
 			DisplayLog.display("No available dates for appointments.\n"); 
 			return -1; 
 		} 
-		 
-		int count = 1;
+		int count = 0;
+		for(int i =0;i<availableDates.size();i++){
+			if(availableDates.get(i).getStatus().equals("Available")){
+				count++;
+			}
+		}
+		if(count == 0){
+			DisplayLog.display("No available dates for appointments.\n"); 
+			return -1;
+		}
 
 		/* this is ALL available dates OR for the doctor's own personal dates, one of the object made of this class will hold all the available dates -> see Doctor class */ 
 		AvailableDatesDisplay.display(availableDates);

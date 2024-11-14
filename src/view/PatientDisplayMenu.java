@@ -14,7 +14,8 @@ public class PatientDisplayMenu implements DisplayMenu {
 				+ "7) View Scheduled Appointments\r\n"
 				+ "8) View Past Appointment Outcome Records\r\n"
 				+ "9) View Inbox\r\n"
-				+ "10) Logout");
+				+ "10) Rate A Doctor\r\n"
+				+ "11) Logout");
 		System.out.println("==============================================");
 		System.out.println("");
 	}

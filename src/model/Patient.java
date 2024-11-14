@@ -1,17 +1,22 @@
 package model;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
 
 import view.AppointmentOutcomeRecordDisplay;
 import view.AppointmentsDisplay;
 import view.EmailUpdateDisplay;
 import view.InputEmail;
+import view.InputInt;
 import view.InputIntChoice;
 import view.MedicalRecordDisplay;
 import view.PatientDisplayMenu;
 import view.DisplayLog;
 import view.DisplayPrompt;
+import view.DoctorRatingDisplay;
+import view.DoctorRateDisplay;
 
 public class Patient extends User{
 	private MedicalRecord medicalRecord;
@@ -19,7 +24,7 @@ public class Patient extends User{
 	private Available availableDates;
 	private ArrayList<AppointmentOutcomeRecord> appointmentOutcomeRecords = new ArrayList<>();
 	private ArrayList<Appointment> allAppointments;
-	
+	private Set<Doctor> doctorsVisited = new HashSet<>();
 
 	
 	/* this availableDates is the global object that itself store an array of ALL Availability objects->days indicated by all doctors that
@@ -42,7 +47,7 @@ public class Patient extends User{
 		/* to be filled */
 		
 		int choice=-1;
-		InputIntChoice inputForMenu = new InputIntChoice(10);
+		InputIntChoice inputForMenu = new InputIntChoice(11);
 		
 		do{
 			PatientDisplayMenu.display();
@@ -99,9 +104,12 @@ public class Patient extends User{
 				  showInbox();
 				  break;
 		      case 10:
+				  rateDoctor(new InputIntChoice(5));
 		    	  break;
+			  case 11:
+				  break;
 		      }
-		} while (choice != 10);
+		} while (choice != 11);
 		
 		// scan.close();
 	}
@@ -199,5 +207,38 @@ public class Patient extends User{
 		sendMessage(appoinmentToBeRemoved.getDoctor(), appoinmentToBeRemoved.getPatient().getName()+" has CANCELLED an appointment on "+appoinmentToBeRemoved.getDate()+" "+appoinmentToBeRemoved.getTime());
 		this.availableDates.updateAvailableDates(doc, dat, tim);
 		return true;
+	}
+
+	public void updateDoctorsVisited(Doctor doc){
+		doctorsVisited.add(doc);
+	}
+
+	public void rateDoctor(InputInt inputForRating){
+		if (doctorsVisited.size() == 0) {
+			System.out.println("You have not seen any Doctors yet!");
+			return;
+		}
+
+		DoctorRatingDisplay.display(doctorsVisited);
+		int choice = -1;
+		InputIntChoice inputDoctor = new InputIntChoice(doctorsVisited.size());
+		choice = inputDoctor.getIntChoice();
+
+		Doctor doctorToBeRated = null;
+		int i = 1;
+		for(Doctor doctor : doctorsVisited){
+			if(i==choice){
+				doctorToBeRated = doctor;
+				break;
+			}
+			i++;
+		}
+		
+		DoctorRateDisplay.display(doctorToBeRated);
+		choice = inputForRating.getIntChoice();
+		UpdateRating.update(doctorToBeRated.getRating(),choice);
+		doctorsVisited.remove(doctorToBeRated);
+		
+
 	}
 }
