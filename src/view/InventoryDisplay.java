@@ -2,7 +2,7 @@ package view;
 
 import model.Inventory;
 
-public class InventoryDisplay {
+public class InventoryDisplay implements DisplayInfo {
     static public void display(Inventory inventory) {
 		System.out.println("");
 		//System.out.println("Current Inventory Information: ");
