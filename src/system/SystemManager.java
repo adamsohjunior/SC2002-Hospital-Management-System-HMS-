@@ -65,7 +65,23 @@ public class SystemManager {
 
     public void runSystem() {
         while (true) {
-            DisplayLog.display("Welcome to HMS!");
+            
+            System.out.println();
+            System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                           __    __    ______________      ______                                    ║");
+            System.out.println("║                          /  |  /  |  /              \\    /      \\                                   ║");
+            System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐▐▐▐▐▐▐▐▐▐▐▐▐  |  /▐▐▐▐▐▐▐ |                                  ║");
+            System.out.println("║                          ▐▐ |__▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐ \\__▐▐/                                   ║");
+            System.out.println("║                          ▐▐    ▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐      \\                                   ║");
+            System.out.println("║                          ▐▐▐▐▐▐▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |   ▐▐▐▐▐▐▐ |                                  ║");
+            System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |   / \\__ ▐▐|                                  ║ ");
+            System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐    ▐▐▐|                                  ║");
+            System.out.println("║                          ▐▐/   ▐▐/   ▐▐/   ▐▐/   ▐▐ /    ▐▐▐▐▐▐▐/                                   ║");
+            System.out.println("║                                                                                                     ║");
+            System.out.println("║                            Welcome to Hospital Management System                                    ║");
+            System.out.println("║                                                                                                     ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+
             sessionManager.startNewSession();
             if (shutdown) {
                 return;

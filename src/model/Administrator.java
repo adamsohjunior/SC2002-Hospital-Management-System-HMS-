@@ -6,6 +6,7 @@ import controller.InventoryManagement;
 import controller.StaffManagement;
 import model.Appointment;
 import view.AdminDisplayMenu;
+import view.DisplayLog;
 import view.InputIntChoice;
 import system.SystemManager;
 
@@ -46,6 +47,9 @@ public class Administrator extends User {
 	
     public void displayMenu() {
         int choice;
+		System.out.println("");
+		DisplayLog.display("WELCOME, " + this.getName() + "!");
+		
 		do{
 			AdminDisplayMenu.display();
 			choice = inputIntChoice.getIntChoice();

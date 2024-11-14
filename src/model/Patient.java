@@ -43,7 +43,8 @@ public class Patient extends User{
 		
 		int choice=-1;
 		InputIntChoice inputForMenu = new InputIntChoice(10);
-		
+		System.out.println("");
+		DisplayLog.display("WELCOME, " + this.getName() + "!");
 		do{
 			PatientDisplayMenu.display();
 			choice = inputForMenu.getIntChoice();
