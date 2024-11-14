@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import view.DisplayInbox;
 import view.DisplayLog;
+import view.DisplayPrompt;
+import view.InputIntChoice;
 
 public abstract class User {
 	private String userId;
@@ -22,11 +24,15 @@ public abstract class User {
 	}
 
 	public void showInbox() {
+		DisplayLog.display("Your inbox:");
 		DisplayInbox.display(inbox);
-	}
-
-	public void clearInbox() {
-		inbox.clear();
+		DisplayPrompt.display("Clear inbox?\n1 Yes || 2 No\n");
+		InputIntChoice option = new InputIntChoice(2);
+		int selection = option.getIntChoice();
+		if (selection == 1) {
+			inbox.clear();
+			DisplayLog.display("Inbox cleared!");
+		}
 	}
 
 	public void sendMessage(User user, String message) {

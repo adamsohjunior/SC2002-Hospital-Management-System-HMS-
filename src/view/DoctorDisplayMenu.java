@@ -12,7 +12,8 @@ public class DoctorDisplayMenu implements DisplayMenu  {
 				+ "5) Accept or Decline Appointment Requests\r\n"
 				+ "6) View Upcoming Appointments\r\n"
 				+ "7) Record Appointment Outcome\r\n"
-				+ "8) Logout\r");
+				+ "8) View Inbox\r\n"
+				+ "9) Logout\r");
 		System.out.println("==============================================");
 		System.out.println("");
 	}

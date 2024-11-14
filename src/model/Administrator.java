@@ -13,7 +13,7 @@ public class Administrator extends User {
 	private InventoryManagement inventoryManagement;
     private StaffManagement staffManagement;
 	private ArrayList<Appointment> allAppointments;
-	private InputIntChoice inputIntChoice = new InputIntChoice(6); // 6 input choices
+	private InputIntChoice inputIntChoice = new InputIntChoice(7); // 7 input choices
 	private SystemManager systemManager;
 	private ArrayList<User> staffList;
 
@@ -67,10 +67,12 @@ public class Administrator extends User {
 				systemManager.shutdown();
 				break;
 			case 6:
+				showInbox();
+			case 7:
 				break;
 			}
 			
-		} while (choice != 6 && choice != 5);
+		} while (choice != 5 && choice != 7);
 		
 		// scan.close();
     }

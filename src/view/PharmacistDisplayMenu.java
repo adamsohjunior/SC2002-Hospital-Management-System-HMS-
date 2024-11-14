@@ -9,7 +9,8 @@ public class PharmacistDisplayMenu implements DisplayMenu {
                             + "2) Update Prescription Status\r\n"
                             + "3) View Medication Inventory\r\n"
                             + "4) Submit Replenishment Request\r\n"
-                            + "5) Logout\r");
+							+ "5) View Inbox\r\n"
+                            + "6) Logout\r");
 		System.out.println("==============================================");
 		
 	}

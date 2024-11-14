@@ -42,7 +42,7 @@ public class Patient extends User{
 		/* to be filled */
 		
 		int choice=-1;
-		InputIntChoice inputForMenu = new InputIntChoice(9);
+		InputIntChoice inputForMenu = new InputIntChoice(10);
 		
 		do{
 			PatientDisplayMenu.display();
@@ -95,10 +95,13 @@ public class Patient extends User{
 		      case 8:
 		    	  viewAppointmentOutcomeRecords();
 		    	  break;
-		      case 9:
+			  case 9:
+				  showInbox();
+				  break;
+		      case 10:
 		    	  break;
 		      }
-		} while (choice != 9);
+		} while (choice != 10);
 		
 		// scan.close();
 	}
@@ -179,7 +182,7 @@ public class Patient extends User{
 		AppointmentsDisplay.display(scheduledAppointments);
 
 		int choice = 0;
-		DisplayPrompt.display("Please select an appointment to cancel: ");
+		DisplayPrompt.display("Please select an appointment to cancel -> ");
 		InputIntChoice inputForAppointment = new InputIntChoice(scheduledAppointments.size());
 		choice  = inputForAppointment.getIntChoice();
      

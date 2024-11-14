@@ -12,6 +12,9 @@ import view.PharmacistDisplayMenu;
 import view.PrescriptionDisplay;
 import view.ReplenishmentRequestMenu;
 import view.UpdatePresriptionStatusMenu;
+import view.DisplayLog;
+import view.DisplayPrompt;
+import view.InputInt;
 
 public class Pharmacist extends User {
     private Scanner scan = new Scanner(System.in);
@@ -34,7 +37,7 @@ public class Pharmacist extends User {
 		/* To be done */
 		
 		int choice=-1;
-        InputIntChoice input = new InputIntChoice(5);
+        InputIntChoice input = new InputIntChoice(6);
 		
 		do{	
             PharmacistDisplayMenu.display();
@@ -65,13 +68,17 @@ public class Pharmacist extends User {
                 System.out.println("Replenishment Request:");
                 this.replenishmentRequest();
                 break;
-
+            
             case 5:
+                showInbox();
+                break;
+
+            case 6:
                 System.out.println("");
                 System.out.println("Pharmacist logging out . . . ");
                 break;
             }
-        }while(choice != 5);
+        } while (choice != 6);
 
 }
 

@@ -22,6 +22,7 @@ public class HMS {
         system.initialise();
         system.loadData();
         system.runSystem();
+        system.saveData();
         
         // // further improvement: create SystemInitializer and LoginManagement classes (facade pattern)
         // System.out.println("System starting...");

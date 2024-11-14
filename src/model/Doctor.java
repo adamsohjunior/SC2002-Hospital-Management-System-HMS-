@@ -50,7 +50,7 @@ public class Doctor extends User {
 		
 		int choice=-1;
 		
-		InputIntChoice inputForMenu = new InputIntChoice(8);
+		InputIntChoice inputForMenu = new InputIntChoice(9);
 		do{
 			DoctorDisplayMenu.display();
 			choice = inputForMenu.getIntChoice();
@@ -77,10 +77,13 @@ public class Doctor extends User {
 		      case 7:
 		    	  recordAppointmentOutcome();
 		    	  break;
-		      case 8:
+			  case 8:
+				  showInbox();
+				  break;
+		      case 9:
 		    	  break;
 		      }
-		} while (choice != 8);
+		} while (choice != 9);
 		
 		// scan.close();
 	}
