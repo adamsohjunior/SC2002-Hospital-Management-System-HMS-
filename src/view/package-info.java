@@ -55,7 +55,7 @@
  * </p>
  *
  * @since 1.0
- * @author Your Name
+ * @author Adam Soh
  */
 package view;
 
