@@ -18,21 +18,53 @@ import view.DisplayPrompt;
 import view.DoctorRatingDisplay;
 import view.DoctorRateDisplay;
 
+/**
+ * The Patient Class represents the Patient that has his own Medical Record, schedule appointment with a Doctor, reschedule/cancel and
+ * able to rate Doctors they have visited and more...
+ */
+
 public class Patient extends User{
+	/**
+	 * Patient own Medical Record
+	 */
 	private MedicalRecord medicalRecord;
+	/**
+	 * Patient scheduled appointment
+	 */
 	private ArrayList<Appointment> scheduledAppointments = new ArrayList<>();
+	/**
+	 * The 'global' array for all available dates
+	 */
 	private Available availableDates;
+	/**
+	 * Patient own appointment outcome records
+	 */
 	private ArrayList<AppointmentOutcomeRecord> appointmentOutcomeRecords = new ArrayList<>();
+	/**
+	 * The 'global' array for all appointments
+	 */
 	private ArrayList<Appointment> allAppointments;
+	/**
+	 * Doctors visited to be rated
+	 */
 	private Set<Doctor> doctorsVisited = new HashSet<>();
 
 	
-	/* this availableDates is the global object that itself store an array of ALL Availability objects->days indicated by all doctors that
-	 * they are able. We have this to use later on in the scheduling methods.
-	 * 
-	 * the allAppointments is the global array for ALL appointments for ALL patient. This is really mainly for the Admin class as stated in manual they can access ALL appointment in real-time
-	 * */
 	
+	/**
+	 * 
+	 * Constructs a new Patient object with the specified details.
+	 * 
+	 * @param id Patient Id
+	 * @param name Patient Name
+	 * @param age Patient Age
+	 * @param email Patient Email
+	 * @param bloodType Patient Blood Type
+	 * @param dateOfBirth Patient Date Of Birth
+	 * @param availableDates All available dates
+	 * @param gender Patient Gender
+	 * @param allAppointments All Appointments
+	 */
 	// removed contactNumber
 	public Patient(String id, String name, int age, String email, String bloodType, String dateOfBirth, Available availableDates, String gender, ArrayList<Appointment> allAppointments) {
 		
@@ -42,9 +74,11 @@ public class Patient extends User{
 		this.allAppointments = allAppointments;
 		this.availableDates = availableDates;
 	}
-	
+	/**
+	 * Display Patient Menu
+	 */
 	public void displayMenu() {
-		/* to be filled */
+
 		
 		int choice=-1;
 		InputInt inputForMenu = new InputIntChoice(11);
@@ -116,33 +150,47 @@ public class Patient extends User{
 		// scan.close();
 	}
 	
-	/* Getters function that will be removed or not later*/
+	/**
+	 * Get Patient Medical Record
+	 * @return Medical Record
+	 */
 	public MedicalRecord getMedicalRecord() {
 		return medicalRecord;
 	}
 	
+	/**
+	 * Get Patient scheduled appointments
+	 * @return Patient scheduled appointments
+	 */
 	public ArrayList<Appointment> getScheduledAppointments(){
 		return scheduledAppointments;
 	}
-	
+	/**
+	 * Update Patient's appoint outcome record
+	 * @param appoinment The appointment to that is completed
+	 */
 	public void updateAppointmentOutcomeRecords(Appointment appoinment) {
 		scheduledAppointments.remove(appoinment);
 		AppointmentOutcomeRecord outcome = appoinment.getAppointmentOutcome();
 		appointmentOutcomeRecords.add(outcome);
 	}
-	
+	/**
+	 * Display Patient's Medical Record
+	 */
 	public void viewMedicalRecord() {
 		MedicalRecordDisplay.display(medicalRecord);
 	}
-	
+	/**
+	 * Update Patient's Email
+	 * @param newEmailString Patient New Email
+	 */
 	public void updatePersonalInfo(String newEmailString) {
 		medicalRecord.updateRecord(newEmailString);
 	}
 	
-	public void updatePatientOutcome(AppointmentOutcomeRecord outcome){
-		this.appointmentOutcomeRecords.add(outcome);
-	}
-
+	/**
+	 * Display the Patient's appointment outcome record
+	 */
 	public void viewAppointmentOutcomeRecords() {
 		if(this.appointmentOutcomeRecords.size() == 0) {
 			DisplayLog.display("There are no records.");
@@ -151,6 +199,9 @@ public class Patient extends User{
 		AppointmentOutcomeRecordDisplay.display(appointmentOutcomeRecords);
 	}
 	
+	/**
+	 * Display the Patient's scheduled appointments
+	 */
 	public void viewScheduledAppointments() {
 		if(this.scheduledAppointments.size()==0) {
 			DisplayLog.display("There are no appointments.");
@@ -163,6 +214,10 @@ public class Patient extends User{
 
 	}
 	
+	/**
+	 * Schedule an appointment with a Doctor
+	 * Select a doctor, date and time and send appointment requests
+	 */
 	public void scheduleAppointment() {
 		Appointment appointment = availableDates.selectAvailableSlot(scheduledAppointments,this);
 		if (appointment == null){ 
@@ -175,6 +230,9 @@ public class Patient extends User{
 		sendMessage(appointment.getDoctor(), appointment.getPatient().getName()+" has SCHEDULED an appointment on "+appointment.getDate()+" "+appointment.getTime());
 	}
 	
+	/**
+	 * Reschedule an appointment
+	 */
 	public void rescheduleAppointment() {
 		
 		if (cancelAppointment()) {
@@ -185,7 +243,10 @@ public class Patient extends User{
 		}
 
 	}
-	
+	/**
+	 * Select an appointment to cancel
+	 * @return a boolean value to indicate whether cancelling is succesfull or not
+	 */
 	public boolean cancelAppointment() {
 		if(this.scheduledAppointments.size() == 0) {
 			DisplayLog.display("There are no appointments to cancel");
@@ -214,11 +275,17 @@ public class Patient extends User{
 		this.availableDates.updateAvailableDates(doc, dat, tim);
 		return true;
 	}
-
+	/**
+	 * Update doctors visited
+	 * @param doc Doctor visited
+	 */
 	public void updateDoctorsVisited(Doctor doc){
 		doctorsVisited.add(doc);
 	}
-
+	/**
+	 * To rate a Doctor that the Patient visited
+	 * @param inputForRating InputInt controller to take in an INT input (DIP)
+	 */
 	public void rateDoctor(InputInt inputForRating){
 		if (doctorsVisited.size() == 0) {
 			System.out.println("You have not seen any Doctors yet!");

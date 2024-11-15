@@ -425,9 +425,10 @@ public class Doctor extends User {
 		
 		/* update the global list so that pharmacists can see and perform their task */
 		allAppointmentOutcomeRecords.add(outcome);
-		chosen.getPatient().updatePatientOutcome(outcome);
+		
 		chosen.getPatient().updateDoctorsVisited(this);
 		chosen.getPatient().getMedicalRecord().updateRecord(outcome);
+		chosen.getPatient().updateAppointmentOutcomeRecords(chosen);
 	}
 
 	public DoctorRating getRating(){
