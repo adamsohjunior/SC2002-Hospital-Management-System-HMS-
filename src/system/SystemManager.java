@@ -71,7 +71,7 @@ public class SystemManager {
             System.out.println("║                           __    __    ______________      ______                             SC2002 ║");
             System.out.println("║                          /  |  /  |  /              \\    /      \\                              SCS6 ║");
             System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐▐▐▐▐▐▐▐▐▐▐▐▐  |  /▐▐▐▐▐▐▐ |                           TEAM 5 ║");
-            System.out.println("║                          ▐▐ |__▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐ \\__▐▐/                                   ║");
+            System.out.println("║                          ▐▐ |__▐▐ |  ▐▐  _ ▐▐  _ ▐▐  |  ▐▐ \\__▐▐/                                   ║");
             System.out.println("║                          ▐▐    ▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐      \\                                   ║");
             System.out.println("║                          ▐▐▐▐▐▐▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |   ▐▐▐▐▐▐▐ |                                  ║");
             System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |   / \\__ ▐▐|                                  ║ ");
