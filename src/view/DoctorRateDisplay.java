@@ -1,8 +1,14 @@
 package view;
 
 import model.Doctor;
-
+/**
+ * DoctorRate Class to be displayed
+ */
 public class DoctorRateDisplay implements DisplayInfo {
+	/**
+	 * static method to display rating system for a Doctor
+	 * @param doc Doctor to be rated
+	 */
 	public static void display(Doctor doc) {
 		String border = "----------------------------------------------";
 		System.out.println("");

@@ -1,7 +1,15 @@
 package view;
 
+
+/**
+ * Class to prompt an input for an Email choice
+ */
 public class InputEmail implements InputString{
-	
+	/**
+	 * To get an Email input from User.
+	 * Email input is to be checked for validity(Robustness)
+	 * Returns validified email input by User
+	 */
 	public String getStringInput() {
 		String email ="";
 		boolean validity = false;
