@@ -1,8 +1,6 @@
 package model;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import model.Inventory.Status;
 import model.Prescription.PrescriptionStatus;
 import model.Inventory.RequestStatus; 
 import view.AppointmentOutcomeRecordDisplay;
@@ -13,7 +11,6 @@ import view.PrescriptionDisplay;
 import view.ReplenishmentRequestMenu;
 import view.UpdatePresriptionStatusMenu;
 import view.DisplayLog;
-import view.DisplayPrompt;
 import view.InputInt;
 
 /** The Pharmacist class represents a pharmacist user who will monitor the prescription status and the supply of medicine.
@@ -22,7 +19,6 @@ import view.InputInt;
  */
 
 public class Pharmacist extends User {
-    private Scanner scan = new Scanner(System.in);
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private ArrayList<Inventory> allInventoryItems = new ArrayList<>();
     private ArrayList<User> staffList;

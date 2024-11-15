@@ -8,7 +8,7 @@ public class DoctorRating extends Rating{
 	 * This will update the rating of the Doctor by calculation the average of his previous ratings
 	 * 
 	 */
-	@override
+	@Override
 	public void updateRating(int feedback) {
 		
 		if(getCount() == 0) {

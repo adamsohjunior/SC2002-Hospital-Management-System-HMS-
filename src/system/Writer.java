@@ -1,7 +1,6 @@
 package system;
 
 import java.util.ArrayList;
-import system.CSVWriter;
 import model.Inventory;
 import model.User;
 

@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Formatter;
 import model.User;
 import model.Administrator;
 import model.Appointment;
@@ -66,7 +64,6 @@ public class StaffManagement {
      */
     public void manageStaff() {
         int choice;
-        Scanner scan = new Scanner(System.in);
 
         do {
             StaffMDisplayMenu.display();
@@ -267,7 +264,6 @@ public class StaffManagement {
      * Displays an error if the staff member is not found.
      */
     private void removeStaff() {
-        Scanner scan = new Scanner(System.in);
         String id;
         InputID inputID = new InputID();
         id = inputID.getStringInput();

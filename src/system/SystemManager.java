@@ -11,8 +11,6 @@ import model.User;
 
 import view.DisplayLog;
 
-import system.Writer;
-
 /**
  * SystemManager class that handle the operation of system
  */
