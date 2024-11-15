@@ -16,12 +16,29 @@ import view.DisplayLog;
 import view.DisplayPrompt;
 import view.InputInt;
 
+/** The Pharmacist class represents a pharmacist user who will monitor the prescription status and the supply of medicine.
+ * 
+ * It provides methods to view appointment outcome record, update prescription status, view inventory, and submit medicine replenishment request.
+ */
+
 public class Pharmacist extends User {
     private Scanner scan = new Scanner(System.in);
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private ArrayList<Inventory> allInventoryItems = new ArrayList<>();
     private ArrayList<User> staffList;
     
+    /**
+	 * Constructs a Pharmacist object with the given details.
+	 *
+	 * @param id                          the unique ID of the administrator
+	 * @param name                        the name of the administrator
+	 * @param age                         the age of the administrator
+	 * @param gender                      the gender of the administrator
+	 * @param allAppointmentOutcomeRecord the list of all appointment outcome record
+	 * @param allInventory                the list of all inventory
+	 * @param stafflist                   the list of all staffs
+	 */
+
     public Pharmacist(String id, String name, int age, String gender, Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> allInventoryItems, ArrayList<User> staffList){
         super(id, name, age, gender);
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
@@ -29,12 +46,22 @@ public class Pharmacist extends User {
         this.staffList = staffList;
     }
 
+    /**
+	 * Sets the staff list for the pharmacist.
+	 *
+	 * @param staffList the new list of staff members
+	 */
+
     public void setStaffList(ArrayList<User> staffList) {
         this.staffList = staffList;
     }
 
-    public void displayMenu() {         // use PharmascistDisplayMenu class
-		/* To be done */
+    /**
+	 * Displays the main menu for the pharmacist and allows interaction
+	 * for update prescription status, view appointment and inventory, replenishment requests, and more.
+	 */
+
+    public void displayMenu() {         
 		
 		int choice=-1;
         InputInt input = new InputIntChoice(6);
@@ -45,8 +72,7 @@ public class Pharmacist extends User {
             PharmacistDisplayMenu.display();
             choice = input.getIntChoice();
 		        
-				/* clear the enter key */
-			// scan.nextLine(); 
+			/* clear the enter key */ 
             switch(choice) {
             case 1:
                 System.out.println("");
@@ -83,6 +109,10 @@ public class Pharmacist extends User {
 
 }
 
+    /** 
+     * Display appointment details for all appointments
+     */
+
     public void viewAppointmentOutcomeRecords(){
         String border = "----------------------------------------------";
         System.out.println("");
@@ -97,6 +127,13 @@ public class Pharmacist extends User {
         System.out.println("\nQuitting Appointment Outcome Record. . . ");
     }
 
+    /**
+     * Check the status of presription first
+     * Decide if want to update all prescription status
+     * if Yes, the status updated to 'Prescribed' and update the stock quantity
+     * if No, move on to the next appointment outcome record
+     * if the stock is lower than LowStockAlert, it suggest pharmacist to submit replenishment request
+     */
 
     public void updatePrescriptionStatus(){
         InputInt input = new InputIntChoice(3);
@@ -152,6 +189,12 @@ public class Pharmacist extends User {
         System.out.println("Quitting Prescription Status. . .");
     }
 
+    /**
+     * Update inventory if pharmacist decides to prescribe medicine
+     * Display the prescription info as acknowledgement
+     * @param medicine allowing to do name-matching and update presription status
+     */
+
     private void updateInventory(Prescription medicine) {
         if (medicine.getStatus() == PrescriptionStatus.PENDING){
             for (Inventory stock : allInventoryItems){
@@ -167,6 +210,10 @@ public class Pharmacist extends User {
         }
     }
 
+    /**
+     * View medication inventory
+     * Check the availability status and quantity of inventory
+     */
 
     public void viewMedicationInventory(){
         String border = "----------------------------------------------";
@@ -179,6 +226,11 @@ public class Pharmacist extends User {
         System.out.println(border);
         System.out.println("\nQuitting Medication Inventory. . .\n");
     }
+
+    /**
+     * Display the current inventory information
+     * Submit replenishment request to administrator to seek approval
+     */
 
     public void replenishmentRequest(){
         InputInt input = new InputIntChoice(2);
@@ -213,6 +265,12 @@ public class Pharmacist extends User {
             System.out.println("Actions Completed!");
             System.out.println("Quitting Replenishment Request. . . ");
     }
+
+    /**
+     * Get admin details to send message to admin inbox
+     * 
+     * return null
+     */
 
     private User getAdmin() {
         for (User user: staffList) {
