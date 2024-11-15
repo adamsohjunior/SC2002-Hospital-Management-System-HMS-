@@ -1,5 +1,14 @@
 @startuml
 left to right direction
+
+' Title and global note
+title Hpostial Management System (HMS)
+
+note as teamNote
+  Developed by SC2002 HMS SCS6 Group 5
+end note
+
+
 class model.AppointmentOutcomeRecord {
 - String date
 - String diagnoses
@@ -20,7 +29,7 @@ class model.AppointmentOutcomeRecord {
 }
 
 
-class system.PatientParser {
+class system.PatientParser{
 - Available availableDates
 - ArrayList<Appointment> allAppointments
 + <<Create>> PatientParser(Available,ArrayList<Appointment>)
@@ -129,9 +138,9 @@ class view.DisplayInbox {
 }
 
 class system.Writer {
-~ ArrayList<Inventory> allInventoryItem
-~ ArrayList<User> staffList
-~ ArrayList<User> patientList
+- ArrayList<Inventory> allInventoryItem
+- ArrayList<User> staffList
+- ArrayList<User> patientList
 + <<Create>> Writer(ArrayList<User>,ArrayList<User>,ArrayList<Inventory>)
 + void writeDataIntoCSV()
 }
@@ -159,7 +168,7 @@ class view.InputMonthChoice {
 }
 
 
-class view.PrescriptionDisplay {
+class view.PrescriptionDisplay implements view.DisplayInfo{
 + {static} void display(Prescription)
 }
 
@@ -248,15 +257,6 @@ interface view.Input {
 ~ {static} Scanner scan
 }
 
-class system.DoctorParser {
-- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
-- Available availableDates
-- ArrayList<Inventory> storage
-+ <<Create>> DoctorParser(Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>)
-+ Doctor parse(String)
-}
-
-
 class system.CSVWriter {
 - String userHeader
 - String patientHeader
@@ -288,7 +288,7 @@ class system.HMS {
 + {static} void main(String[])
 }
 
-class view.AvailableDatesDisplay {
+class view.AvailableDatesDisplay implements view.DisplayInfo{
 + {static} void display(ArrayList<Availability>)
 }
 
@@ -560,11 +560,6 @@ class model.Availability {
 + void setStatus(String)
 }
 
-
-class system.AdministratorParser {
-+ Administrator parse(String)
-}
-
 class view.DisplayPrompt {
 + {static} void display(String)
 }
@@ -577,22 +572,17 @@ class view.AdminDisplayMenu {
 + {static} void display()
 }
 
-class system.PharmacistParser {
-- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
-- Available availableDates
-- ArrayList<Inventory> storage
-+ <<Create>> PharmacistParser(Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>)
-+ User parse(String)
+class model.UpdateRating {
+    + static void update(Rating rate, int newRate)
 }
 
+model.UpdateRating "update" ..> model.Rating
+model.Doctor "1" --> model.DoctorRating
 
-
-
-system.CSVParser <|.. system.PatientParser
 view.DisplayMenu <|.. view.UpdatePresriptionStatusMenu
 view.InputIntChoice <|-- view.InputTimeChoice
 view.DisplayInfo <|.. view.TimeDisplay
-system.CSVParser <|.. system.StaffParser
+system.CSVReader$CSVParser <|.. system.StaffParser
 view.DisplayInfo <|.. view.EmailUpdateDisplay
 view.Display <|-- view.DisplayMenu
 view.DisplayMenu <|.. view.DoctorRatingDisplay
@@ -609,7 +599,6 @@ view.DisplayInfo <|.. view.DayDisplay
 view.InputString <|.. view.InputID
 view.DisplayInfo <|.. view.MonthDisplay
 view.DisplayInfo <|.. view.MedicalRecordDisplay
-system.CSVParser <|.. system.DoctorParser
 view.InputIntChoice <|-- view.InputDayChoice
 model.User <|-- model.Doctor
 view.InputString <|.. view.InputPassword
@@ -627,14 +616,27 @@ model.Rating <|-- model.DoctorRating
 view.InputString <|.. view.InputEmail
 view.DisplayMenu <|.. view.PharmacistDisplayMenu
 view.DisplayInfo <|.. view.AppointmentOutcomeRecordDisplay
-system.CSVReader +.. system.CSVReader$CSVParser
+system.CSVReader <|.. system.CSVReader$CSVParser
 view.Display <|-- view.DisplayInfo
 view.DisplayMenu <|.. view.InventoryDisplayMenu
-system.CSVParser <|.. system.InventoryParser
+system.CSVReader$CSVParser <|.. system.InventoryParser
+system.CSVReader$CSVParser <|.. system.PatientParser
 view.InputInt <|.. view.InputIntChoice
-system.CSVParser <|.. system.AdministratorParser
 view.DisplayInfo <|.. view.DisplayPrompt
 view.DisplayMenu <|.. view.PatientDisplayMenu
-view.Display <|.. view.AdminDisplayMenu
-system.CSVParser <|.. system.PharmacistParser
+view.DisplayMenu <|.. view.AdminDisplayMenu
+
+model.Patient "1" --> "1" model.MedicalRecord
+model.Patient "*" --> model.AppointmentOutcomeRecord
+model.Patient "*" *-- model.Appointment
+model.Patient "1" --> model.Available
+model.Available "*" *-- model.Availability
+model.Doctor "1" --> model.Available
+model.Doctor "1" *-- model.Appointment
+model.Doctor ..> model.AppointmentOutcomeRecord : uses
+model.Doctor ..> model.Prescription : uses
+model.Doctor "*" *-- model.MedicalRecord
+model.AppointmentOutcomeRecord "*" *-- model.Prescription
+model.Pharmacist "*" o-- model.Inventory
+
 @enduml
