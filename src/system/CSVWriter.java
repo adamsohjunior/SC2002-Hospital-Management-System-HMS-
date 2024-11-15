@@ -9,6 +9,9 @@ import model.MedicalRecord;
 import model.Patient;
 import model.User;
 
+/**
+ * the CSVWriter is the function to write data into csv file
+ */
 public class CSVWriter {
     private String userHeader = "Staff ID,Name,Role,Gender,Age";
     private String patientHeader = "Patient ID,Name,Date of Birth,Gender,Blood Type,Contact Information";
@@ -20,12 +23,25 @@ public class CSVWriter {
     private ArrayList<User> patientList; 
     private ArrayList<Inventory> allInventoryItem;
 
+    /**
+     * Constructs CSVWriter object with the given details
+     * 
+     * @param staffList        the list of staff members
+     * @param patientList      the list of patients
+     * @param allInventoryItem the list of all Inventories
+     */
     public CSVWriter(ArrayList<User> staffList, ArrayList<User> patientList, ArrayList<Inventory> allInventoryItem) {
         this.staffList = staffList;
         this.patientList = patientList;
         this.allInventoryItem = allInventoryItem;
     }
-    
+
+    /**
+     * method to write staff's detail back into Staff_List.csv once system is shut down
+     * 
+     * @param staffList    the list of all patients
+     * @throws IOException if an error occurs while writing to the file 
+     */
     private void writeUser(ArrayList<User> staffList) throws IOException  {
         // error checking
         if (staffList == null || staffList.isEmpty()) {
@@ -76,6 +92,12 @@ public class CSVWriter {
         }
     }
 
+    /**
+     * method to write patient's data back into Patient_List.csv once system is shut down
+     * 
+     * @param patientList  the list of all patients
+     * @throws IOException if an error occurs while writing to the file
+     */
     private void writePatient(ArrayList<User> patientList) throws IOException  {
         // error checking
         if (patientList == null || patientList.isEmpty()) {
@@ -112,6 +134,13 @@ public class CSVWriter {
         }
     }
 
+    /**
+     * method write medicine data back into Medicine_List.csv once system is shut down
+     * 
+     * @param allInventoryItems the list of all Inventories
+     * @throws IOException      if an error occurs while writing to the file
+     * 
+     */
     private void writeMedicine(ArrayList<Inventory> allInventoryItems) throws IOException  {
         // error checking
         if (allInventoryItems == null || allInventoryItems.isEmpty()) {
@@ -142,6 +171,9 @@ public class CSVWriter {
         }
     }
 
+    /**
+     * method to call writeUser(), writePatien() and writeMedicine()
+     */
     public void writeData() {
         try {
             writeUser(staffList);

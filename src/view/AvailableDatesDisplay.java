@@ -4,7 +4,16 @@ import java.util.ArrayList;
 
 import model.Availability;
 
+/**
+ * AvailableDatesDisplay class for display
+ */
 public class AvailableDatesDisplay implements DisplayInfo {
+
+	/**
+	 * static method to display Available Dates
+	 * 
+	 * @param availableDates the list of all available dates
+	 */
 	static public void display(ArrayList<Availability> availableDates) {
 		String border = "----------------------------------------------";
 		System.out.println("");

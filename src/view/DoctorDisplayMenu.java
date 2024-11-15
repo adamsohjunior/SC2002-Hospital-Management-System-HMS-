@@ -1,6 +1,12 @@
 package view;
 
+/**
+ * DoctorDisplayMenu class for display
+ */
 public class DoctorDisplayMenu implements DisplayMenu  {
+    /**
+     * static method to display menu for Doctor object
+     */
 	static public void display() {
 		System.out.println("");
 		String border = "+============================================+";

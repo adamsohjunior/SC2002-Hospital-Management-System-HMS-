@@ -4,9 +4,16 @@ import java.util.ArrayList;
 
 import model.AppointmentOutcomeRecord;
 
+/**
+ * AppointmentOutcomeRecordDisplay class for display
+ */
 public class AppointmentOutcomeRecordDisplay implements DisplayInfo {
 
-
+    /**
+     * static method to display all Appointment Outcome Record
+     * 
+     * @param allAppointmentOutcomeRecords the list of Appointment Outcome Records
+     */
     static public void display(ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords) {
 		// System.out.println("Appointment Outcome Record:");     // DISCLAIMER: everyone put this line into your own main file before calling this method
 		System.out.println("");

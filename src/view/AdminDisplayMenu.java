@@ -1,6 +1,13 @@
 package view;
 
+/**
+ * AdminDisplayMenu class for display
+ */
 public class AdminDisplayMenu implements Display{
+
+    /**
+     * static method to display menu for admin object
+     */
     static public void display() {
         System.out.println("");
 		String border = "+============================================+";

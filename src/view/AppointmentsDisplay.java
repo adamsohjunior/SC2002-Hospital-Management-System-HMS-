@@ -4,7 +4,16 @@ import java.util.ArrayList;
 
 import model.Appointment;
 
+/**
+ * AppointmentDisplay class for display
+ */
 public class AppointmentsDisplay implements DisplayInfo {
+
+	/**
+	 * static method to display scheduled appointments
+	 * 
+	 * @param scheduledAppointments the list of all scheduled appointments
+	 */
 	static public void display(ArrayList<Appointment> scheduledAppointments) {
 		String border = "----------------------------------------------";
 		System.out.printf("%-44s\n", "	Appointment		   ");

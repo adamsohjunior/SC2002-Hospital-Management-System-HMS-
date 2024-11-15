@@ -1,6 +1,12 @@
 package view;
 
+/**
+ * DisplayGender class for display
+ */
 public class DisplayGender implements DisplayMenu {
+	/**
+	 * static method to display gender
+	 */
     static public void display() {
         String border = "----------------------------------------------";
 		System.out.println("");
