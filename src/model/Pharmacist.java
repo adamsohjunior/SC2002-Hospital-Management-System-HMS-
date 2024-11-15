@@ -37,7 +37,7 @@ public class Pharmacist extends User {
 		/* To be done */
 		
 		int choice=-1;
-        InputIntChoice input = new InputIntChoice(6);
+        InputInt input = new InputIntChoice(6);
         System.out.println("");
 		DisplayLog.display("WELCOME, " + this.getName() + "!");
 		
@@ -99,7 +99,7 @@ public class Pharmacist extends User {
 
 
     public void updatePrescriptionStatus(){
-        InputIntChoice input = new InputIntChoice(3);
+        InputInt input = new InputIntChoice(3);
         int choice = -1;
 
         if (allAppointmentOutcomeRecords.size() == 0){
@@ -181,7 +181,7 @@ public class Pharmacist extends User {
     }
 
     public void replenishmentRequest(){
-        InputIntChoice input = new InputIntChoice(2);
+        InputInt input = new InputIntChoice(2);
         int choice = -1;
 
         for(Inventory stock : allInventoryItems){

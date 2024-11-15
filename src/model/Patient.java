@@ -47,7 +47,7 @@ public class Patient extends User{
 		/* to be filled */
 		
 		int choice=-1;
-		InputIntChoice inputForMenu = new InputIntChoice(11);
+		InputInt inputForMenu = new InputIntChoice(11);
 		System.out.println("");
 		DisplayLog.display("WELCOME, " + this.getName() + "!");
 		do{
@@ -197,7 +197,7 @@ public class Patient extends User{
 
 		int choice = 0;
 		DisplayPrompt.display("Please select an appointment to cancel -> ");
-		InputIntChoice inputForAppointment = new InputIntChoice(scheduledAppointments.size());
+		InputInt inputForAppointment = new InputIntChoice(scheduledAppointments.size());
 		choice  = inputForAppointment.getIntChoice();
      
 		choice = choice-1;
@@ -227,7 +227,7 @@ public class Patient extends User{
 
 		DoctorRatingDisplay.display(doctorsVisited);
 		int choice = -1;
-		InputIntChoice inputDoctor = new InputIntChoice(doctorsVisited.size());
+		InputInt inputDoctor = new InputIntChoice(doctorsVisited.size());
 		choice = inputDoctor.getIntChoice();
 
 		Doctor doctorToBeRated = null;

@@ -55,22 +55,33 @@ public class Available {
 		int choice = 0;
 		boolean validity = false;
 
-		int check = this.viewAvailableAppointmentSlots();
-		if (check == -1) {
-			return null;
-		}
+		int check = this.viewAvailableAppointmentSlots(); 
+		if (check == -1){ 
+			return null; 
+		} 
+		System.out.println("Enter 0 to exit scheduling");
+		System.out.println("");
 
-		// Ensures that the patient selects a valid available slot without conflicts.
-		while (!validity) {
-			try {
+		ArrayList<Integer> validChoices = new ArrayList<>();
+		validChoices.add(0);
+		for(int j =0;j<availableDates.size();j++){
+			if(availableDates.get(j).getStatus().equals("Available")){
+				validChoices.add(j+1);
+			}
+		}
+	    while (!validity) { 
+	        try {
 				DisplayPrompt.display("Please enter your choice: ");
 				choice = scan.nextInt();
 				DisplayLog.display("");
-				if (choice > 0 && choice <= availableDates.size()) {
-					// Check if the selected appointment is valid (no conflict with other appointments)
-					String date = this.availableDates.get(choice - 1).getDate();
-					String time = this.availableDates.get(choice - 1).getTime();
-
+				if(choice>=0 && choice<=availableDates.size() && validChoices.contains(choice)) {
+					/* Check if selected appointment is VALID -> meaning that it has no conflict with other scheduled appointments*/
+					if(choice == 0){
+						return null;
+					}
+					String date = this.availableDates.get(choice-1).getDate();
+					String time = this.availableDates.get(choice-1).getTime();
+					
 					validity = true;
 
 					for (int i = 0; i < scheduledAppointments.size(); i++) {
@@ -84,8 +95,9 @@ public class Available {
 							}
 						}
 					}
-				} else {
-					DisplayLog.display("Please input a choice that is valid.\n");
+				}
+				else {
+					DisplayLog.display("Please LOOK at the available dates and select an AVAILABLE option(look at option number carefully)\n");
 				}
 			} catch (InputMismatchException e) {
 				DisplayLog.display("Invalid input! Please enter an appropriate choice.\n");
@@ -132,7 +144,7 @@ public class Available {
 	 *
 	 * @param avail the availability object to add
 	 */
-	public void addAvailableDates(Availability avail) {
+	public int addAvailableDates(Availability avail) {
 		String doc = avail.getDoctor().getName();
 		String dat = avail.getDate();
 		String tim = avail.getTime();
@@ -143,11 +155,13 @@ public class Available {
 					availableDates.get(i).getDate().equals(dat) &&
 					availableDates.get(i).getTime().equals(tim)) {
 				DisplayLog.display("Date is already available.\n");
-				return;
+				return 0;
 			}
 		}
 
 		// Adds the new available date if no duplicates found.
 		availableDates.add(avail);
+		return 1;
 	}
 }
+
