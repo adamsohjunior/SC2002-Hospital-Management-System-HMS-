@@ -84,6 +84,7 @@ public class Doctor extends User {
 				  showInbox();
 				  break;
 		      case 9:
+			    System.out.println("Logged out successfully!\n");
 		    	  break;
 		      }
 		} while (choice != 9);
@@ -116,9 +117,9 @@ public class Doctor extends User {
 		DisplayPrompt.display("Select patient to update their record");
 		System.out.println("");
 		for(int i=0;i<patientMedicalRecords.size();i++) {
-			System.out.println((i+1)+")"+patientMedicalRecords.get(i).getName());
+			System.out.println((i+1)+") "+patientMedicalRecords.get(i).getName());
 		}
-		
+		System.out.println("");
 	
 		int choice =-1;
 	      choice = inputForPatient.getIntChoice();
@@ -151,10 +152,10 @@ public class Doctor extends User {
 			while(choice1 !=2) {
 				
 				System.out.println("");
-				System.out.println("==============================================");
-				System.out.println("1)Prescribe Medication");
-				System.out.println("2)Finish");
-				System.out.println("==============================================");
+				System.out.println("----------------------------------------------");
+				System.out.println("1) Prescribe Medication");
+				System.out.println("2) Finish");
+				System.out.println("----------------------------------------------");
 				System.out.println("");
 				
 
@@ -242,7 +243,7 @@ public class Doctor extends User {
 			return;
 		}
 		
-		DisplayLog.display("Appointment requests: ");
+		
 		InputIntChoice inputForAccDec = new InputIntChoice(2);
 
 		
@@ -323,10 +324,10 @@ public class Doctor extends User {
 		int choice1 = -1;
 		while(choice1 !=2) {
 				
-			System.out.println("\n==============================================");
+			System.out.println("\n----------------------------------------------");
 			System.out.println("1)Prescribe Medication");
 			System.out.println("2)Finish");
-			System.out.println("==============================================\n");
+			System.out.println("----------------------------------------------\n");
 
 			choice1 = inputForChoice1.getIntChoice();
 					

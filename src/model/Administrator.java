@@ -72,7 +72,9 @@ public class Administrator extends User {
 				break;
 			case 6:
 				showInbox();
+				break;
 			case 7:
+			    System.out.println("Logged out successfully!\n");
 				break;
 			}
 			
@@ -83,7 +85,9 @@ public class Administrator extends User {
 	
 	private void viewAppointment(ArrayList<Appointment> allAppointments) {
 		for(Appointment a : allAppointments) {
+			System.out.println("");
 			a.printInfoForAdmin();
+			System.out.println("");
 		}
 	}
     

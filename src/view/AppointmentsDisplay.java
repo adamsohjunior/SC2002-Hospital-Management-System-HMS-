@@ -6,9 +6,9 @@ import model.Appointment;
 
 public class AppointmentsDisplay implements DisplayInfo {
 	static public void display(ArrayList<Appointment> scheduledAppointments) {
-		System.out.println("");
-		System.out.println("Appointments");
-		System.out.println("==============================================");
+		String border = "----------------------------------------------";
+		System.out.printf("%-44s\n", "	Appointment		   ");
+		System.out.println(border);
 		System.out.println("");
 		for(int i=0;i<scheduledAppointments.size();i++) {
 			System.out.println((i+1)+")  Doctor: "+scheduledAppointments.get(i).getDoctor().getName());
@@ -18,7 +18,7 @@ public class AppointmentsDisplay implements DisplayInfo {
 			System.out.println("    Status: "+scheduledAppointments.get(i).getStatus());
 			System.out.println("");
 		}
-		System.out.println("==============================================");
+		System.out.println(border);
 		System.out.println("");
 	}
 }

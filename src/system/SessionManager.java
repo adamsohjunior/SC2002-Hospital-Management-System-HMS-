@@ -33,13 +33,13 @@ public class SessionManager {
             for (int i = 0; i < users.size(); i++) {
                 if (id.equalsIgnoreCase(users.get(i).getUserId())) {
                     currentUser = users.get(i);
-                    System.out.println("ID match found!");
+                    System.out.println("ID match found!\n");
                 }
             }
             if (currentUser != null) {
                 break;
             }
-            System.out.println("ID not recognised. Try again");
+            System.out.println("ID not recognised. Try again\n");
         }
     }
 
@@ -52,19 +52,20 @@ public class SessionManager {
             password = input.getStringInput();
             
             if (password.equals(currentUser.getPassword())) {
-                DisplayLog.display("Login successful!");
+                DisplayLog.display("Login successful!\n");
                 if (password.equals("password")) {
                     // First login
                     DisplayLog.display("Please change your password for security.");
                     while (true) {
                         DisplayPrompt.display("Enter new password: ");
                         newPassword = inputStrict.getStringInput();
+                        break;
 
-                        if (!newPassword.equals(password)) {
-                            break;
-                        }
+                        // if (!newPassword.equals(password)) {
+                        //     break;
+                        // }
 
-                        DisplayLog.display("New and old passwords are the same.");
+                        // DisplayLog.display("New and old passwords are the same.\n");
                     }
                     
                     /*
@@ -90,12 +91,12 @@ public class SessionManager {
                     // }
 
                     currentUser.changePassword(newPassword);
-                    DisplayLog.display("Password changed successfully!");
+                    DisplayLog.display("Password changed successfully!\n");
                 }
                 currentUser.displayMenu();
                 break;
             }
-            DisplayLog.display("Wrong password. Try again");
+            DisplayLog.display("Wrong password. Try again\n");
         }
     }
 }

@@ -124,17 +124,28 @@ public class InventoryManagement {
     }
 
     public void approveRequest() {
+        boolean need = false;
         for(Inventory stock : allInventoryItems){
             if (stock.getreqStatus() == RequestStatus.PENDING){
-            
+                need = true;
                 stock.setreqStatus(RequestStatus.APPROVED);
             }
+        }
+
+        if(!need){
+            System.out.println("\nNo actions needed!\n");
         }
     }
 
     private void displayInventory() {
+        String border = "----------------------------------------------";
+        System.out.println("");
+        System.out.printf("%-44s\n", "	Current Inventory Information			   ");
+        System.out.println(border);
         for (Inventory item : allInventoryItems) {
-            InventoryDisplay.display(item);
-        }
+            InventoryDisplay.display(item);;                // use InventoryDisplay class
+     }
+
+     System.out.println(border);
     }
 }

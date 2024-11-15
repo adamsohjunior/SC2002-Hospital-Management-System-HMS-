@@ -37,7 +37,7 @@ public class SystemManager {
 
 
     public void initialise() {
-        DisplayLog.display("System starting...");
+        DisplayLog.display("\nSystem starting...");
         this.storage = new ArrayList<Inventory>();
         this.staffList = new ArrayList<User>();
         this.patientList = new ArrayList<User>();
@@ -68,9 +68,9 @@ public class SystemManager {
             
             System.out.println();
             System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                           __    __    ______________      ______                                    ║");
-            System.out.println("║                          /  |  /  |  /              \\    /      \\                                   ║");
-            System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐▐▐▐▐▐▐▐▐▐▐▐▐  |  /▐▐▐▐▐▐▐ |                                  ║");
+            System.out.println("║                           __    __    ______________      ______                             SC2002 ║");
+            System.out.println("║                          /  |  /  |  /              \\    /      \\                              SCS6 ║");
+            System.out.println("║                          ▐▐ |  ▐▐ |  ▐▐▐▐▐▐▐▐▐▐▐▐▐▐  |  /▐▐▐▐▐▐▐ |                           TEAM 5 ║");
             System.out.println("║                          ▐▐ |__▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐ \\__▐▐/                                   ║");
             System.out.println("║                          ▐▐    ▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |  ▐▐      \\                                   ║");
             System.out.println("║                          ▐▐▐▐▐▐▐▐ |  ▐▐ |  ▐▐ |  ▐▐  |   ▐▐▐▐▐▐▐ |                                  ║");
@@ -81,7 +81,8 @@ public class SystemManager {
             System.out.println("║                            Welcome to Hospital Management System                                    ║");
             System.out.println("║                                                                                                     ║");
             System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-
+            System.out.println("");
+            
             sessionManager.startNewSession();
             if (shutdown) {
                 return;

@@ -47,7 +47,7 @@ public class Patient extends User{
 		/* to be filled */
 		
 		int choice=-1;
-		InputIntChoice inputForMenu = new InputIntChoice(10);
+		InputIntChoice inputForMenu = new InputIntChoice(11);
 		System.out.println("");
 		DisplayLog.display("WELCOME, " + this.getName() + "!");
 		do{
@@ -108,6 +108,7 @@ public class Patient extends User{
 				  rateDoctor(new InputIntChoice(5));
 		    	  break;
 			  case 11:
+				  System.out.println("Logged out successfully!\n");
 				  break;
 		      }
 		} while (choice != 11);
@@ -155,7 +156,11 @@ public class Patient extends User{
 			DisplayLog.display("There are no appointments.");
 			return;
 		}
+
+		System.out.println("");
 		AppointmentsDisplay.display(scheduledAppointments);
+		System.out.println("");
+
 	}
 	
 	public void scheduleAppointment() {

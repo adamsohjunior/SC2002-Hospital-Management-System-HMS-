@@ -2,7 +2,7 @@ package view;
 
 import model.Prescription;
 
-public class PrescriptionDisplay {
+public class PrescriptionDisplay implements DisplayInfo {
 
     static public void display(Prescription medicine) {
 		System.out.println("");

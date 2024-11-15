@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import model.Availability;
 
-public class AvailableDatesDisplay {
+public class AvailableDatesDisplay implements DisplayInfo {
 	static public void display(ArrayList<Availability> availableDates) {
+		String border = "----------------------------------------------";
 		System.out.println("");
-		System.out.println("Available Dates");
-		System.out.println("==============================================");
+		System.out.printf("%-44s\n", "		Available Date			   ");
+		System.out.println(border);
+		System.out.println("");
 		for (int i=0;i<availableDates.size();i++) {
 			if(availableDates.get(i).getStatus().equals("Available")) {
 				System.out.println((i+1)+")  Doctor: "+availableDates.get(i).getDoctor().getName());
@@ -17,7 +19,7 @@ public class AvailableDatesDisplay {
 				System.out.println("");
 			}
 		}
-		System.out.println("==============================================");
+		System.out.println(border);
 		System.out.println("");
 	}
 }

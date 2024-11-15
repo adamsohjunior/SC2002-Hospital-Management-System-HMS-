@@ -50,18 +50,18 @@ public class Pharmacist extends User {
             switch(choice) {
             case 1:
                 System.out.println("");
-                System.out.println("Appointment Outcome Record:");
+                //System.out.println("Appointment Outcome Record:");
                 this.viewAppointmentOutcomeRecords();
                 break;
             case 2:
                 System.out.println("");
-                System.out.println("Update Prescription Status:");
+               // System.out.println("Update Prescription Status:");
                 this.updatePrescriptionStatus();
                 break;
         
             case 3:
                 System.out.println("");
-                System.out.println("Medication Inventory:");
+                // System.out.println("Medication Inventory:");
                 this.viewMedicationInventory();
                 break;
 
@@ -76,8 +76,7 @@ public class Pharmacist extends User {
                 break;
 
             case 6:
-                System.out.println("");
-                System.out.println("Pharmacist logging out . . . ");
+                System.out.println("Logged out successfully!\n");
                 break;
             }
         } while (choice != 6);
@@ -85,8 +84,17 @@ public class Pharmacist extends User {
 }
 
     public void viewAppointmentOutcomeRecords(){
+        String border = "----------------------------------------------";
+        System.out.println("");
+        if (allAppointmentOutcomeRecords.size() == 0){
+            System.out.println("No appointment outcome record!");
+            return;
+        }
+        System.out.printf("%-44s\n", "      Appointment Outcome Record			   ");
+        System.out.println(border);
         AppointmentOutcomeRecordDisplay.display(allAppointmentOutcomeRecords);
-        System.out.println("Quitting Appointment Outcome Record. . . ");
+        System.out.println(border);
+        System.out.println("\nQuitting Appointment Outcome Record. . . ");
     }
 
 
@@ -101,7 +109,9 @@ public class Pharmacist extends User {
 
 		
         for (AppointmentOutcomeRecord record : allAppointmentOutcomeRecords) {
-            System.out.println("==============================================");
+            System.out.printf("%-44s\n","       Update Prescription Status");
+            String border = "----------------------------------------------";
+            System.out.println(border);
             boolean updateNeeded = false;
             for (Prescription item : record.getPrescriptionList()){
                 if (item.getStatus() == PrescriptionStatus.PENDING){
@@ -110,7 +120,7 @@ public class Pharmacist extends User {
                 }
             
             }
-            System.out.println("==============================================");
+            System.out.println(border);
 		    System.out.println("");
 
             if (updateNeeded){
@@ -123,7 +133,7 @@ public class Pharmacist extends User {
                     for (Prescription item : record.getPrescriptionList()){
                         this.updateInventory(item);
                     }
-                    System.out.println("Next patient record. . .");
+                    System.out.println("Next patient record. . .\n");
                 }
 
                 if (choice == 2) {
@@ -159,13 +169,15 @@ public class Pharmacist extends User {
 
 
     public void viewMedicationInventory(){
-        System.out.println("Current Inventory Information: ");
-		System.out.println("==============================================");
+        String border = "----------------------------------------------";
+		System.out.println("");
+		System.out.printf("%-44s\n", "	Current Inventory Information			   ");
+		System.out.println(border);
         for (Inventory stock : allInventoryItems){
             InventoryDisplay.display(stock);;            // use InventoryDisplay class
         }
-        System.out.println("==============================================");
-        System.out.println("Quitting Medication Inventory. . .");
+        System.out.println(border);
+        System.out.println("\nQuitting Medication Inventory. . .\n");
     }
 
     public void replenishmentRequest(){
@@ -173,10 +185,12 @@ public class Pharmacist extends User {
         int choice = -1;
 
         for(Inventory stock : allInventoryItems){
-                System.out.println("Current Inventory Information: ");
-                System.out.println("==============================================");
+                String border = "----------------------------------------------";
+                System.out.println("");
+                System.out.printf("%-44s\n", "	Current Inventory Information			   ");
+                System.out.println(border);
                 InventoryDisplay.display(stock);;                // use InventoryDisplay class
-                System.out.println("==============================================");
+                System.out.println(border);
 
                 ReplenishmentRequestMenu.display();
                 choice = input.getIntChoice();

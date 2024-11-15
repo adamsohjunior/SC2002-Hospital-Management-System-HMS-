@@ -11,15 +11,16 @@ public class DoctorRatingDisplay implements DisplayMenu{
 			System.out.println("You have not seen any Doctors yet!");
 			return;
 		}*/
+		String border = "----------------------------------------------";
 		System.out.println("");
-		System.out.println("Doctor To Rate");
-		System.out.println("==============================================");
+		System.out.printf("%-44s\n","		Doctor to Rate			   ");
+		System.out.println(border);
 		int i = 1;
 		for(Doctor doctor : doctorList) {
 			System.out.println(i+") "+doctor.getName());
 			i++;
 		}
-		System.out.println("==============================================");
+		System.out.println(border);
 		System.out.println("");
 		
 		//MAKE THE DOCTOR LIST A SET? UPDATE PATIEN MENU UPDATE INTCHOICE UPDATE SWITCH

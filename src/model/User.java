@@ -26,7 +26,7 @@ public abstract class User {
 	public void showInbox() {
 		DisplayLog.display("Your inbox:");
 		DisplayInbox.display(inbox);
-		DisplayPrompt.display("Clear inbox?\n1 Yes || 2 No\n");
+		DisplayPrompt.display("\nClear inbox?\n1 Yes || 2 No\n\n");
 		InputIntChoice option = new InputIntChoice(2);
 		int selection = option.getIntChoice();
 		if (selection == 1) {

@@ -2,9 +2,10 @@ package view;
 
 public class TimeDisplay implements DisplayInfo{
 	static public void display() {
+		String border = "----------------------------------------------";
 		System.out.println("");
-		System.out.println("Select Time");
-		System.out.println("==============================================");
+		System.out.printf("%-44s\n", "		Select Time			   ");
+		System.out.println(border);
 		System.out.println("Please select timing: ");
 		System.out.println("1) 8AM");
 		System.out.println("2) 9AM");
@@ -16,7 +17,7 @@ public class TimeDisplay implements DisplayInfo{
 		System.out.println("8) 3PM");
 		System.out.println("9) 4PM");
 		System.out.println("10) 5PM");
-		System.out.println("==============================================");
+		System.out.println(border);
 		System.out.println("");
 	}
 }
