@@ -1,6 +1,22 @@
 package view;
 
+/**
+ * Displays the inventory management menu in a structured format.
+ * Implements the DisplayMenu interface to ensure consistency in displaying menu options.
+ * This class is part of the view layer in the hospital management system.
+ * 
+ * It provides options for adding, updating, and removing stocks, 
+ * setting alert levels, approving replenishment requests, displaying inventory details, and exiting.
+ * 
+ */
+
 public class InventoryDisplayMenu implements DisplayMenu {
+
+	/**
+     * Displays the menu options for inventory management.
+     * The menu includes operations to manage stock levels, alert thresholds, and replenishment requests.
+     */
+	
     public static void display() {
         String border = "----------------------------------------------";
 		System.out.println("");
