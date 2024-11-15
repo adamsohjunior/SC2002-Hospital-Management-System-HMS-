@@ -163,7 +163,7 @@ Hospital Management System (HMS) is a Java-based console application developed f
 
 ## UML Class Diagram
 
-The UML class diagram for HMS is done using plantuml code and can be viewed [here](diagram\hms_classdiagram.svg).
+The UML class diagram for HMS is done using plantuml code and can be viewed [here](diagram/hms_classdiagram.svghms_classdiagram.svg).
 
 ---
 
