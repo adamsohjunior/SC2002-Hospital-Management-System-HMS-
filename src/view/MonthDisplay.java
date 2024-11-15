@@ -1,6 +1,21 @@
 package view;
 
+/**
+ * The MonthDisplay class is responsible for displaying a list of months in a selection menu format.
+ * It shows the months of the year, each associated with a number for user selection.
+ * 
+ * <p>Example usage:</p>
+ * <pre>
+ * MonthDisplay.display();  // Displays the list of months for selection
+ * </pre>
+ */
 public class MonthDisplay implements DisplayInfo{
+
+	/**
+     * Displays a menu with the months of the year, each paired with a corresponding number.
+     * The user is prompted to select a month from the list.
+     */
+	
 	static public void display() {
 		String border = "----------------------------------------------";
 		System.out.println("");

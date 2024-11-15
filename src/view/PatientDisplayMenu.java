@@ -1,6 +1,23 @@
 package view;
 
+/**
+ * The PatientDisplayMenu class is responsible for displaying the menu of available actions for a patient.
+ * It provides the patient with options to view medical records, schedule and manage appointments, and more.
+ * 
+ * <p>Example usage:</p>
+ * <pre>
+ * PatientDisplayMenu.display();  // Displays the menu with options for the patient
+ * </pre>
+ */
 public class PatientDisplayMenu implements DisplayMenu {
+
+    /**
+     * Displays the patient menu, showing a list of actions that the patient can perform.
+     * Each option is presented with a corresponding number for easy selection.
+     * The menu includes options for viewing medical records, scheduling or rescheduling appointments,
+     * and interacting with other patient services.
+     */
+    
 	static public void display() {
 		System.out.println("");
 		String border = "+============================================+";

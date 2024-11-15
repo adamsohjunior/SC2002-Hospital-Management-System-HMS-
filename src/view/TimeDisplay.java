@@ -1,6 +1,19 @@
 package view;
 
+/**
+ * The TimeDisplay class displays a menu for selecting a time slot.
+ * It offers options to choose from various time slots, ranging from 8 AM to 5 PM.
+ * 
+ * <p>Example usage:</p>
+ * <pre>
+ * TimeDisplay.display();  // Displays the time selection menu
+ * </pre>
+ */
+
 public class TimeDisplay implements DisplayInfo{
+	/**
+     * Displays the time selection menu with available options for the user to choose a time slot.
+     */
 	static public void display() {
 		String border = "----------------------------------------------";
 		System.out.println("");
