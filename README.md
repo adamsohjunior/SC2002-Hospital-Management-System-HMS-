@@ -100,12 +100,16 @@ Hospital Management System (HMS) is a Java-based console application developed f
 
 ### Additional Features
 
-1. **Password Validation**: Ensures strong passwords with specific requirements.
-2. **Datetime Validation**: Verifies valid datetime format and existence.
-3. **Inbox**: User inbox for messages and automatic notifications.
-4. **Rating**: Patients rate doctors, and admins view ratings.
-5. **UI Enhancement**: Pretty printing, user menus, and ASCII art title.
-6. **Password Invisibility**: Hides password input for enhanced privacy and security.
+| Feature               | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| Password Validation   | Ensures strong passwords with specific requirements.                        |
+| Datetime Validation   | Verifies valid datetime format and existence.                               |
+| Inbox                 | User inbox for messages and automatic notifications.                        |
+| Rating                | Patients rate doctors, and admins view ratings.                             |
+| UI Enhancement        | Pretty printing, user menus, and ASCII art title.                           |
+| Password Invisibility | Hides password input for enhanced privacy and security.                     |
+
+---
 
 ---
 
@@ -117,7 +121,7 @@ Hospital Management System (HMS) is a Java-based console application developed f
    ```
 2. **Navigate to the Project Directory:**
    ```bash
-   cd Hospital-Management-System
+   cd SC2002-HMS
    ```
 3. **Build & Run the Project:**
    - Open the project in [JetBrains IntelliJ IDEA](https://www.jetbrains.com/idea/).
