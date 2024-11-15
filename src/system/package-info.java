@@ -7,15 +7,15 @@
  * </p>
  * <p>Key classes in this package:
  * <ul>
- * <li>{@link system.CSVReader} - </li>
- * <li>{@link system.CSVWriter} - </li>
- * <li>{@link system.HMS} - </li>
- * <li>{@link system.InventoryParser} - </li>
- * <li>{@link system.PatientParser} - </li>
- * <li>{@link system.SessionManager} - </li>
- * <li>{@link system.StaffParser} - </li>
- * <li>{@link system.SystemManager} - </li>
- * <li>{@link system.Writer} - </li>
+ * <li>{@link system.CSVReader} - read in CSV data </li>
+ * <li>{@link system.CSVWriter} - function to write data into csv file </li>
+ * <li>{@link system.HMS} - run main system </li>
+ * <li>{@link system.InventoryParser} - to parse and construct the Inventory object </li>
+ * <li>{@link system.PatientParser} - to parse and construct the Patient object </li>
+ * <li>{@link system.SessionManager} - manage session </li>
+ * <li>{@link system.StaffParser} - to parse and construct the User object </li>
+ * <li>{@link system.SystemManager} - handle the operation of system </li>
+ * <li>{@link system.Writer} - handle the writing of data into different file </li>
  * </ul>
  * </p>
  *
