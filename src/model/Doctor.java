@@ -18,25 +18,61 @@ import view.MedicineDisplay;
 import view.MonthDisplay;
 import view.TimeDisplay;
 
-public class Doctor extends User {
+/**
+ * The Doctor Class represents the Doctor who can set his/her availabilities, accept/decline any appointment requests, record Appointment Outcome 
+ * and any thing a Doctor should do and more
+ */
 
+public class Doctor extends User {
+	/**
+	 * This stores the Patient Medical Record for Doctor
+	 */
 	private ArrayList<MedicalRecord> patientMedicalRecords = new ArrayList<>();
+	/**
+	 * This stores Doctor's own schedule
+	 */
 	private Available personalSchedule;
+	/**
+	 * This is the "global" arrayList for all available dates
+	 */
 	private Available availableDates;
+	/**
+	 * This stores all appointment requests from patients
+	 */
 	private ArrayList<Appointment> appointmentRequests = new ArrayList<>();
+	/**
+	 * This stores all upcoming appoinment for the Doctor 
+	 */
 	private ArrayList<Appointment> upcomingAppointments = new ArrayList<>();
+	/**
+	 * This is the "global" arrayList for all appointmentOutcomeRecords for Pharmacists/Admins
+	 */
 	private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
+	/**
+	 * Scanner for input
+	 */
 	private Scanner scan = new Scanner(System.in);
+	/**
+	 * The medicine storage
+	 */
 	private ArrayList<Inventory> storage;
+	/**
+	 * Doctor personal rating
+	 */
 	private DoctorRating personalRating = new DoctorRating();
 	
-	/* availableDates is same with patient, here is where we are able to update it for patient use
-	 * 
-	 * allAppointmentOutcomeRecords is the global list for all appointmentoutcomerecords. Since the doctor is the one making this class (see method below) when they want to 'complete' the appointment
-	 * and write up on diagnoses,treatment,pres...etc, they will make a AppointmentOutcomeRecord object. This object is stored in both the current appointment object and this global list.
-	 * This global list is then ACCESSED by PHARMACISTS so they can do their job of prescribing the medicine, update status, etc.
-	 */
 	
+	/**
+	 * Constructs a new Doctor with the specified details.
+	 *
+	 * @param id                        the unique identifier of the doctor
+	 * @param name                      the name of the doctor
+	 * @param age                       the age of the doctor
+	 * @param gender                    the gender of the doctor
+	 * @param availableDates            the schedule of all available dates
+	 * @param allAppointmentOutcomeRecords a list of all appointment outcome records
+	 * @param storage                   The medicine storage
+	 */
 	
 	public Doctor(String id, String name, int age, String gender, Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage) {
 		super(id,name,age,gender);
@@ -45,9 +81,11 @@ public class Doctor extends User {
 		this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
 		this.storage = storage;
 	}
-	
+	/**
+	 * Display Doctor's Menu
+	 */
 	public void displayMenu() {
-		/* To be done */
+		
 		
 		int choice=-1;
 		
@@ -91,11 +129,15 @@ public class Doctor extends User {
 		
 		// scan.close();
 	}
-	
+	/**
+	 * Will show Doctor's own schedule(in terms of free dates)
+	 */
 	public void viewPersonalSchedule() {
 		personalSchedule.viewAvailableAppointmentSlots();
 	}
-	
+	/**
+	 * This will show all of the Doctor's Patient's Medical Record
+	 */
 	public void viewPatientMedicalRecords() {
 		if (patientMedicalRecords.size() == 0) {
 			DisplayLog.display("No patients");
@@ -107,7 +149,14 @@ public class Doctor extends User {
 			DisplayLog.display("");
 		}
 	}
-	
+	/**
+	 * 
+	 * To select a Patient under the Doctor to update his/her Medical Record by adding new diagnosis,treatment,ConsultNotes 
+	 * and prescriptions
+	 * 
+	 * @param inputForPatient Our InputInt interface( that is instantiated by an InputIntChoice object ) to take in INT inputs
+	 * 
+	 */
 	public void updatePatientMedicalRecord(InputInt inputForPatient) {
 		if(patientMedicalRecords.size()==0) {
 			DisplayLog.display("You have no patients");
@@ -188,7 +237,9 @@ public class Doctor extends User {
 			AppointmentOutcomeRecord outcome = new AppointmentOutcomeRecord(date, diag, treat, list, notes);
 			patientMedicalRecords.get(choice).updateRecord(outcome);
 	}
-	
+	/**
+	 * This will set the Doctor's availability
+	 */
 	public void setAvailability() {
 		MonthDisplay.display();
 		InputMonthChoice inputForMonth = new InputMonthChoice();
@@ -210,15 +261,25 @@ public class Doctor extends User {
 			availableDates.addAvailableDates(avail);
 		}
 	}
-	
+	/**
+	 * Will add to Doctor's appointment requests
+	 * @param appointment Appointment Request from patient
+	 */
 	public void incomingAppointment(Appointment appointment) {
 		appointmentRequests.add(appointment);
 	}
+	/**
+	 * 
+	 * Remove appoinment when appointment is cancelled/rescheduled
+	 * @param appointment Appointment to be removed
+	 */
 	public void removeIncommingAppointment(Appointment appointment){
 		appointmentRequests.remove(appointment);
 		upcomingAppointments.remove(appointment);
 	}
-	
+	/**
+	 * Logic to update Doctor's patient list
+	 */
 	private void updatePatientList() {
 		ArrayList<MedicalRecord> temp = new ArrayList<>();
 		for(int i =0;i<upcomingAppointments.size();i++) {
@@ -237,7 +298,9 @@ public class Doctor extends User {
 		
 		this.patientMedicalRecords = temp;
 	}
-	
+	/**
+	 * This will accept or decline appointment requests
+	 */
 	public void acceptOrDecline() {
 		if (appointmentRequests.size() == 0) {
 			DisplayLog.display("There are no appointment requests.");
@@ -278,7 +341,9 @@ public class Doctor extends User {
 		}
 		appointmentRequests.clear();
 	}
-	
+	/**
+	 * This will show all the Doctor's upcoming appointments
+	 */
 	public void viewUpcomingAppointments() {
 		if(upcomingAppointments.size()==0) {
 			DisplayLog.display("You have no upcoming appoinments.");
@@ -287,7 +352,9 @@ public class Doctor extends User {
 		
 		AppointmentsDisplay.display(upcomingAppointments);
 	}
-	
+	/**
+	 * This will record Appointment Outcome, basically completing the appointment
+	 */
 	public void recordAppointmentOutcome() {
 		if(this.upcomingAppointments.size() == 0) {
 			DisplayLog.display("There are no appointments to complete");
