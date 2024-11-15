@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import model.User;
 /**
  * CSVReader class to read in CSV data
  */

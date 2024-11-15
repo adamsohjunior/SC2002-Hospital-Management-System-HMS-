@@ -2,7 +2,6 @@ package controller;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import model.Inventory;
 import model.Inventory.Status;
@@ -119,7 +118,6 @@ public class InventoryManagement {
      * Removes an inventory item from the list based on user selection.
      */
     private void removeStocks() {
-        Scanner scan = new Scanner(System.in);
         int medicineChoice;
 	    InputInt inputIntChoice = new InputIntChoice(allInventoryItems.size()) ;
 

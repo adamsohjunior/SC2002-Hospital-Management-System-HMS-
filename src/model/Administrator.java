@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import controller.InventoryManagement;
 import controller.StaffManagement;
-import model.Appointment;
 import view.AdminDisplayMenu;
 import view.DisplayLog;
 import view.InputIntChoice;

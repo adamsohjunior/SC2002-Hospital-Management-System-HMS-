@@ -30,6 +30,6 @@ public class PharmacistParser implements CSVReader.CSVParser<User> {
         String gender = data[3];
         int age = Integer.parseInt(data[4]);
 
-        return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage);
+        return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage, new ArrayList<User>());
     }
 }

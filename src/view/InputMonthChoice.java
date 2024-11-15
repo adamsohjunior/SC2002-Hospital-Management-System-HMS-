@@ -1,5 +1,4 @@
 package view;
-import java.util.InputMismatchException;
 
 /**
  * Handles user input for selecting a month from a list of months.

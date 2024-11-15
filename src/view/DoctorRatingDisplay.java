@@ -1,6 +1,5 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import model.Doctor;
