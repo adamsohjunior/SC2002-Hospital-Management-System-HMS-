@@ -19,6 +19,7 @@ import view.StaffMDisplayMenu;
 import view.DisplayGender;
 import view.InputID;
 import system.SystemManager;
+import view.InputInt;
 
 /**
  * Manages the staff operations within the hospital management system, including
@@ -36,9 +37,9 @@ public class StaffManagement {
     private ArrayList<User> staffList;
     private ArrayList<Inventory> allInventoryItems;
     private ArrayList<Appointment> allAppointments;
-    private InputIntChoice inputRoleChoice = new InputIntChoice(4);
-    private InputIntChoice inputIntChoice = new InputIntChoice(5);
-    private InputIntChoice inputGenderChoice = new InputIntChoice(3);
+    private InputInt inputRoleChoice = new InputIntChoice(4);
+    private InputInt inputIntChoice = new InputIntChoice(5);
+    private InputInt inputGenderChoice = new InputIntChoice(3);
     private SystemManager systemManager;
 
     /**

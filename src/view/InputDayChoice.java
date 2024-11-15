@@ -2,12 +2,9 @@ package view;
 
 public class InputDayChoice extends InputIntChoice{
 	
-	
 	public InputDayChoice() {
 		super(31);
 	}
-	
-	
 	
 	public int getDay(String month) {
 		DayChecker dayChecker = new DayChecker();

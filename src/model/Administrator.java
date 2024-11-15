@@ -8,6 +8,7 @@ import view.AdminDisplayMenu;
 import view.DisplayLog;
 import view.InputIntChoice;
 import system.SystemManager;
+import view.InputInt;
 
 /**
  * The Administrator class represents an administrator user who has control over inventory and staff management.
@@ -17,7 +18,7 @@ public class Administrator extends User {
 	private InventoryManagement inventoryManagement;
 	private StaffManagement staffManagement;
 	private ArrayList<Appointment> allAppointments;
-	private InputIntChoice inputIntChoice = new InputIntChoice(7); // 7 input choices
+	private InputInt inputIntChoice = new InputIntChoice(7); // 7 input choices
 	private SystemManager systemManager;
 	private ArrayList<User> staffList;
 

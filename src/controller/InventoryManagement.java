@@ -12,6 +12,7 @@ import view.InventoryDisplayMenu;
 import view.InventoryDisplay;
 import view.MedicineDisplay;
 import view.InputIntChoice;
+import view.InputInt;
 
 /**
  * Manages all operations related to inventory management in the system.
@@ -41,8 +42,8 @@ public class InventoryManagement {
      */
     public void manageInventory() {
         int choice;
-        InputIntChoice inputIntChoice = new InputIntChoice(7);
-        do {
+        InputInt inputIntChoice = new InputIntChoice(7);
+		do{
             InventoryDisplayMenu.display();
             choice = inputIntChoice.getIntChoice();
 
@@ -98,7 +99,7 @@ public class InventoryManagement {
     private void updateStocks() {
         Scanner scan = new Scanner(System.in);
         int medicineChoice, stockAvailable;
-        InputIntChoice inputIntChoice = new InputIntChoice(allInventoryItems.size());
+	    InputInt inputIntChoice = new InputIntChoice(allInventoryItems.size()) ;
 
         System.out.println("Select medicine to be updated");
         MedicineDisplay.display(allInventoryItems);
@@ -120,7 +121,7 @@ public class InventoryManagement {
     private void removeStocks() {
         Scanner scan = new Scanner(System.in);
         int medicineChoice;
-        InputIntChoice inputIntChoice = new InputIntChoice(allInventoryItems.size());
+	    InputInt inputIntChoice = new InputIntChoice(allInventoryItems.size()) ;
 
         System.out.println("Select medicine to be removed");
         MedicineDisplay.display(allInventoryItems);
@@ -136,7 +137,7 @@ public class InventoryManagement {
     private void updateAlertLine() {
         Scanner scan = new Scanner(System.in);
         int medicineChoice, alertLevel;
-        InputIntChoice inputIntChoice = new InputIntChoice(allInventoryItems.size());
+	    InputInt inputIntChoice = new InputIntChoice(allInventoryItems.size()) ;
 
         System.out.println("Select medicine to update alert level");
         MedicineDisplay.display(allInventoryItems);
