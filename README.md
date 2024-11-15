@@ -39,7 +39,7 @@ We are **Group 5** from lab group **SCS6**, CCDS, Nanyang Technological Universi
 |--------------------|----------------|----------------------|
 | Adam Soh Shi Jie   | adamsohjunior  | adam0025@e.ntu.edu.sg|
 | Chong Jia Chern    | goldenchern    | jchong069@e.ntu.edu.sg|
-| Ho Shang Ji Jason  | ho-shang-jj    | hosh0029@e.ntu.edu.sg|
+| Ho Shang Ji Jason  | jason-hp       | hosh0029@e.ntu.edu.sg|
 | Song Tingfeng      | tingfeng03     | tsong005@e.ntu.edu.sg|
 | Tan Uei Horng      | tanueihorng    | utan001@e.ntu.edu.sg |
 
