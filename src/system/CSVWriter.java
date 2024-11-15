@@ -125,7 +125,7 @@ public class CSVWriter {
                 writer.write(",");
                 writer.write(medicalRecord.getBloodType() != null ? medicalRecord.getBloodType() : "");
                 writer.write(",");
-                writer.write(medicalRecord.getContact() != null ? medicalRecord.getContact() : "");            
+                writer.write(medicalRecord.getEmail() != null ? medicalRecord.getEmail() : "");            
 
                 writer.newLine();
             }

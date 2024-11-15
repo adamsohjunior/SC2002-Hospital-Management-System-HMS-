@@ -10,6 +10,9 @@ import model.Pharmacist;
 import model.User;
 import model.Appointment;
 
+/**
+ * StaffParser class for parsing
+ */
 public class StaffParser implements CSVReader.CSVParser<User> {
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private Available availableDates;
@@ -18,6 +21,16 @@ public class StaffParser implements CSVReader.CSVParser<User> {
     private ArrayList<Appointment> allAppointments;
     private SystemManager systemManager;
 
+    /**
+     * constructs StaffParser object with the given details
+     * 
+     * @param availableDates               the available dates
+     * @param allAppointmentOutcomeRecords the list of all Appointment Outcome Records
+     * @param storage                      the list of all Inventories
+     * @param allAppointments              the list of all Appointments
+     * @param systemManager                the entity that manage the  entire system
+     * @param staffList                    the list of all staffs
+     */
     public StaffParser(Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage, ArrayList<Appointment> allAppointments, SystemManager systemManager, ArrayList<User> staffList) {
         this.availableDates = availableDates;
         this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
@@ -27,6 +40,9 @@ public class StaffParser implements CSVReader.CSVParser<User> {
         this.staffList = staffList;
     }
     
+    /**
+     * method to extract a line of information from CSV and construct an User object
+     */
     @Override
     public User parse(String line) {
         String[] data = line.split(",");
