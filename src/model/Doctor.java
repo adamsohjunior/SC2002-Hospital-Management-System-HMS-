@@ -28,6 +28,7 @@ public class Doctor extends User {
 	private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
 	private Scanner scan = new Scanner(System.in);
 	private ArrayList<Inventory> storage;
+	private DoctorRating personalRating = new DoctorRating();
 	
 	/* availableDates is same with patient, here is where we are able to update it for patient use
 	 * 
@@ -113,6 +114,7 @@ public class Doctor extends User {
 		}
 		InputIntChoice inputForPatient = new InputIntChoice(patientMedicalRecords.size());
 		DisplayPrompt.display("Select patient to update their record");
+		System.out.println("");
 		for(int i=0;i<patientMedicalRecords.size();i++) {
 			System.out.println((i+1)+")"+patientMedicalRecords.get(i).getName());
 		}
@@ -159,14 +161,26 @@ public class Doctor extends User {
 				choice1 = inputForChoice1.getIntChoice();
 						
 				if(choice1 == 1) {
-					
+					boolean duplicate = false;
+
 					MedicineDisplay.display(storage);
 					int medicineChoice = inputForMedicineChoice.getIntChoice();
 					medicineChoice = medicineChoice-1;
 					String medName = storage.get(medicineChoice).getName();
 
-					Prescription toBePrescribed = new Prescription(medName);
-					list.add(toBePrescribed);
+					for(int i =0;i<list.size();i++){
+						if(medName.equals(list.get(i).getName())){
+							duplicate = true;
+							break;
+						}
+					}
+					if(duplicate == false){
+						Prescription toBePrescribed = new Prescription(medName);
+						list.add(toBePrescribed);
+					}
+					else{
+						System.out.println("Duplicate Medicine!");
+					}
 				}
 			}
 			
@@ -317,14 +331,26 @@ public class Doctor extends User {
 			choice1 = inputForChoice1.getIntChoice();
 					
 			if(choice1 == 1) {
-				
+				boolean duplicate = false;
+
 				MedicineDisplay.display(storage);
 				int medicineChoice = inputForMedicineChoice.getIntChoice();
 				medicineChoice = medicineChoice-1;
 				String medName = storage.get(medicineChoice).getName();
 
-				Prescription toBePrescribed = new Prescription(medName);
-				list.add(toBePrescribed);
+				for(int i =0;i<list.size();i++){
+					if(medName.equals(list.get(i).getName())){
+						duplicate = true;
+						break;
+					}
+				}
+				if(duplicate == false){
+					Prescription toBePrescribed = new Prescription(medName);
+					list.add(toBePrescribed);
+				}
+				else{
+					System.out.println("Duplicate Medicine!");
+				}
 			}
 		}
 		
@@ -334,7 +360,12 @@ public class Doctor extends User {
 		/* update the global list so that pharmacists can see and perform their task */
 		allAppointmentOutcomeRecords.add(outcome);
 		chosen.getPatient().updatePatientOutcome(outcome);
+		chosen.getPatient().updateDoctorsVisited(this);
 		chosen.getPatient().getMedicalRecord().updateRecord(outcome);
+	}
+
+	public DoctorRating getRating(){
+		return personalRating;
 	}
 
 }

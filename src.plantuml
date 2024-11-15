@@ -1,0 +1,415 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AdminDisplayMenu {
+  + AdminDisplayMenu(): 
+  + display(): void
+}
+class Administrator {
+  + Administrator(String, String, int, String, ArrayList<Inventory>, ArrayList<User>, ArrayList<Appointment>, SystemManager): 
+  - staffList: ArrayList<User>
+  + manageStaff(): void
+  - viewAppointment(ArrayList<Appointment>): void
+  + approveRequest(): void
+  + displayMenu(): void
+  + manageInventory(): void
+   staffList: ArrayList<User>
+}
+class AdministratorParser {
+  + AdministratorParser(): 
+  + parse(String): Administrator
+}
+class Appointment {
+  + Appointment(Doctor, String, String, Patient): 
+  - patient: Patient
+  - doctor: Doctor
+  - time: String
+  - status: String
+  - date: String
+  + updateAppointment(AppointmentOutcomeRecord): void
+  + printInfoForAdmin(): void
+   status: String
+   date: String
+   time: String
+   appointmentOutcome: AppointmentOutcomeRecord
+   patient: Patient
+   doctor: Doctor
+}
+class AppointmentOutcomeRecord {
+  + AppointmentOutcomeRecord(String, String, String, ArrayList<Prescription>, String): 
+  - date: String
+  - consultationNotes: String
+  - diagnoses: String
+  - treatment: String
+  - prescriptionList: ArrayList<Prescription>
+  + printInfo(): void
+   consultationNotes: String
+   date: String
+   prescriptionList: ArrayList<Prescription>
+   diagnoses: String
+   treatment: String
+}
+class AppointmentOutcomeRecordDisplay {
+  + AppointmentOutcomeRecordDisplay(): 
+  + display(ArrayList<AppointmentOutcomeRecord>): void
+}
+class AppointmentsDisplay {
+  + AppointmentsDisplay(): 
+  + display(ArrayList<Appointment>): void
+}
+class Availability {
+  + Availability(Doctor, String, String): 
+  - doctor: Doctor
+  - time: String
+  - status: String
+  - date: String
+   status: String
+   date: String
+   time: String
+   doctor: Doctor
+}
+class Available {
+  + Available(): 
+  + addAvailableDates(Availability): void
+  + viewAvailableAppointmentSlots(): int
+  + selectAvailableSlot(ArrayList<Appointment>, Patient): Appointment
+  + updateAvailableDates(Doctor, String, String): void
+}
+class AvailableDatesDisplay {
+  + AvailableDatesDisplay(): 
+  + display(ArrayList<Availability>): void
+}
+interface CSVParser<T> << interface >> {
+  + parse(String): T
+}
+class CSVReader<T> {
+  + CSVReader(): 
+  + read(String, CSVParser<T>): ArrayList<T>
+}
+class DayChecker {
+  + DayChecker(): 
+  + getMonthIndex(String): int
+  + dayCheck(String, int): boolean
+}
+class DayDisplay {
+  + DayDisplay(): 
+  + display(): void
+}
+interface Display << interface >> {
+  + display(): void
+}
+class DisplayInbox {
+  + DisplayInbox(): 
+  + display(ArrayList<String>): void
+}
+interface DisplayInfo << interface >>
+class DisplayLog {
+  + DisplayLog(): 
+  + display(String): void
+}
+interface DisplayMenu << interface >>
+class DisplayPrompt {
+  + DisplayPrompt(): 
+  + display(String): void
+}
+class Doctor {
+  + Doctor(String, String, int, String, Available, ArrayList<AppointmentOutcomeRecord>, ArrayList<Inventory>): 
+  + updatePatientMedicalRecord(): void
+  + removeIncommingAppointment(Appointment): void
+  + viewPersonalSchedule(): void
+  + setAvailability(): void
+  + incomingAppointment(Appointment): void
+  + viewUpcomingAppointments(): void
+  + displayMenu(): void
+  + acceptOrDecline(): void
+  + viewPatientMedicalRecords(): void
+  + recordAppointmentOutcome(): void
+  - updatePatientList(): void
+}
+class DoctorDisplayMenu {
+  + DoctorDisplayMenu(): 
+  + display(): void
+}
+class DoctorParser {
+  + DoctorParser(Available, ArrayList<AppointmentOutcomeRecord>, ArrayList<Inventory>): 
+  + parse(String): Doctor
+}
+class EmailUpdateDisplay {
+  + EmailUpdateDisplay(): 
+  + display(): void
+}
+class HMS {
+  + HMS(): 
+  + main(String[]): void
+}
+interface Input << interface >>
+class InputDayChoice {
+  + InputDayChoice(): 
+  + getDay(String): int
+}
+class InputEmail {
+  + InputEmail(): 
+   stringInput: String
+}
+class InputID {
+  + InputID(): 
+   stringInput: String
+}
+interface InputInt << interface >> {
+   intChoice: int
+}
+class InputIntChoice {
+  + InputIntChoice(int): 
+   intChoice: int
+}
+class InputMonthChoice {
+  + InputMonthChoice(): 
+   month: String
+}
+class InputPassword {
+  + InputPassword(): 
+   stringInput: String
+}
+class InputPasswordStrict {
+  + InputPasswordStrict(): 
+   stringInput: String
+}
+class InputPrescriptionChoice {
+  + InputPrescriptionChoice(int): 
+   prescription: int
+}
+interface InputString << interface >> {
+   stringInput: String
+}
+class InputTimeChoice {
+  + InputTimeChoice(): 
+  - time: String[]
+   time: String
+}
+class Inventory {
+  + Inventory(String, int, int): 
+  - alertLevel: int
+  - status: Status
+  + setreqStatus(RequestStatus): void
+  + display(): void
+  - lowStockAlert(): void
+  + getreqStatus(): RequestStatus
+  + updateStock(): boolean
+   name: String
+   stock: int
+   alertLevel: int
+   status: Status
+}
+class InventoryDisplay {
+  + InventoryDisplay(): 
+  + display(Inventory): void
+}
+class InventoryDisplayMenu {
+  + InventoryDisplayMenu(): 
+  + display(): void
+}
+class InventoryManagement {
+  + InventoryManagement(ArrayList<Inventory>): 
+  - removeStocks(): void
+  + manageInventory(): void
+  - updateAlertLine(): void
+  - addStocks(): void
+  - updateStocks(): void
+  + approveRequest(): void
+}
+class InventoryParser {
+  + InventoryParser(): 
+  + parse(String): Inventory
+}
+class MedicalRecord {
+  + MedicalRecord(String, String, String, String, String, String): 
+  - userId: String
+  - gender: String
+  - name: String
+  - dateOfBirth: String
+  - diagnosesTreatmentPrescription: ArrayList<AppointmentOutcomeRecord>
+  - bloodType: String
+  - email: String
+  + updateRecord(String): void
+  + updateRecord(AppointmentOutcomeRecord): void
+   name: String
+   gender: String
+   dateOfBirth: String
+   bloodType: String
+   email: String
+   diagnosesTreatmentPrescription: ArrayList<AppointmentOutcomeRecord>
+   userId: String
+}
+class MedicalRecordDisplay {
+  + MedicalRecordDisplay(): 
+  + display(MedicalRecord): void
+}
+class MedicineDisplay {
+  + MedicineDisplay(): 
+  + display(ArrayList<Inventory>): void
+}
+class MonthDisplay {
+  + MonthDisplay(): 
+  + display(): void
+}
+class Patient {
+  + Patient(String, String, int, String, String, String, Available, String, ArrayList<Appointment>): 
+  - scheduledAppointments: ArrayList<Appointment>
+  - medicalRecord: MedicalRecord
+  + viewScheduledAppointments(): void
+  + scheduleAppointment(): void
+  + viewAppointmentOutcomeRecords(): void
+  + updatePersonalInfo(String): void
+  + updatePatientOutcome(AppointmentOutcomeRecord): void
+  + updateAppointmentOutcomeRecords(Appointment): void
+  + cancelAppointment(): boolean
+  + displayMenu(): void
+  + viewMedicalRecord(): void
+  + rescheduleAppointment(): void
+   medicalRecord: MedicalRecord
+   scheduledAppointments: ArrayList<Appointment>
+}
+class PatientDisplayMenu {
+  + PatientDisplayMenu(): 
+  + display(): void
+}
+class PatientParser {
+  + PatientParser(Available, ArrayList<Appointment>): 
+  + parse(String): Patient
+}
+class Pharmacist {
+  + Pharmacist(String, String, int, String, Available, ArrayList<AppointmentOutcomeRecord>, ArrayList<Inventory>, ArrayList<User>): 
+  - staffList: ArrayList<User>
+  + viewAppointmentOutcomeRecords(): void
+  + replenishmentRequest(): void
+  + updatePrescriptionStatus(): void
+  + displayMenu(): void
+  + viewMedicationInventory(): void
+  - updateInventory(Prescription): void
+   staffList: ArrayList<User>
+   admin: User?
+}
+class PharmacistDisplayMenu {
+  + PharmacistDisplayMenu(): 
+  + display(): void
+}
+class PharmacistParser {
+  + PharmacistParser(Available, ArrayList<AppointmentOutcomeRecord>, ArrayList<Inventory>): 
+  + parse(String): User
+}
+class Prescription {
+  + Prescription(String): 
+  - status: PrescriptionStatus
+  + updateStatus(): void
+  + display(): void
+   name: String
+   status: PrescriptionStatus
+}
+class PrescriptionDisplay {
+  + PrescriptionDisplay(): 
+  + display(Prescription): void
+}
+enum PrescriptionStatus << enumeration >> {
+  + PrescriptionStatus(): 
+  + valueOf(String): PrescriptionStatus
+  + values(): PrescriptionStatus[]
+}
+class ReplenishmentRequestMenu {
+  + ReplenishmentRequestMenu(): 
+  + display(): void
+}
+enum RequestStatus << enumeration >> {
+  + RequestStatus(): 
+  + values(): RequestStatus[]
+  + valueOf(String): RequestStatus
+}
+class RoleDisplayMenu {
+  + RoleDisplayMenu(): 
+  + display(): void
+}
+class SessionManager {
+  + SessionManager(ArrayList<User>): 
+  - getUserID(): void
+  - getPassword(): void
+  + startNewSession(): void
+}
+class StaffDisplay {
+  + StaffDisplay(): 
+  + display(ArrayList<User>): void
+}
+class StaffMDisplayMenu {
+  + StaffMDisplayMenu(): 
+  + display(): void
+}
+class StaffManagement {
+  + StaffManagement(ArrayList<User>, ArrayList<Inventory>, ArrayList<Appointment>, SystemManager): 
+  - addStaff(): void
+  - createStaff(String, String, int, String): User?
+  + manageStaff(): void
+  - updateStaff(): void
+  - generateId(String, int): String?
+  - removeStaff(): void
+  - displayStaff(): void
+}
+class StaffParser {
+  + StaffParser(Available, ArrayList<AppointmentOutcomeRecord>, ArrayList<Inventory>, ArrayList<Appointment>, SystemManager, ArrayList<User>): 
+  + parse(String): User
+}
+enum Status << enumeration >> {
+  + Status(): 
+  + valueOf(String): Status
+  + values(): Status[]
+}
+class SystemManager {
+  + SystemManager(): 
+  - staffList: ArrayList<User>
+  - allAppointments: ArrayList<Appointment>
+  - allAppointmentOutcomeRecords: ArrayList<AppointmentOutcomeRecord>
+  - availableDates: Available
+  - storage: ArrayList<Inventory>
+  + loadData(): void
+  + runSystem(): void
+  + initialise(): void
+  + shutdown(): void
+   allAppointmentOutcomeRecords: ArrayList<AppointmentOutcomeRecord>
+   allAppointments: ArrayList<Appointment>
+   storage: ArrayList<Inventory>
+   availableDates: Available
+   staffList: ArrayList<User>
+}
+class TimeDisplay {
+  + TimeDisplay(): 
+  + display(): void
+}
+class UpdatePresriptionStatusMenu {
+  + UpdatePresriptionStatusMenu(): 
+  + display(): void
+}
+class User {
+  + User(String, String, int, String): 
+  - password: String
+  - gender: String
+  - name: String
+  - userId: String
+  - age: int
+  + clearInbox(): void
+  + displayMenu(): void
+  + sendMessage(User, String): void
+  + changePassword(String): void
+  + showInbox(): void
+   name: String
+   password: String
+   gender: String
+   staffList: ArrayList<User>
+   userId: String
+   age: int
+}
+
+CSVParser                        +-[#820000,plain]-  CSVReader                       
+PrescriptionStatus               +-[#820000,plain]-  Prescription                    
+RequestStatus                    +-[#820000,plain]-  Inventory                       
+Status                           +-[#820000,plain]-  Inventory                       
+@enduml

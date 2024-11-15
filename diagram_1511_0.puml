@@ -1,0 +1,640 @@
+@startuml
+left to right direction
+class model.AppointmentOutcomeRecord {
+- String date
+- String diagnoses
+- String treatment
+- String consultationNotes
+- ArrayList<Prescription> prescriptionList
++ <<Create>> AppointmentOutcomeRecord(String,String,String,ArrayList<Prescription>,String)
++ String getDate()
++ String getDiagnoses()
++ String getTreatment()
++ ArrayList<Prescription> getPrescriptionList()
++ String getConsultationNotes()
++ void setConsultationNotes(String)
++ void setDiagnoses(String)
++ void setTreatment(String)
++ void setPrescriptionList(ArrayList<Prescription>)
++ void printInfo()
+}
+
+
+class system.PatientParser {
+- Available availableDates
+- ArrayList<Appointment> allAppointments
++ <<Create>> PatientParser(Available,ArrayList<Appointment>)
++ Patient parse(String)
+}
+
+
+class view.UpdatePresriptionStatusMenu {
++ {static} void display()
+}
+
+class view.InputTimeChoice {
+- String[] time
++ <<Create>> InputTimeChoice()
++ String getTime()
+}
+
+
+class model.Prescription {
+- String medicineName
+- PrescriptionStatus status
++ <<Create>> Prescription(String)
++ void updateStatus()
++ String getName()
++ PrescriptionStatus getStatus()
++ void display()
+}
+
+
+enum model.PrescriptionStatus {
++  PENDING
++  DISPENSED
+}
+
+class view.TimeDisplay {
++ {static} void display()
+}
+
+class system.StaffParser {
+- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
+- Available availableDates
+- ArrayList<Inventory> storage
+- ArrayList<User> staffList
+- ArrayList<Appointment> allAppointments
+- SystemManager systemManager
++ <<Create>> StaffParser(Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>,ArrayList<Appointment>,SystemManager,ArrayList<User>)
++ User parse(String)
+}
+
+
+class view.EmailUpdateDisplay {
++ {static} void display()
+}
+
+interface view.DisplayMenu {
+}
+abstract class model.User {
+- String userId
+- String password
+- String name
+- int age
+- String gender
+- ArrayList<String> inbox
++ <<Create>> User(String,String,int,String)
++ void showInbox()
++ void sendMessage(User,String)
++ void changePassword(String)
++ String getUserId()
++ String getName()
++ int getAge()
++ String getGender()
++ String getPassword()
++ void setName(String)
++ void setAge(int)
++ void setGender(String)
++ {abstract}void displayMenu()
++ void setStaffList(ArrayList<User>)
+}
+
+
+class controller.StaffManagement {
+- ArrayList<User> staffList
+- ArrayList<Inventory> allInventoryItems
+- ArrayList<Appointment> allAppointments
+- InputIntChoice inputRoleChoice
+- InputIntChoice inputIntChoice
+- InputIntChoice inputGenderChoice
+- SystemManager systemManager
++ <<Create>> StaffManagement(ArrayList<User>,ArrayList<Inventory>,ArrayList<Appointment>,SystemManager)
++ void manageStaff()
+- void addStaff()
+- User createStaff(String,String,int,String)
+- String generateId(String,int)
+- void updateStaff()
+- void removeStaff()
+- void displayStaff()
+}
+
+
+class view.DoctorRatingDisplay {
++ {static} void display(Set<Doctor>)
+}
+
+class view.DisplayInbox {
++ {static} void display(ArrayList<String>)
+}
+
+class system.Writer {
+~ ArrayList<Inventory> allInventoryItem
+~ ArrayList<User> staffList
+~ ArrayList<User> patientList
++ <<Create>> Writer(ArrayList<User>,ArrayList<User>,ArrayList<Inventory>)
++ void writeDataIntoCSV()
+}
+
+
+class view.AppointmentsDisplay {
++ {static} void display(ArrayList<Appointment>)
+}
+
+class view.DayChecker {
+- String[] months
++ int getMonthIndex(String)
++ boolean dayCheck(String,int)
+}
+
+
+class view.DisplayLog {
++ {static} void display(String)
+}
+
+class view.InputMonthChoice {
+- String[] months
++ <<Create>> InputMonthChoice()
++ String getMonth()
+}
+
+
+class view.PrescriptionDisplay {
++ {static} void display(Prescription)
+}
+
+interface view.InputInt {
++ int getIntChoice()
+}
+
+class view.InputPrescriptionChoice {
++ <<Create>> InputPrescriptionChoice(int)
++ int getPrescription()
+}
+
+class model.Appointment {
+- Patient patient
+- Doctor doctor
+- String date
+- String time
+- String status
+- AppointmentOutcomeRecord outcome
++ <<Create>> Appointment(Doctor,String,String,Patient)
++ void updateAppointment(AppointmentOutcomeRecord)
++ void printInfoForAdmin()
++ AppointmentOutcomeRecord getAppointmentOutcome()
++ String getDate()
++ String getTime()
++ Doctor getDoctor()
++ Patient getPatient()
++ String getStatus()
++ void setStatus(String)
+}
+
+
+class view.InventoryDisplay {
++ {static} void display(Inventory)
+}
+
+class view.DoctorDisplayMenu {
++ {static} void display()
+}
+
+class model.Pharmacist {
+- Scanner scan
+- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
+- ArrayList<Inventory> allInventoryItems
+- ArrayList<User> staffList
++ <<Create>> Pharmacist(String,String,int,String,Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>,ArrayList<User>)
++ void setStaffList(ArrayList<User>)
++ void displayMenu()
++ void viewAppointmentOutcomeRecords()
++ void updatePrescriptionStatus()
+- void updateInventory(Prescription)
++ void viewMedicationInventory()
++ void replenishmentRequest()
+- User getAdmin()
+}
+
+
+class view.DayDisplay {
++ {static} void display()
+}
+
+class view.InputID {
++ String getStringInput()
+}
+
+class view.MonthDisplay {
++ {static} void display()
+}
+
+class view.MedicalRecordDisplay {
++ {static} void display(MedicalRecord)
+}
+
+class system.SessionManager {
+- String id
+- User currentUser
+- ArrayList<User> users
++ <<Create>> SessionManager(ArrayList<User>)
++ void startNewSession()
+- void getUserID()
+- void getPassword()
+}
+
+
+interface view.Input {
+~ {static} Scanner scan
+}
+
+class system.DoctorParser {
+- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
+- Available availableDates
+- ArrayList<Inventory> storage
++ <<Create>> DoctorParser(Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>)
++ Doctor parse(String)
+}
+
+
+class system.CSVWriter {
+- String userHeader
+- String patientHeader
+- String medicineHeader
+- String StaffFilePath
+- String PatientFilePath
+- String MedicineFilePath
+- ArrayList<User> staffList
+- ArrayList<User> patientList
+- ArrayList<Inventory> allInventoryItem
++ <<Create>> CSVWriter(ArrayList<User>,ArrayList<User>,ArrayList<Inventory>)
+- void writeUser(ArrayList<User>)
+- void writePatient(ArrayList<User>)
+- void writeMedicine(ArrayList<Inventory>)
++ void writeData()
+}
+
+
+class view.InputDayChoice {
++ <<Create>> InputDayChoice()
++ int getDay(String)
+}
+
+interface view.Display {
++ {static} void display()
+}
+
+class system.HMS {
++ {static} void main(String[])
+}
+
+class view.AvailableDatesDisplay {
++ {static} void display(ArrayList<Availability>)
+}
+
+class model.Doctor {
+- ArrayList<MedicalRecord> patientMedicalRecords
+- Available personalSchedule
+- Available availableDates
+- ArrayList<Appointment> appointmentRequests
+- ArrayList<Appointment> upcomingAppointments
+- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
+- Scanner scan
+- ArrayList<Inventory> storage
++ <<Create>> Doctor(String,String,int,String,Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>)
++ void displayMenu()
++ void viewPersonalSchedule()
++ void viewPatientMedicalRecords()
++ void updatePatientMedicalRecord()
++ void setAvailability()
++ void incomingAppointment(Appointment)
++ void removeIncommingAppointment(Appointment)
+- void updatePatientList()
++ void acceptOrDecline()
++ void viewUpcomingAppointments()
++ void recordAppointmentOutcome()
+}
+
+
+class view.InputPassword {
++ String getStringInput()
+}
+
+class view.InputPasswordStrict {
++ String getStringInput()
+}
+
+class view.DisplayGender {
++ {static} void display()
+}
+
+class view.ReplenishmentRequestMenu {
++ {static} void display()
+}
+
+interface view.InputString {
++ String getStringInput()
+}
+
+class view.RoleDisplayMenu {
++ {static} void display()
+}
+
+class model.Patient {
+- MedicalRecord medicalRecord
+- ArrayList<Appointment> scheduledAppointments
+- Available availableDates
+- ArrayList<AppointmentOutcomeRecord> appointmentOutcomeRecords
+- ArrayList<Appointment> allAppointments
++ <<Create>> Patient(String,String,int,String,String,String,Available,String,ArrayList<Appointment>)
++ void displayMenu()
++ MedicalRecord getMedicalRecord()
++ ArrayList<Appointment> getScheduledAppointments()
++ void updateAppointmentOutcomeRecords(Appointment)
++ void viewMedicalRecord()
++ void updatePersonalInfo(String)
++ void updatePatientOutcome(AppointmentOutcomeRecord)
++ void viewAppointmentOutcomeRecords()
++ void viewScheduledAppointments()
++ void scheduleAppointment()
++ void rescheduleAppointment()
++ boolean cancelAppointment()
+}
+
+
+class view.StaffMDisplayMenu {
++ {static} void display()
+}
+
+class view.MedicineDisplay {
++ {static} void display(ArrayList<Inventory>)
+}
+
+class model.Administrator {
+- InventoryManagement inventoryManagement
+- StaffManagement staffManagement
+- ArrayList<Appointment> allAppointments
+- InputIntChoice inputIntChoice
+- SystemManager systemManager
+- ArrayList<User> staffList
++ <<Create>> Administrator(String,String,int,String,ArrayList<Inventory>,ArrayList<User>,ArrayList<Appointment>,SystemManager)
++ void setStaffList(ArrayList<User>)
++ void manageInventory()
++ void approveRequest()
++ void manageStaff()
++ void displayMenu()
+- void viewAppointment(ArrayList<Appointment>)
+}
+
+
+class view.StaffDisplay {
++ {static} void display(ArrayList<User>)
+}
+
+class model.MedicalRecord {
+- String userId
+- String email
+- String gender
+- String name
+- String bloodType
+- String dateOfBirth
+- ArrayList<AppointmentOutcomeRecord> diagnosesTreatmentPrescription
++ <<Create>> MedicalRecord(String,String,String,String,String,String)
++ void updateRecord(String)
++ void updateRecord(AppointmentOutcomeRecord)
++ String getUserId()
++ String getName()
++ String getEmail()
++ String getBloodType()
++ String getDateOfBirth()
++ String getGender()
++ String getContact()
++ ArrayList<AppointmentOutcomeRecord> getDiagnosesTreatmentPrescription()
+}
+
+
+class model.DoctorRating {
++ void updateRating(int)
+}
+
+class model.Rating {
+- float rating
+- int count
++ void updateRating(int)
++ float getRating()
++ int getCount()
++ void setRating(float)
++ void setCount(int)
+}
+
+
+class view.InputEmail {
++ String getStringInput()
+}
+
+class model.Inventory {
+- String medicineName
+- int stockAvailable
+- Status status
+- RequestStatus reqStatus
++ <<Create>> Inventory(String,int,int)
++ boolean updateStock()
+- void lowStockAlert()
++ String getName()
++ int getStock()
++ void setStock(int)
++ Status getStatus()
++ RequestStatus getreqStatus()
++ int getAlertLevel()
++ void setStatus(Status)
++ void setreqStatus(RequestStatus)
++ void setAlertLevel(int)
++ void display()
+}
+
+
+enum model.RequestStatus {
++  NULL
++  PENDING
++  APPROVED
+}
+
+enum model.Status {
++  SUFFICIENT
++  LOW
+}
+
+class controller.InventoryManagement {
+- ArrayList<Inventory> allInventoryItems
++ <<Create>> InventoryManagement(ArrayList<Inventory>)
++ void manageInventory()
+- void addStocks()
+- void updateStocks()
+- void removeStocks()
+- void updateAlertLine()
++ void approveRequest()
+- void displayInventory()
+}
+
+
+class model.Available {
+- ArrayList<Availability> availableDates
+- Scanner scan
++ int viewAvailableAppointmentSlots()
++ Appointment selectAvailableSlot(ArrayList<Appointment>,Patient)
++ void updateAvailableDates(Doctor,String,String)
++ void addAvailableDates(Availability)
+}
+
+
+class view.PharmacistDisplayMenu {
++ {static} void display()
+}
+
+class view.AppointmentOutcomeRecordDisplay {
++ {static} void display(ArrayList<AppointmentOutcomeRecord>)
+}
+
+class system.CSVReader {
++ ArrayList<T> read(String,CSVParser<T>)
+}
+
+interface system.CSVReader$CSVParser {
+~ T parse(String)
+}
+
+interface view.DisplayInfo {
+}
+class view.InventoryDisplayMenu {
++ {static} void display()
+}
+
+class system.InventoryParser {
++ Inventory parse(String)
+}
+
+class view.InputIntChoice {
+- int numberOfChoice
++ <<Create>> InputIntChoice(int)
++ int getIntChoice()
+}
+
+
+class system.SystemManager {
+- SessionManager sessionManager
+- ArrayList<Inventory> storage
+- ArrayList<User> staffList
+- ArrayList<User> patientList
+- Available availableDates
+- ArrayList<Appointment> allAppointments
+- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
+- boolean shutdown
+- ArrayList<User> users
+- String medicineListPath
+- String patientListPath
+- String staffListPath
++ void initialise()
++ void loadData()
++ void runSystem()
++ void saveData()
++ void shutdown()
++ void addUser(User)
++ ArrayList<Inventory> getStorage()
++ ArrayList<User> getStaffList()
++ Available getAvailableDates()
++ ArrayList<Appointment> getAllAppointments()
++ ArrayList<AppointmentOutcomeRecord> getAllAppointmentOutcomeRecords()
+}
+
+
+class model.Availability {
+- Doctor doctor
+- String date
+- String time
+- String status
++ <<Create>> Availability(Doctor,String,String)
++ Doctor getDoctor()
++ String getDate()
++ String getTime()
++ String getStatus()
++ void setStatus(String)
+}
+
+
+class system.AdministratorParser {
++ Administrator parse(String)
+}
+
+class view.DisplayPrompt {
++ {static} void display(String)
+}
+
+class view.PatientDisplayMenu {
++ {static} void display()
+}
+
+class view.AdminDisplayMenu {
++ {static} void display()
+}
+
+class system.PharmacistParser {
+- ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords
+- Available availableDates
+- ArrayList<Inventory> storage
++ <<Create>> PharmacistParser(Available,ArrayList<AppointmentOutcomeRecord>,ArrayList<Inventory>)
++ User parse(String)
+}
+
+
+
+
+system.CSVParser <|.. system.PatientParser
+view.DisplayMenu <|.. view.UpdatePresriptionStatusMenu
+view.InputIntChoice <|-- view.InputTimeChoice
+view.DisplayInfo <|.. view.TimeDisplay
+system.CSVParser <|.. system.StaffParser
+view.DisplayInfo <|.. view.EmailUpdateDisplay
+view.Display <|-- view.DisplayMenu
+view.DisplayMenu <|.. view.DoctorRatingDisplay
+view.DisplayInfo <|.. view.DisplayInbox
+view.DisplayInfo <|.. view.AppointmentsDisplay
+view.DisplayInfo <|.. view.DisplayLog
+view.InputIntChoice <|-- view.InputMonthChoice
+view.Input <|-- view.InputInt
+view.InputIntChoice <|-- view.InputPrescriptionChoice
+view.DisplayInfo <|.. view.InventoryDisplay
+view.DisplayMenu <|.. view.DoctorDisplayMenu
+model.User <|-- model.Pharmacist
+view.DisplayInfo <|.. view.DayDisplay
+view.InputString <|.. view.InputID
+view.DisplayInfo <|.. view.MonthDisplay
+view.DisplayInfo <|.. view.MedicalRecordDisplay
+system.CSVParser <|.. system.DoctorParser
+view.InputIntChoice <|-- view.InputDayChoice
+model.User <|-- model.Doctor
+view.InputString <|.. view.InputPassword
+view.InputString <|.. view.InputPasswordStrict
+view.DisplayMenu <|.. view.DisplayGender
+view.DisplayMenu <|.. view.ReplenishmentRequestMenu
+view.Input <|-- view.InputString
+view.DisplayMenu <|.. view.RoleDisplayMenu
+model.User <|-- model.Patient
+view.DisplayMenu <|.. view.StaffMDisplayMenu
+view.DisplayInfo <|.. view.MedicineDisplay
+model.User <|-- model.Administrator
+view.DisplayInfo <|.. view.StaffDisplay
+model.Rating <|-- model.DoctorRating
+view.InputString <|.. view.InputEmail
+view.DisplayMenu <|.. view.PharmacistDisplayMenu
+view.DisplayInfo <|.. view.AppointmentOutcomeRecordDisplay
+system.CSVReader +.. system.CSVReader$CSVParser
+view.Display <|-- view.DisplayInfo
+view.DisplayMenu <|.. view.InventoryDisplayMenu
+system.CSVParser <|.. system.InventoryParser
+view.InputInt <|.. view.InputIntChoice
+system.CSVParser <|.. system.AdministratorParser
+view.DisplayInfo <|.. view.DisplayPrompt
+view.DisplayMenu <|.. view.PatientDisplayMenu
+view.Display <|.. view.AdminDisplayMenu
+system.CSVParser <|.. system.PharmacistParser
+@enduml

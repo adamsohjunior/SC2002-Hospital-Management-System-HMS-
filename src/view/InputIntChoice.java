@@ -35,6 +35,7 @@ public class InputIntChoice implements InputInt{
 	        }
 			/* clear the enter key */
 			scan.nextLine();
+			System.out.println("");
 			return choice;
 	}
 }
