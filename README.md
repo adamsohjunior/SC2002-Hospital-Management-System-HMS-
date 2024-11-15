@@ -1,6 +1,6 @@
 # Hospital Management System (HMS)
 
-** NTU College of Computing and Data Science**
+**NTU College of Computing and Data Science**
 
 ## SC2002 Assignment | SCS6 GROUP 5
 
