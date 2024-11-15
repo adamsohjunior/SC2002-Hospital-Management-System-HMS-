@@ -51,40 +51,40 @@ Hospital Management System (HMS) is a Java-based console application developed f
 
 ## Features
 
-### **Patient**
-✔️ Profile Management
-✔️ Secure Authentication
-✔️ Appointment Handling
-✔️ Medical Records
-✔️ Inbox
-✔️ Feedback
+### Patient
+- ✅ Profile Management
+- ✅ Secure Authentication
+- ✅ Appointment Handling
+- ✅ Medical Records
+- ✅ Inbox
+- ✅ Feedback
 
-### **Doctor**
-✔️ Profile Management
-✔️ Secure Authentication
-✔️ Availability Management
-✔️ Appointment Management
-✔️ Medical Documentation
-✔️ Medication Prescription
-✔️ Inbox
-✔️ Performance Review
+### Doctor
+- ✅ Profile Management
+- ✅ Secure Authentication
+- ✅ Availability Management
+- ✅ Appointment Management
+- ✅ Medical Documentation
+- ✅ Medication Prescription
+- ✅ Inbox
+- ✅ Performance Review
 
-### **Pharmacist**
-✔️ Profile Management
-✔️ Secure Authentication
-✔️ Medication Management
-✔️ Replenishment Requests
-✔️ Inbox
+### Pharmacist
+- ✅ Profile Management
+- ✅ Secure Authentication
+- ✅ Medication Management
+- ✅ Replenishment Requests
+- ✅ Inbox
 
-### **Administrator**
-✔️ Profile Management
-✔️ Secure Authentication
-✔️ User Management
-✔️ Inventory Control
-✔️ Replenishment Approval
-✔️ Reporting
-✔️ Inbox
-✔️ Performance Review
+### Administrator
+- ✅ Profile Management
+- ✅ Secure Authentication
+- ✅ User Management
+- ✅ Inventory Control
+- ✅ Replenishment Approval
+- ✅ Reporting
+- ✅ Inbox
+- ✅ Performance Review
 
 ### Assumptions
 
@@ -179,7 +179,7 @@ For any queries or support, please contact any of the team members via their pro
 
 ---
 
-# Disclaimer
+## Disclaimer
 
 This project is developed for educational purposes as part of the SC2002 course assignment at Nanyang Technological University, Singapore. 
 [16 November 2024]
