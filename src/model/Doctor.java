@@ -53,7 +53,7 @@ public class Doctor extends User {
 		
 		System.out.println("");
 		DisplayLog.display("WELCOME, " + this.getName() + "!");
-		InputIntChoice inputForMenu = new InputIntChoice(9);
+		InputInt inputForMenu = new InputIntChoice(9);
 		do{
 			DoctorDisplayMenu.display();
 			choice = inputForMenu.getIntChoice();
@@ -63,7 +63,7 @@ public class Doctor extends User {
 		    	  viewPatientMedicalRecords();
 		    	  break;
 		      case 2:
-		    	  updatePatientMedicalRecord();
+		    	  updatePatientMedicalRecord(new InputIntChoice(patientMedicalRecords.size()));
 		    	  break;
 		      case 3:
 		    	  viewPersonalSchedule();
@@ -84,6 +84,7 @@ public class Doctor extends User {
 				  showInbox();
 				  break;
 		      case 9:
+			    System.out.println("Logged out successfully!\n");
 		    	  break;
 		      }
 		} while (choice != 9);
@@ -107,18 +108,18 @@ public class Doctor extends User {
 		}
 	}
 	
-	public void updatePatientMedicalRecord() {
+	public void updatePatientMedicalRecord(InputInt inputForPatient) {
 		if(patientMedicalRecords.size()==0) {
 			DisplayLog.display("You have no patients");
 			return;
 		}
-		InputIntChoice inputForPatient = new InputIntChoice(patientMedicalRecords.size());
+		
 		DisplayPrompt.display("Select patient to update their record");
 		System.out.println("");
 		for(int i=0;i<patientMedicalRecords.size();i++) {
-			System.out.println((i+1)+")"+patientMedicalRecords.get(i).getName());
+			System.out.println((i+1)+") "+patientMedicalRecords.get(i).getName());
 		}
-		
+		System.out.println("");
 	
 		int choice =-1;
 	      choice = inputForPatient.getIntChoice();
@@ -145,16 +146,16 @@ public class Doctor extends User {
 			/* here can change to list of medications instead of the doctor manually enterint the name*/
 			ArrayList<Prescription> list = new ArrayList<>();
 			
-			InputIntChoice inputForChoice1 = new InputIntChoice(2);
-			InputIntChoice inputForMedicineChoice = new InputIntChoice(storage.size());
+			InputInt inputForChoice1 = new InputIntChoice(2);
+			InputInt inputForMedicineChoice = new InputIntChoice(storage.size());
 			int choice1 = 0;
 			while(choice1 !=2) {
 				
 				System.out.println("");
-				System.out.println("==============================================");
-				System.out.println("1)Prescribe Medication");
-				System.out.println("2)Finish");
-				System.out.println("==============================================");
+				System.out.println("----------------------------------------------");
+				System.out.println("1) Prescribe Medication");
+				System.out.println("2) Finish");
+				System.out.println("----------------------------------------------");
 				System.out.println("");
 				
 
@@ -205,8 +206,9 @@ public class Doctor extends User {
 		
 		Availability avail = new Availability(this,date,time);
 		/* Both arraylist contains the same ref to Availability object */
-		personalSchedule.addAvailableDates(avail);
-		availableDates.addAvailableDates(avail);
+		if(personalSchedule.addAvailableDates(avail)==1){
+			availableDates.addAvailableDates(avail);
+		}
 	}
 	
 	public void incomingAppointment(Appointment appointment) {
@@ -242,10 +244,7 @@ public class Doctor extends User {
 			return;
 		}
 		
-		DisplayLog.display("Appointment requests: ");
-		InputIntChoice inputForAccDec = new InputIntChoice(2);
-
-		
+		InputInt inputForAccDec = new InputIntChoice(2);
 
 		for (int i = 0;i<appointmentRequests.size();i++) {
 			Appointment temp = appointmentRequests.get(i);
@@ -297,7 +296,7 @@ public class Doctor extends User {
 		
 		AppointmentsDisplay.display(upcomingAppointments);
 		
-		InputIntChoice inputForApp = new InputIntChoice(upcomingAppointments.size());
+		InputInt inputForApp = new InputIntChoice(upcomingAppointments.size());
 		int choice = 0;
 		
 		DisplayLog.display("Please select an appointment to complete: ");
@@ -318,15 +317,15 @@ public class Doctor extends User {
 
 		/* here can change to list of medications instead of the doctor manually enterint the name*/
 		ArrayList<Prescription> list = new ArrayList<>();
-		InputIntChoice inputForChoice1 = new InputIntChoice(2);
-		InputIntChoice inputForMedicineChoice = new InputIntChoice(storage.size());
+		InputInt inputForChoice1 = new InputIntChoice(2);
+		InputInt inputForMedicineChoice = new InputIntChoice(storage.size());
 		int choice1 = -1;
 		while(choice1 !=2) {
 				
-			System.out.println("\n==============================================");
+			System.out.println("\n----------------------------------------------");
 			System.out.println("1)Prescribe Medication");
 			System.out.println("2)Finish");
-			System.out.println("==============================================\n");
+			System.out.println("----------------------------------------------\n");
 
 			choice1 = inputForChoice1.getIntChoice();
 					

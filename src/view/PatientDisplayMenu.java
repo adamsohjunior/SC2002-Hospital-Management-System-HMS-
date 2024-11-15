@@ -17,7 +17,8 @@ public class PatientDisplayMenu implements DisplayMenu {
         System.out.printf("| %-42s |\n", "7) View Scheduled Appointments");
         System.out.printf("| %-42s |\n", "8) View Past Appointment Outcome Records");
         System.out.printf("| %-42s |\n", "9) View Inbox");
-        System.out.printf("| %-42s |\n", "10) Logout");
+        System.out.printf("| %-42s |\n", "10) Rate a Doctor");
+        System.out.printf("| %-42s |\n", "11) Logout");
         System.out.println(border);
 		System.out.println("");
 	}

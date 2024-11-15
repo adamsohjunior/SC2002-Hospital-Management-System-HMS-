@@ -2,9 +2,10 @@ package view;
 
 public class MonthDisplay implements DisplayInfo{
 	static public void display() {
+		String border = "----------------------------------------------";
 		System.out.println("");
-		System.out.println("Select Month");
-		System.out.println("==============================================");
+		System.out.printf("%-44s\n", "		Select Month			   ");
+		System.out.println(border);
 		System.out.println("Please select a Month: ");
 		System.out.println("1) Jan");
 		System.out.println("2) Feb");
@@ -18,7 +19,9 @@ public class MonthDisplay implements DisplayInfo{
 		System.out.println("10) Oct");
 		System.out.println("11) Nov");
 		System.out.println("12) Dec");
-		System.out.println("==============================================");
+		System.out.println(border);
 		System.out.println("");
 	}
 }
+
+	

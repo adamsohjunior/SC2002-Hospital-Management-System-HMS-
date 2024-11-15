@@ -12,12 +12,12 @@ public class InputID implements InputString {
             id = scan.nextLine();
             // Empty input validation
             if (id.isEmpty()) {
-                DisplayLog.display("ID cannot be empty.");
+                DisplayLog.display("ID cannot be empty.\n");
                 continue;
             }
             // Format validation (source: regex101.com)
             if (!id.matches("^[A-Za-z]\\d+$")) {
-                DisplayLog.display("Invalid ID format.");
+                DisplayLog.display("Invalid ID format.\n");
                 continue;
             }
             break;
