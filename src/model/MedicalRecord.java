@@ -55,45 +55,70 @@ public class MedicalRecord {
 		this.bloodType = bloodType;
 		this.dateOfBirth = dateOfBirth;
 	}
-	
+	/**
+     * Update Patient Email
+     * @param email
+     */
 	public void updateRecord(String email) {
 		this.email = email;
 	}
-	
+	/**
+     * Add diagnosis,treatment and prescription
+     * @param outcome An appointmentOutcomeRecord to update Patient Medical History
+     */
 	public void updateRecord(AppointmentOutcomeRecord outcome) {
 		diagnosesTreatmentPrescription.add(outcome);
 	}
 
-    // Getters for all private attributes
+    /**
+     * Get Patient Id
+     * @return Patient Id
+     */
     public String getUserId() {
         return userId;
     }
-
+    /**
+     * Get Patient Name
+     * @return Patient Name
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * Get Patient Email
+     * @return Patient Email
+     */
     public String getEmail() {
         return email;
     }
-
+    /**
+     * Get Patient Blood Type
+     * @return Patient Blood Type
+     */
     public String getBloodType() {
         return bloodType;
     }
     
-
+    /**
+     * Get Patient Date Of Birth
+     * @return Patient Date Of Birth
+     */
     public String getDateOfBirth() {
         return dateOfBirth;
     }
 
+    /**
+     * Get Patient Gender
+     * @return Patient Gender
+     */
     public String getGender() {
         return gender;
     }
 
-    public String getContact() {
-        return email;
-    }
-
+    /**
+     * Get past diagnosis,treatments and prescriptions
+     * @return diagnosis,treatments and prescriptions
+     */
     public ArrayList<AppointmentOutcomeRecord> getDiagnosesTreatmentPrescription() {
         return diagnosesTreatmentPrescription;
     }
