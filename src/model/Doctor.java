@@ -51,6 +51,8 @@ public class Doctor extends User {
 		
 		int choice=-1;
 		
+		System.out.println("");
+		DisplayLog.display("WELCOME, " + this.getName() + "!");
 		InputIntChoice inputForMenu = new InputIntChoice(9);
 		do{
 			DoctorDisplayMenu.display();

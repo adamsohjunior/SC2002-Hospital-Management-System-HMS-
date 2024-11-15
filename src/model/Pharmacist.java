@@ -38,6 +38,8 @@ public class Pharmacist extends User {
 		
 		int choice=-1;
         InputIntChoice input = new InputIntChoice(6);
+        System.out.println("");
+		DisplayLog.display("WELCOME, " + this.getName() + "!");
 		
 		do{	
             PharmacistDisplayMenu.display();
