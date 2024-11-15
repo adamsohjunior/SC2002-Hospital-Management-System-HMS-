@@ -8,11 +8,11 @@ public class Rating {
 		if(getCount() == 0) {
 			setCount(1);
 		}
+		else {
+			count++;
+		}
 		
-		setCount(getCount()+1);
-		
-		setRating((getRating()+feedback)/getCount());
-		
+		rating = feedback;
     }
 
     public float getRating() {
