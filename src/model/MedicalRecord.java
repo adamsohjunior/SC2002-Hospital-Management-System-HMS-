@@ -38,7 +38,7 @@ public class MedicalRecord {
 	private ArrayList<AppointmentOutcomeRecord> diagnosesTreatmentPrescription = new ArrayList<>();
 	
 	/**
-     * Constructs a new Medical Record with the specified details.
+     * Constructs a new Medical Record object with the specified details.
      * 
      * @param id Patient Identification 
      * @param name Patient Name

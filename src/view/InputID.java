@@ -1,9 +1,14 @@
 package view;
 
-
+/**
+ * Class to prompt an input for ID
+ */
 public class InputID implements InputString {
     
-
+    /**
+     * To get ID input from User
+     * Check if ID is legit before return ID
+     */
     public String getStringInput() {
         String id;
 

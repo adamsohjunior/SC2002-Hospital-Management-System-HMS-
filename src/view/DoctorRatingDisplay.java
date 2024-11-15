@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import model.Doctor;
-
+/**
+ * DoctorRating Class to be displayed, displays doctors to be rated
+ */
 public class DoctorRatingDisplay implements DisplayMenu{
+	/**
+	 * Displays doctors to be rated
+	 * @param doctorList List of doctors to be rated
+	 */
 	public static void display(Set<Doctor> doctorList) {
 		/*if (doctorList.size() == 0) {
 			System.out.println("You have not seen any Doctors yet!");
