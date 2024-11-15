@@ -13,9 +13,12 @@ import view.DisplayLog;
 
 import system.Writer;
 
+/**
+ * SystemManager class that handle the operation of system
+ */
 // Facade pattern
 public class SystemManager {
-    // Global (system) variables
+    /** Global (system) variables */ 
     private SessionManager sessionManager;
     private ArrayList<Inventory> storage;
     private ArrayList<User> staffList;      // for admin usage
@@ -24,18 +27,20 @@ public class SystemManager {
     private ArrayList<Appointment> allAppointments;
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
 
-    // Flag for system shutdown
+    /** Flag for system shutdown */ 
     private boolean shutdown;
 
-    // Main user list for sessionManagement
+    /** Main user list for sessionManagement */ 
     private ArrayList<User> users;
     
-    // Paths for file I/O
+    /** Paths for file I/O */ 
     private final String medicineListPath = "../data/Medicine_List.csv";
     private final String patientListPath = "../data/Patient_List.csv";
     private final String staffListPath = "../data/Staff_List.csv";
 
-
+    /**
+     * method to initialise the variable needed
+     */
     public void initialise() {
         DisplayLog.display("\nSystem starting...");
         this.storage = new ArrayList<Inventory>();
@@ -49,6 +54,9 @@ public class SystemManager {
         this.shutdown = false;
     }
 
+    /**
+     * method to load all the necessary data into the system
+     */
     public void loadData() {
         // Load inventory items
         InventoryParser inventoryParser = new InventoryParser();
@@ -63,6 +71,9 @@ public class SystemManager {
         users.addAll(staffList);
     }
 
+    /**
+     * method to run HMS system by starting a new session
+     */
     public void runSystem() {
         while (true) {
             
@@ -90,35 +101,71 @@ public class SystemManager {
         }
     }
 
+    /**
+     * method to save every modified into the original CSV
+     */
     public void saveData() {
         Writer csvwriter = new Writer(staffList, patientList, storage);
         csvwriter.writeDataIntoCSV();
     }
 
+    /**
+     * method to shut down the system
+     */
     public void shutdown() {
         shutdown = true;
     }
 
+    /**
+     * method to add user into user list
+     * 
+     * @param user user that is interacting with the system
+     */
     public void addUser(User user) {
         users.add(user);
     }
 
+    /**
+     * method to retrive Inventory List
+     * 
+     * @return the list with all Inventory object
+     */
     public ArrayList<Inventory> getStorage() {
         return this.storage;
     }
 
+    /**
+     * method to retrieve Staff List
+     * 
+     * @return the list with all Staff object
+     */
     public ArrayList<User> getStaffList() {
         return this.staffList;
     }
 
+    /**
+     * method to get the available dates
+     * 
+     * @return available dates of Doctor
+     */
     public Available getAvailableDates() {
         return this.availableDates;
     }
 
+    /**
+     * method to get all appointments
+     * 
+     * @return the list of all Appointment object
+     */
     public ArrayList<Appointment> getAllAppointments() {
         return this.allAppointments;
     }
 
+    /**
+     * method to get all Appointment Outcome Records
+     * 
+     * @return the list of all AppointmentOutcomeRecord object
+     */
     public ArrayList<AppointmentOutcomeRecord> getAllAppointmentOutcomeRecords() {
         return this.allAppointmentOutcomeRecords;
     }

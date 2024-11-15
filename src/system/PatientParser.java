@@ -6,15 +6,27 @@ import model.Appointment;
 import model.Available;
 import model.Patient;
 
+/**
+ * PatientParser class for parsing
+ */
 public class PatientParser implements CSVReader.CSVParser<Patient> {
     private Available availableDates;
     private ArrayList<Appointment> allAppointments;
     
+    /**
+     * constructs PatientParser object with the given details
+     * 
+     * @param availableDates
+     * @param allAppointments
+     */
     public PatientParser(Available availableDates, ArrayList<Appointment> allAppointments) {
         this.availableDates = availableDates;
         this.allAppointments = allAppointments;
     }
 
+    /**
+     * method to extract a line of information from CSV and construct the Patient object
+     */
     public Patient parse(String line) {
         String[] data = line.split(",");
         String id = data[0];

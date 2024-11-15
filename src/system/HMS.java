@@ -15,7 +15,15 @@ package system;
 // import java.io.Console;
 // import java.time.Year;
 
+/**
+ * HMS class to run main system
+ */
 public class HMS {
+    /**
+     * main function
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         // latest version
         SystemManager system = new SystemManager();

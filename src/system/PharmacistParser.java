@@ -7,7 +7,7 @@ import model.Inventory;
 import model.Pharmacist;
 import model.User;
 
-/*
+/**
  *  Not used. See StaffParser
  */
 

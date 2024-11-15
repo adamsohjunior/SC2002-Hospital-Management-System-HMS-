@@ -9,21 +9,35 @@ import view.InputPasswordStrict;
 
 import java.util.ArrayList;
 
+/**
+ * SessionManager class to manage session
+ */
 public class SessionManager {
     private String id, password, newPassword;
     private User currentUser;
     private ArrayList<User> users;
 
+    /**
+     * constructs SessionManager object with the given details
+     * 
+     * @param users the list of all users 
+     */
     public SessionManager(ArrayList<User> users) {
         this.users = users;
     }
 
+    /**
+     * method to start new session when a new user login
+     */
     public void startNewSession() {
         currentUser = null;
         getUserID();
         getPassword();
     }
 
+    /**
+     * method to prompt user to enter Hospital ID
+     */
     private void getUserID() {
         InputID input = new InputID();
 
@@ -43,6 +57,9 @@ public class SessionManager {
         }
     }
 
+    /**
+     * method to prompt user to enter their password
+     */
     private void getPassword() {
         InputPassword input = new InputPassword();
         InputPasswordStrict inputStrict = new InputPasswordStrict();

@@ -2,7 +2,7 @@ package system;
 import model.Administrator;
 import model.User;
 
-/*
+/**
  *  Not used. See StaffParser
  */
 
