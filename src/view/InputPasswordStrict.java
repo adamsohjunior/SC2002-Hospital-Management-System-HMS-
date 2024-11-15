@@ -1,5 +1,7 @@
 package view;
 
+import java.io.Console;
+
 
 /**
  * Handles user input for a password with stricter validation rules.
@@ -30,19 +32,25 @@ public class InputPasswordStrict implements InputString {
     
     public String getStringInput() {
         String password;
+        Console console = System.console();
+
+        if (console == null) {
+            System.err.println("No console available!");
+            return null;
+        }
 
         while (true) {
-            password = scan.nextLine();
+            char[] passwordArray = console.readPassword("Enter new password: ");
+            password = new String(passwordArray);
+            
             // Empty input validation
             if (password.isEmpty()) {
                 DisplayLog.display("Password cannot be empty.\n");
-                DisplayPrompt.display("Enter new password: ");
                 continue;
             }
             // Format validation (source: regex101.com)
             if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}$")) {
                 DisplayLog.display("Invalid password format.\n");
-                DisplayPrompt.display("Enter new password: ");
                 continue;
             }
             break;

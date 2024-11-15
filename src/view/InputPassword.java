@@ -1,5 +1,7 @@
 package view;
 
+import java.io.Console;
+
 /**
  * Handles user input for a password, ensuring the password is not empty.
  * Implements the InputString interface to retrieve a string input from the user.
@@ -18,13 +20,21 @@ public class InputPassword implements InputString {
     
     public String getStringInput() {
         String password;
+        
+        Console console = System.console();
+
+        if (console == null) {
+            System.err.println("No console available!");
+            return null;
+        }
 
         while (true) {
-            password = scan.nextLine();
+            char[] passwordArray = console.readPassword("Enter password: ");
+            password = new String(passwordArray);
+
             // Empty input validation
             if (password.isEmpty()) {
                 DisplayLog.display("Password cannot be empty.\n");
-                DisplayPrompt.display("Enter password: ");
                 continue;
             }
             break;

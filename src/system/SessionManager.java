@@ -65,7 +65,7 @@ public class SessionManager {
         InputPasswordStrict inputStrict = new InputPasswordStrict();
 
         while (true) {
-            DisplayPrompt.display("Enter password: ");
+            // DisplayPrompt.display("Enter password: ");
             password = input.getStringInput();
             
             if (password.equals(currentUser.getPassword())) {
@@ -74,14 +74,14 @@ public class SessionManager {
                     // First login
                     DisplayLog.display("Please change your password for security.");
                     while (true) {
-                        DisplayPrompt.display("Enter new password: ");
+                        // DisplayPrompt.display("Enter new password: ");
                         newPassword = inputStrict.getStringInput();
                         break;
 
+                        // // Unreachable case
                         // if (!newPassword.equals(password)) {
                         //     break;
                         // }
-
                         // DisplayLog.display("New and old passwords are the same.\n");
                     }
                     
