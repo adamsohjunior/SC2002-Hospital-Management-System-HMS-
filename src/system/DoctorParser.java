@@ -6,6 +6,10 @@ import model.Available;
 import model.Doctor;
 import model.Inventory;
 
+/*
+ *  Not used. See StaffParser
+ */
+
 public class DoctorParser implements CSVReader.CSVParser<Doctor> {
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private Available availableDates;

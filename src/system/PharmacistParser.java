@@ -7,6 +7,10 @@ import model.Inventory;
 import model.Pharmacist;
 import model.User;
 
+/**
+ *  Not used. See StaffParser
+ */
+
 public class PharmacistParser implements CSVReader.CSVParser<User> {
     private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
     private Available availableDates;
@@ -26,6 +30,6 @@ public class PharmacistParser implements CSVReader.CSVParser<User> {
         String gender = data[3];
         int age = Integer.parseInt(data[4]);
 
-        return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage);
+        return new Pharmacist(id, name, age, gender, availableDates, allAppointmentOutcomeRecords, storage, new ArrayList<User>());
     }
 }

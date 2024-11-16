@@ -1,26 +1,77 @@
 package model;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Doctor extends User{
+import view.AppointmentsDisplay;
+import view.DayDisplay;
+import view.DisplayLog;
+import view.DisplayPrompt;
+import view.DoctorDisplayMenu;
+import view.InputDayChoice;
+import view.InputInt;
+import view.InputIntChoice;
+import view.InputMonthChoice;
+import view.InputTimeChoice;
+import view.MedicalRecordDisplay;
+import view.MedicineDisplay;
+import view.MonthDisplay;
+import view.TimeDisplay;
 
-	private ArrayList<MedicalRecord> patientMedicalRecords = new ArrayList<>();
-	private Available personalSchedule;
-	private Available availableDates;
-	private ArrayList<Appointment> appointmentRequests = new ArrayList<>();
-	private ArrayList<Appointment> upcomingAppointments = new ArrayList<>();
-	private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
-	private Scanner scan = new Scanner(System.in);
-	private ArrayList<Inventory> storage;
-	
-	/* availableDates is same with patient, here is where we are able to update it for patient use
-	 * 
-	 * allAppointmentOutcomeRecords is the global list for all appointmentoutcomerecords. Since the doctor is the one making this class (see method below) when they want to 'complete' the appointment
-	 * and write up on diagnoses,treatment,pres...etc, they will make a AppointmentOutcomeRecord object. This object is stored in both the current appointment object and this global list.
-	 * This global list is then ACCESSED by PHARMACISTS so they can do their job of prescribing the medicine, update status, etc.
+/**
+ * The Doctor Class represents the Doctor who can set his/her availabilities, accept/decline any appointment requests, record Appointment Outcome 
+ * and any thing a Doctor should do and more
+ */
+
+public class Doctor extends User {
+	/**
+	 * This stores the Patient Medical Record for Doctor
 	 */
+	private ArrayList<MedicalRecord> patientMedicalRecords = new ArrayList<>();
+	/**
+	 * This stores Doctor's own schedule
+	 */
+	private Available personalSchedule;
+	/**
+	 * This is the "global" arrayList for all available dates
+	 */
+	private Available availableDates;
+	/**
+	 * This stores all appointment requests from patients
+	 */
+	private ArrayList<Appointment> appointmentRequests = new ArrayList<>();
+	/**
+	 * This stores all upcoming appoinment for the Doctor 
+	 */
+	private ArrayList<Appointment> upcomingAppointments = new ArrayList<>();
+	/**
+	 * This is the "global" arrayList for all appointmentOutcomeRecords for Pharmacists/Admins
+	 */
+	private ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords;
+	/**
+	 * Scanner for input
+	 */
+	private Scanner scan = new Scanner(System.in);
+	/**
+	 * The medicine storage
+	 */
+	private ArrayList<Inventory> storage;
+	/**
+	 * Doctor personal rating
+	 */
+	private DoctorRating personalRating = new DoctorRating();
 	
+	
+	/**
+	 * Constructs a new Doctor with the specified details.
+	 *
+	 * @param id                        the unique identifier of the doctor
+	 * @param name                      the name of the doctor
+	 * @param age                       the age of the doctor
+	 * @param gender                    the gender of the doctor
+	 * @param availableDates            the schedule of all available dates
+	 * @param allAppointmentOutcomeRecords a list of all appointment outcome records
+	 * @param storage                   The medicine storage
+	 */
 	
 	public Doctor(String id, String name, int age, String gender, Available availableDates, ArrayList<AppointmentOutcomeRecord> allAppointmentOutcomeRecords, ArrayList<Inventory> storage) {
 		super(id,name,age,gender);
@@ -29,46 +80,27 @@ public class Doctor extends User{
 		this.allAppointmentOutcomeRecords = allAppointmentOutcomeRecords;
 		this.storage = storage;
 	}
-	
+	/**
+	 * Display Doctor's Menu
+	 */
 	public void displayMenu() {
-		/* To be done */
+		
 		
 		int choice=-1;
-		boolean validity = false;
 		
+		System.out.println("");
+		DisplayLog.display("WELCOME, " + this.getName() + "!");
+		InputInt inputForMenu = new InputIntChoice(9);
 		do{
-			validity = false;
-		      while (!validity) { 
-		            try {
-		    			System.out.println("1) View Patient Medical Records\r\n"
-		    					+ "2) Update Patient Medical Records\r\n"
-		    					+ "3) View Personal Schedule\r\n"
-		    					+ "4) Set Availability for Appointments\r\n"
-		    					+ "5) Accept or Decline Appointment Requests\r\n"
-		    					+ "6) View Upcoming Appointments\r\n"
-		    					+ "7) Record Appointment Outcome\r\n"
-		    					+ "8) Logout\r\n");
-		                System.out.print("Please enter your choice: ");
-		                choice = scan.nextInt(); 
-		                if(choice>0 && choice<=8) {                	
-		                	validity = true;
-		                }
-		                else {
-		                	System.out.print("Please input a choice that is valid.");
-		                }
-		            } catch (InputMismatchException e) {
-		                System.out.println("Invalid input! Please enter an appropriate choice.");
-		                scan.next(); 
-		            }
-		        }
-				/* clear the enter key */
-				scan.nextLine(); 
+			DoctorDisplayMenu.display();
+			choice = inputForMenu.getIntChoice();
+
 		      switch(choice) {
 		      case 1:
 		    	  viewPatientMedicalRecords();
 		    	  break;
 		      case 2:
-		    	  updatePatientMedicalRecord();
+		    	  updatePatientMedicalRecord(new InputIntChoice(patientMedicalRecords.size()));
 		    	  break;
 		      case 3:
 		    	  viewPersonalSchedule();
@@ -85,128 +117,168 @@ public class Doctor extends User{
 		      case 7:
 		    	  recordAppointmentOutcome();
 		    	  break;
-		      case 8:
+			  case 8:
+				  showInbox();
+				  break;
+		      case 9:
+			    System.out.println("Logged out successfully!\n");
 		    	  break;
 		      }
-		} while (choice != 8);
+		} while (choice != 9);
 		
 		// scan.close();
 	}
-	
+	/**
+	 * Will show Doctor's own schedule(in terms of free dates)
+	 */
 	public void viewPersonalSchedule() {
 		personalSchedule.viewAvailableAppointmentSlots();
 	}
-	
+	/**
+	 * This will show all of the Doctor's Patient's Medical Record
+	 */
 	public void viewPatientMedicalRecords() {
 		if (patientMedicalRecords.size() == 0) {
-			System.out.println("No patients");
+			DisplayLog.display("No patients");
 			return;
 		}
 
 		for(int j = 0;j<patientMedicalRecords.size();j++) {
-			patientMedicalRecords.get(j).printRecord();
-			System.out.println("");
+			MedicalRecordDisplay.display(patientMedicalRecords.get(j));
+			DisplayLog.display("");
 		}
 	}
-	
-	public void updatePatientMedicalRecord() {
+	/**
+	 * 
+	 * To select a Patient under the Doctor to update his/her Medical Record by adding new diagnosis,treatment,ConsultNotes 
+	 * and prescriptions
+	 * 
+	 * @param inputForPatient Our InputInt interface( that is instantiated by an InputIntChoice object ) to take in INT inputs
+	 * 
+	 */
+	public void updatePatientMedicalRecord(InputInt inputForPatient) {
 		if(patientMedicalRecords.size()==0) {
-			System.out.println("You have no patients");
+			DisplayLog.display("You have no patients");
 			return;
 		}
 		
-		System.out.println("Select patient to update their record");
+		DisplayPrompt.display("Select patient to update their record");
+		System.out.println("");
 		for(int i=0;i<patientMedicalRecords.size();i++) {
-			System.out.println((i+1)+")"+patientMedicalRecords.get(i).getName());
+			System.out.println((i+1)+") "+patientMedicalRecords.get(i).getName());
 		}
-		
-		boolean validity = false;
+		System.out.println("");
+	
 		int choice =-1;
-	      while (!validity) { 
-	            try {
-	                System.out.print("Please enter your choice: ");
-	                choice = scan.nextInt(); 
-	                if(choice>0 && choice<=patientMedicalRecords.size()) {	
-	                	validity = true;
-	                }
-	                else {
-	                	System.out.println("Please input a choice that is valid.");
-	                }
-	            } catch (InputMismatchException e) {
-	                System.out.println("Invalid input! Please enter an appropriate choice.");
-	                scan.next(); 
-	            }
-	        }
-			/* clear the enter key */
-			scan.nextLine(); 
+	      choice = inputForPatient.getIntChoice();
 			choice = choice-1;
-			System.out.println("Please enter today's date(DD-MM): ");
-			String date = scan.nextLine();
-			System.out.println("Please enter your diagnoses: ");
+
+			MonthDisplay.display();
+			InputMonthChoice inputForMonth = new InputMonthChoice();
+			String month = inputForMonth.getMonth();
+
+			DayDisplay.display();
+			InputDayChoice inputForDay = new InputDayChoice();
+			int day = inputForDay.getDay(month);
+
+			String date = day + " " + month;
+
+			DisplayPrompt.display("\nPlease enter your diagnoses: ");
 			String diag = scan.nextLine();
-			System.out.println("Please enter your treatment: ");
+			DisplayPrompt.display("\nPlease enter your treatment: ");
 			String treat = scan.nextLine();
-			System.out.println("Please enter your consultation notes: ");
+			DisplayPrompt.display("\nPlease enter your consultation notes: ");
 			String notes = scan.nextLine();
+			DisplayLog.display("");
 			
 			/* here can change to list of medications instead of the doctor manually enterint the name*/
 			ArrayList<Prescription> list = new ArrayList<>();
 			
-			validity = false;
+			InputInt inputForChoice1 = new InputIntChoice(2);
+			InputInt inputForMedicineChoice = new InputIntChoice(storage.size());
 			int choice1 = 0;
 			while(choice1 !=2) {
-				validity = false;
-				while (!validity) { 
-		            try {
-		            	System.out.println("1)Prescribe Medication");
-		            	System.out.println("2)Finish");
-		                choice = scan.nextInt(); 
-		                if(choice1>0 && choice1<3) {	                	
-		                	validity = true;        	
-		                }
-		                else {
-		                	System.out.print("Please input a choice that is valid.");
-		                }
-		            } catch (InputMismatchException e) {
-		                System.out.println("Invalid input! Please enter an appropriate choice.");
-		                scan.next(); 
-		            }
-		        }
 				
-				/* clear the enter key */
-				scan.nextLine(); 
+				System.out.println("");
+				System.out.println("----------------------------------------------");
+				System.out.println("1) Prescribe Medication");
+				System.out.println("2) Finish");
+				System.out.println("----------------------------------------------");
+				System.out.println("");
+				
+
+				choice1 = inputForChoice1.getIntChoice();
+						
 				if(choice1 == 1) {
-					System.out.print("Enter name of medication to prescribe: ");
-					String medName = scan.nextLine();
-					Prescription toBePrescribed = new Prescription(medName);
-					list.add(toBePrescribed);
+					boolean duplicate = false;
+
+					MedicineDisplay.display(storage);
+					int medicineChoice = inputForMedicineChoice.getIntChoice();
+					medicineChoice = medicineChoice-1;
+					String medName = storage.get(medicineChoice).getName();
+
+					for(int i =0;i<list.size();i++){
+						if(medName.equals(list.get(i).getName())){
+							duplicate = true;
+							break;
+						}
+					}
+					if(duplicate == false){
+						Prescription toBePrescribed = new Prescription(medName);
+						list.add(toBePrescribed);
+					}
+					else{
+						System.out.println("Duplicate Medicine!");
+					}
 				}
 			}
 			
 			AppointmentOutcomeRecord outcome = new AppointmentOutcomeRecord(date, diag, treat, list, notes);
 			patientMedicalRecords.get(choice).updateRecord(outcome);
 	}
-	
+	/**
+	 * This will set the Doctor's availability
+	 */
 	public void setAvailability() {
-		System.out.print("Available Date (DD-MMM): ");
-		String date = scan.nextLine();
+		MonthDisplay.display();
+		InputMonthChoice inputForMonth = new InputMonthChoice();
+		String month = inputForMonth.getMonth();
+
+		DayDisplay.display();
+		InputDayChoice inputForDay = new InputDayChoice();
+		int day = inputForDay.getDay(month);
+
+		String date = day + " " + month;
 		
-		System.out.print("Available Time (XX:YY): ");
-		String time = scan.nextLine();
+		TimeDisplay.display();
+		InputTimeChoice inputForTime = new InputTimeChoice();
+		String time = inputForTime.getTime();
 		
 		Availability avail = new Availability(this,date,time);
 		/* Both arraylist contains the same ref to Availability object */
-		personalSchedule.addAvailableDates(avail);
-		availableDates.addAvailableDates(avail);
+		if(personalSchedule.addAvailableDates(avail)==1){
+			availableDates.addAvailableDates(avail);
+		}
 	}
-	
+	/**
+	 * Will add to Doctor's appointment requests
+	 * @param appointment Appointment Request from patient
+	 */
 	public void incomingAppointment(Appointment appointment) {
 		appointmentRequests.add(appointment);
 	}
+	/**
+	 * 
+	 * Remove appoinment when appointment is cancelled/rescheduled
+	 * @param appointment Appointment to be removed
+	 */
 	public void removeIncommingAppointment(Appointment appointment){
 		appointmentRequests.remove(appointment);
+		upcomingAppointments.remove(appointment);
 	}
-	
+	/**
+	 * Logic to update Doctor's patient list
+	 */
 	private void updatePatientList() {
 		ArrayList<MedicalRecord> temp = new ArrayList<>();
 		for(int i =0;i<upcomingAppointments.size();i++) {
@@ -225,48 +297,39 @@ public class Doctor extends User{
 		
 		this.patientMedicalRecords = temp;
 	}
-	
+	/**
+	 * This will accept or decline appointment requests
+	 */
 	public void acceptOrDecline() {
 		if (appointmentRequests.size() == 0) {
-			System.out.println("There are no appointment requests.");
+			DisplayLog.display("There are no appointment requests.");
 			return;
 		}
 		
-		System.out.print("Appointment requests: ");
+		InputInt inputForAccDec = new InputIntChoice(2);
+
 		for (int i = 0;i<appointmentRequests.size();i++) {
 			Appointment temp = appointmentRequests.get(i);
-			temp.printInfo();
+			ArrayList<Appointment> tempList = new ArrayList<Appointment>();
+			tempList.add(temp);
+			AppointmentsDisplay.display(tempList);
 			
-			boolean validity = false;
 			int choice = 0;
-			while (!validity) { 
-	            try {
-	            	System.out.println("1 to Accept || 2 to Decline");
-	                choice = scan.nextInt(); 
-	                if(choice>0 && choice<3) {
-	                	validity = true;               	
-	                }
-	                else {
-	                	System.out.print("Please input a choice that is valid.");
-	                }
-	            } catch (InputMismatchException e) {
-	                System.out.println("Invalid input! Please enter an appropriate choice.");
-	                scan.next(); 
-	            }
-	        }
-			
-			/* clear the enter key */
-			scan.nextLine(); 
+	        DisplayPrompt.display("1 to Accept || 2 to Decline");
+			System.out.println("");	
+	        choice = inputForAccDec.getIntChoice();
 			
 			if(choice == 1) {
 				temp.setStatus("Accepted");
 				upcomingAppointments.add(temp);
-				appointmentRequests.remove(temp);
+				
 				updatePatientList();
+				sendMessage(temp.getPatient(), "Dr "+temp.getDoctor().getName()+" has ACCEPTED your appointment on "+temp.getDate()+" "+temp.getTime());
 			}
 			else {
 				temp.setStatus("Rejected");
-				appointmentRequests.remove(temp);
+				
+				sendMessage(temp.getPatient(), "Dr "+temp.getDoctor().getName()+" has REJECTED your appointment on "+temp.getDate()+" "+temp.getTime());
 				Doctor doc = temp.getDoctor();
 				String dat = temp.getDate();
 				String tim = temp.getTime();
@@ -275,100 +338,85 @@ public class Doctor extends User{
 				this.availableDates.updateAvailableDates(doc, dat, tim);
 			}
 		}
+		appointmentRequests.clear();
 	}
-	
+	/**
+	 * This will show all the Doctor's upcoming appointments
+	 */
 	public void viewUpcomingAppointments() {
 		if(upcomingAppointments.size()==0) {
-			System.out.println("You have no upcoming appoinments.");
+			DisplayLog.display("You have no upcoming appoinments.");
 			return;
 		}
 		
-		for(int i =0; i<upcomingAppointments.size();i++) {
-			upcomingAppointments.get(i).printInfo();
-			System.out.println("");
-		}
+		AppointmentsDisplay.display(upcomingAppointments);
 	}
-	
+	/**
+	 * This will record Appointment Outcome, basically completing the appointment
+	 */
 	public void recordAppointmentOutcome() {
 		if(this.upcomingAppointments.size() == 0) {
-			System.out.println("There are no appointments to complete");
+			DisplayLog.display("There are no appointments to complete");
 			return;
 		}
 		
-		System.out.println("Current appointments");
-		for(int i=0;i<this.upcomingAppointments.size();i++) {
-			System.out.println((i+1)+")Patient: "+this.upcomingAppointments.get(i).getPatient().getName());
-			System.out.println("    Date: "+this.upcomingAppointments.get(i).getDate());
-			System.out.println("    Time: "+this.upcomingAppointments.get(i).getTime());
-		}
+		AppointmentsDisplay.display(upcomingAppointments);
 		
-		boolean validity = false;
+		InputInt inputForApp = new InputIntChoice(upcomingAppointments.size());
 		int choice = 0;
-		while (!validity) { 
-            try {
-                System.out.print("Please select an appointment to complete: ");
-                choice = scan.nextInt(); 
-                if(choice>0 && choice<=this.upcomingAppointments.size()) {
-                	validity = true;            	
-                }
-                else {
-                	System.out.println("Please input a choice that is valid.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter an appropriate choice.");
-                scan.next(); 
-            }
-        }
 		
-		/* clear the enter key */
-		scan.nextLine();
-		
-		choice = choice-1;
+		DisplayLog.display("Please select an appointment to complete: ");
+		choice = inputForApp.getIntChoice()-1;
+
 		Appointment chosen = upcomingAppointments.get(choice);
 		upcomingAppointments.remove(chosen);
 		updatePatientList();
-		
-		System.out.println("Please enter your diagnoses: ");
+
+		DisplayLog.display("\nPlease enter your diagnoses: ");
 		String diag = scan.nextLine();
-		System.out.println("Please enter your treatment: ");
+		DisplayLog.display("\nPlease enter your treatment: ");
 		String treat = scan.nextLine();
-		System.out.println("Please enter your consultation notes: ");
+		DisplayLog.display("\nPlease enter your consultation notes: ");
 		String notes = scan.nextLine();
+		DisplayPrompt.display("");
 		
 
 		/* here can change to list of medications instead of the doctor manually enterint the name*/
 		ArrayList<Prescription> list = new ArrayList<>();
-		
-		validity = false;
-		choice = 0;
-		while(choice !=2) {
-			validity = false;
-			while (!validity) { 
-	            try {
-	            	System.out.println("1)Prescribe Medication");
-	            	System.out.println("2)Finish");
-	                choice = scan.nextInt(); 
-	                if(choice>0 && choice<3) {
-	                	validity = true;          	
-	                }
-	                else {
-	                	System.out.print("Please input a choice that is valid.");
-	                }
-	            } catch (InputMismatchException e) {
-	                System.out.println("Invalid input! Please enter an appropriate choice.");
-	                scan.next(); 
-	            }
-	        }
-			
-			/* clear the enter key */
-			scan.nextLine(); 
-			if(choice == 1) {
-				System.out.print("Enter name of medication to prescribe: ");
-				String medName = scan.nextLine();
-				Prescription toBePrescribed = new Prescription(medName);
-				list.add(toBePrescribed);
+		InputInt inputForChoice1 = new InputIntChoice(2);
+		InputInt inputForMedicineChoice = new InputIntChoice(storage.size());
+		int choice1 = -1;
+		while(choice1 !=2) {
+				
+			System.out.println("\n----------------------------------------------");
+			System.out.println("1)Prescribe Medication");
+			System.out.println("2)Finish");
+			System.out.println("----------------------------------------------\n");
+
+			choice1 = inputForChoice1.getIntChoice();
+					
+			if(choice1 == 1) {
+				boolean duplicate = false;
+
+				MedicineDisplay.display(storage);
+				int medicineChoice = inputForMedicineChoice.getIntChoice();
+				medicineChoice = medicineChoice-1;
+				String medName = storage.get(medicineChoice).getName();
+
+				for(int i =0;i<list.size();i++){
+					if(medName.equals(list.get(i).getName())){
+						duplicate = true;
+						break;
+					}
+				}
+				if(duplicate == false){
+					Prescription toBePrescribed = new Prescription(medName);
+					list.add(toBePrescribed);
+				}
+				else{
+					System.out.println("Duplicate Medicine!");
+				}
 			}
-			
 		}
 		
 		AppointmentOutcomeRecord outcome = new AppointmentOutcomeRecord(chosen.getDate(), diag, treat, list, notes);
@@ -376,8 +424,14 @@ public class Doctor extends User{
 		
 		/* update the global list so that pharmacists can see and perform their task */
 		allAppointmentOutcomeRecords.add(outcome);
-		chosen.getPatient().updatePatientOutcome(outcome);
+		
+		chosen.getPatient().updateDoctorsVisited(this);
 		chosen.getPatient().getMedicalRecord().updateRecord(outcome);
+		chosen.getPatient().updateAppointmentOutcomeRecords(chosen);
+	}
+
+	public DoctorRating getRating(){
+		return personalRating;
 	}
 
 }

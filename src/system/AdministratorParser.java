@@ -1,7 +1,15 @@
 package system;
+
+import java.util.ArrayList;
+
 import model.Administrator;
 import model.User;
+import model.Appointment;
+import model.Inventory;
 
+/**
+ *  Not used. See StaffParser
+ */
 
 public class AdministratorParser implements CSVReader.CSVParser<User> {
     @Override
@@ -12,6 +20,6 @@ public class AdministratorParser implements CSVReader.CSVParser<User> {
         String gender = data[3];
         int age = Integer.parseInt(data[4]);
 
-        return new Administrator(id, name, age, gender);
+        return new Administrator(id, name, age, gender, new ArrayList<Inventory>(), new ArrayList<User>(), new ArrayList<Appointment>(), new SystemManager());
     }
 }
