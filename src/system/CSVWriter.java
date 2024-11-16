@@ -16,9 +16,9 @@ public class CSVWriter {
     private String userHeader = "Staff ID,Name,Role,Gender,Age";
     private String patientHeader = "Patient ID,Name,Date of Birth,Gender,Blood Type,Contact Information";
     private String medicineHeader = "Medicine Name,Initial Stock,Low Stock Level Alert";
-    private String StaffFilePath = "../data/staffList.csv";
-    private String PatientFilePath = "../data/patientList.csv";
-    private String MedicineFilePath = "../data/mdeicineList.csv";
+    private String StaffFilePath = "../data/Staff_List.csv";
+    private String PatientFilePath = "../data/Patient_List.csv";
+    private String MedicineFilePath = "../data/Medicine_List.csv";
     private ArrayList<User> staffList; 
     private ArrayList<User> patientList; 
     private ArrayList<Inventory> allInventoryItem;
