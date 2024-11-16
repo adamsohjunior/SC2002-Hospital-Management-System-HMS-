@@ -232,7 +232,10 @@ public class Patient extends User{
 	 * Reschedule an appointment
 	 */
 	public void rescheduleAppointment() {
-		
+
+		System.out.println("Rescheduling Appointment: ");
+		System.out.println("Please Select An Appointment To Cancel and then Reschedule ");
+		System.out.println("");
 		if (cancelAppointment()) {
 			scheduleAppointment();
 		}
