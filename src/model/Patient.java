@@ -262,6 +262,7 @@ public class Patient extends User{
 		choice = choice-1;
 		Appointment appoinmentToBeRemoved = this.scheduledAppointments.get(choice);
 		this.scheduledAppointments.remove(appoinmentToBeRemoved);
+		this.allAppointments.remove(appoinmentToBeRemoved);
 		
 
 		Doctor doc = appoinmentToBeRemoved.getDoctor();
