@@ -233,10 +233,14 @@ public class Patient extends User{
 	 */
 	public void rescheduleAppointment() {
 
-		System.out.println("Rescheduling Appointment: ");
-		System.out.println("Please Select An Appointment To Cancel and then Reschedule ");
-		System.out.println("");
+		DisplayLog.display("Rescheduling Appointment: ");
+		DisplayLog.display("");
+		DisplayLog.display("Please Select An Appointment To CANCEL and then RESCHEDULE ");
+		DisplayLog.display("");
 		if (cancelAppointment()) {
+
+			DisplayLog.display("Please Select a date To RESCHEDULE: ");
+			DisplayLog.display("");
 			scheduleAppointment();
 		}
 		else {
