@@ -43,6 +43,9 @@ public class InputPasswordStrict implements InputString {
             char[] passwordArray = console.readPassword("Enter new password: ");
             password = new String(passwordArray);
             
+            // System.out.print("Enter new password: ");
+            // password = scan.nextLine();
+            
             // Empty input validation
             if (password.isEmpty()) {
                 DisplayLog.display("Password cannot be empty.\n");

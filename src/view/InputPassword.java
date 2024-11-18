@@ -32,6 +32,9 @@ public class InputPassword implements InputString {
             char[] passwordArray = console.readPassword("Enter password: ");
             password = new String(passwordArray);
 
+            // System.out.print("Enter password: ");
+            // password = scan.nextLine();
+
             // Empty input validation
             if (password.isEmpty()) {
                 DisplayLog.display("Password cannot be empty.\n");

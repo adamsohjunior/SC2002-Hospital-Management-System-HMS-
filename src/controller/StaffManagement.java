@@ -102,7 +102,7 @@ public class StaffManagement {
         String name, gender = null, role = null;
         int age;
         System.out.println("Enter name: ");
-        name = scan.next();
+        name = scan.nextLine();
 
         DisplayGender.display();
         int choiceGen = inputGenderChoice.getIntChoice();
@@ -222,7 +222,7 @@ public class StaffManagement {
         for (User staff : staffList) {
             if (staff.getUserId().equals(id)) {
                 System.out.println("Update name: ");
-                name = scan.next();
+                name = scan.nextLine();
 
                 DisplayGender.display();
                 int choiceGen = inputGenderChoice.getIntChoice();
