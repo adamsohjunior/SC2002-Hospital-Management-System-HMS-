@@ -29,11 +29,11 @@ public class InputPassword implements InputString {
         }
 
         while (true) {
-            char[] passwordArray = console.readPassword("Enter password: ");
-            password = new String(passwordArray);
+            // char[] passwordArray = console.readPassword("Enter password: ");
+            // password = new String(passwordArray);
 
-            // System.out.print("Enter password: ");
-            // password = scan.nextLine();
+            System.out.print("Enter password: ");
+            password = scan.nextLine();
 
             // Empty input validation
             if (password.isEmpty()) {
