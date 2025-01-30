@@ -50,6 +50,7 @@ Hospital Management System (HMS) is a Java-based console application developed f
 <p align="left">
   <img src="bin/Picture 1.png" alt="Cover"/>
 </p>
+
 ---
 
 ## Features
