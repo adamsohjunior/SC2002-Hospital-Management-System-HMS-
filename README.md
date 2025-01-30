@@ -47,6 +47,9 @@ We are **Group 5** from lab group **SCS6**, CCDS, Nanyang Technological Universi
 ## Project Overview
 Hospital Management System (HMS) is a Java-based console application developed for the SC2002 course assignment. HMS streamlines hospital operations by managing appointment scheduling, inventory, and staff administration. It supports patients, doctors, pharmacists, and administrators, ensuring adaptability and scalability. HMS aims to improve resource utilization, enhance patient care, and simplify administrative tasks through an efficient command-line interface.
 
+<p align="center">
+  <img src="Picture 1.png" alt="Cover"/>
+</p>
 ---
 
 ## Features
